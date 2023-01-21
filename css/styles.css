@@ -235,7 +235,7 @@ sup {
 }
 
 a {
-  color: white;
+  color: black;
   text-decoration: underline;
 }
 a:hover {
@@ -3488,11 +3488,11 @@ textarea.form-control-lg {
 
 .btn-link {
   font-weight: 400;
-  color: #0d6efd;
+  color: black;
   text-decoration: underline;
 }
 .btn-link:hover {
-  color: #0a58ca;
+  color: black;
 }
 .btn-link:disabled, .btn-link.disabled {
   color: #6c757d;
@@ -3505,7 +3505,7 @@ textarea.form-control-lg {
 }
 
 .btn-sm, .btn-group-sm > .btn {
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 1rem;
   font-size: 0.875rem;
   border-radius: 0.2rem;
 }
@@ -11423,7 +11423,11 @@ body {
 .sb-topnav {
   padding-left: 0;
   height: 56px;
-  z-index: 1039;
+  z-index: inherit;
+  background-color: white;
+  background-clip: border-box;
+  border: 1px solid #e3e6f0;
+  border-radius: 0.35rem;
 }
 .sb-topnav .navbar-brand {
   width: 225px;
