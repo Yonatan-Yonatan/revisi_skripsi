@@ -24,7 +24,7 @@ include "conn.php";
             </p>
             
             <form method="post" class="form" action="proseslogin.php">
-                <label for="username" style="padding-top: 15pxpx">&nbsp;
+                <label for="username" style="padding-top: 15px">&nbsp;
                     User Name
                 </label>
                 <input id="text" class="form-content" type="username" name="username" autocomplete="on" required/>

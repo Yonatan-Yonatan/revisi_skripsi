@@ -17,11 +17,11 @@
     <nav class="sb-sidenav accordion" id="sidenavAccordion" style="background: -webkit-linear-gradient(bottom,#3498db, #FFFFFF);">
         <div class="sb-sidenav-menu">
             <div class="nav">
-                <a class="nav-link" href="index.php" target="primary-content">
+                <a class="nav-link" href="index.php">
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
                     Stok Barang
                 </a>
-                <a class="nav-link" href="data_masuk.php" target="primary-content">
+                <a class="nav-link" href="data_masuk.php">
                     <div class="sb-nav-link-icon"><i class="fas fa-box"></i></div>
                     Barang Masuk
                  </a>
