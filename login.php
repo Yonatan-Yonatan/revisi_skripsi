@@ -34,15 +34,9 @@ include "conn.php";
                 </label>
                 <input id="password" class="form-content" type="password" name="password" required/>
                 <div class="form-border"></div>
-                
-                
                 <label for="Show Password" style="padding-top: 15px">
                     <input type="checkbox" onclick="showPassword()"/>Show Password
                 </label>
-                
-                <a href="#">
-                    <legend id="forgot-pass">Forget Password</legend>
-                </a>
                 <input id="submit-btn" type="submit" name="submit" value="LOGIN">
 
             </form>

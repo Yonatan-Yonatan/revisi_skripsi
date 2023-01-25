@@ -287,7 +287,7 @@ a {
   text-decoration: none;
 }
 
-a:hover {
+.action:hover {
  text-decoration: underline;
 }
 
@@ -7862,6 +7862,7 @@ textarea.form-control-lg {
 .text-muted {
   --bs-text-opacity: 1;
   color: #6c757d !important;
+  font-size: 11px;
 }
 
 .text-black-50 {

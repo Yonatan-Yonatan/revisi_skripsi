@@ -29,7 +29,7 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-box-open"></i></div>
                     Barang Keluar
                 </a>
-                <a class="nav-link" href="index.php">
+                <a class="nav-link" href="laporan.php">
                     <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
                     Laporan
                 </a>
@@ -42,5 +42,6 @@
             </div>
         </div>
     </nav>
+    
 </body>
 </html>

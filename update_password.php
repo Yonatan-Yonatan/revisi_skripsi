@@ -34,6 +34,7 @@ session_start();
             {
                 $username = $row['username'];
                 $fullname = $row['fullname'];
+                $password = $row['password'];
                 $level = $row['level']; 
             }
         }	 
@@ -47,7 +48,7 @@ session_start();
             <div id="layoutSidenav_content">
                 <div class="container-fluid px-4">
                     <h1 class="mt-4" style="padding-bottom:15px";>User</h1>
-                    <form action="submit_update_user.php" class="form" method="post"> 
+                    <form action="submit_update_password.php" class="form" method="post"> 
                     <label-form for="username">&nbsp;
                         ID User
                     </label-form>
@@ -55,21 +56,22 @@ session_start();
                     <label-form for="username">&nbsp;
                         User Name
                     </label-form>
-                    <input id="username" class="form-control" type="text" name="username" value="<?php echo $username;?>" required/>
+                    <input id="username" class="form-control" type="text" name="username" value="<?php echo $username;?>" readonly/>
                     <label-form for="fullname">&nbsp;
                         Full Name
                     </label-form>
-                    <input id="fullname" class="form-control" type="text" name="fullname" value="<?php echo $fullname;?>" required/>
+                    <input id="fullname" class="form-control" type="text" name="fullname" value="<?php echo $fullname;?>" readonly/>
                     <label-form for="level">&nbsp;
                         Jenis Akun
                     </label-form>
-                        <div>
-                            <select name="level" id="level"  class="form-control"  required>
-                                <option value="">-- Pilih --</option>
-                                <option value="user">User</option>
-                                <option value="admin">Admin</option>
-                            </select>
-                        </div>
+                    <input id="level" class="form-control" type="text" name="level" value="<?php echo $level;?>" readonly/>
+                    <label-form for="password">&nbsp;
+                        Password
+                    </label-form>
+                    <input id="password" class="form-control" type="password" name="password" required/>
+                    <label for="Show Password" style="padding-top: 15px">
+                        <input type="checkbox" onclick="showPassword()"/> Show Password
+                    </label>
                        
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label"></label>

@@ -76,8 +76,9 @@ session_start();
                                                 <td><?php echo $UserName;?></td>
                                                 <td><?php echo $FullName;?></td>
                                                 <td><?php echo $level;?></td>
-                                                <td><?php echo "<a href='update_user.php?id=$ID'>UPDATE</a> | 
-                                                                <a href='delete_user.php?id=$ID' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
+                                                <td><?php echo "<a href='update_user.php?id=$ID' class='action'>UPDATE</a> | 
+                                                                <a href='update_password.php?id=$ID' class='action'>UPDATE PASSWORD</a> | 
+                                                                <a href='delete_user.php?id=$ID' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
                                             </tr>
                                         <?php	   
                                                 }
@@ -88,9 +89,9 @@ session_start();
                             </div>
                         </div>
                     </div>
-                    <f href="add_user.php" class="act-btn">
+                    <a href="add_user.php" class="act-btn">
                         +
-                    </f>
+                    </a>
                 
                 </main>
                 <footer class="py-4 bg-light mt-auto">

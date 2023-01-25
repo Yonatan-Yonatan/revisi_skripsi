@@ -5,9 +5,10 @@
   	$id = $_POST['id'];
   	$username= $_POST['username'];
   	$fullname= $_POST['fullname'];
+	$password = sha1($_POST['password']);
 	$level= $_POST['level'];
   
-  	$sSQL= "update user set username='$username', fullname='$fullname',level='$level'
+  	$sSQL= "update user set username='$username', fullname='$fullname',password='$password',level='$level'
              where id='$id' ";
 	
  	if (mysqli_query($koneksi,  $sSQL)) 

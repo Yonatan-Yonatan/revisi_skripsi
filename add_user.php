@@ -49,11 +49,11 @@ session_start();
                     <label-form for="username">&nbsp;
                         User Name
                     </label-form>
-                    <input id="text" class="form-control" type="username" name="username" autocomplete="on" required/>
+                    <input id="username" class="form-control" type="text" name="username" autocomplete="on" required/>
                     <label-form for="fullname">&nbsp;
                         Full Name
                     </label-form>
-                    <input id="text" class="form-control" type="fullname" name="fullname" autocomplete="on" required/>
+                    <input id="fullname" class="form-control" type="text" name="fullname" autocomplete="on" required/>
                     <label-form for="password">&nbsp;
                         Password
                     </label-form>

@@ -16,5 +16,10 @@ if(mysqli_connect_errno()){
 	echo 'Gagal melakukan koneksi ke Database : '.mysqli_connect_error();
 }   
 
+function FormatUang($harga){
+    $hasil = "Rp " . number_format($harga,2,',','.');
+    return $hasil;
+}
+
 date_default_timezone_set('Asia/Jakarta');
 ?>
