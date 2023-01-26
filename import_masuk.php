@@ -29,33 +29,17 @@ session_start();
             </div>
             <div id="layoutSidenav_content">
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4" style="padding-bottom:15px";>Input Data Barang Masuk</h1>
-                    <form action="submit_barang_masuk.php" class="form" method="post"> 
+                    <h1 class="mt-4" style="padding-bottom:15px";>Import Data Barang Masuk</h1>
+                    <form action="submit_import_data.php" class="form" method="post" enctype="multipart/form-data"> 
                     <label-form for="id_produk">&nbsp;
-                        ID Produk
+                        Import Data
                     </label-form>
-                    <input id="id_produk" class="form-control" type="text" name="id_produk" autocomplete="on" required/>
-                    <label-form for="nama_produk">&nbsp;
-                        Nama Produk
-                    </label-form>
-                    <input id="nama_produk" class="form-control" type="text" name="nama_produk" autocomplete="on" required/>
-                    <label-form for="jenis_barang">&nbsp;
-                        Jenis Barang
-                    </label-form>
-                    <input id="jenis_barang" class="form-control" type="text" name="jenis_barang" autocomplete="on" required/>
-                    <label-form for="quantity">&nbsp;
-                        Quantity
-                    </label-form>
-                    <input id="qty" class="form-control" type="number" name="qty" autocomplete="on" required/>
-                    <label-form for="harga">&nbsp;
-                        Harga
-                    </label-form>
-                    <input id="harga" class="form-control" type="number" name="harga" autocomplete="on" required/>
-                       
+                    <input id="importdata" class="form-control" type="file" name="importdata" required/>
+                    <legend id="forgot-pass">* Hanya Dapat Mengupload File Dengan Format .CSV & .XLSX </legend>
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label"></label>
                             <div class="col-sm-10">
-                                <input type="submit" name="simpan" value="Simpan" class="btn btn-sm btn-primary" />&nbsp;
+                                <input type="submit" name="upload" value="upload" class="btn btn-sm btn-primary" />&nbsp;
                             </div>
                         </div>
                     </form>

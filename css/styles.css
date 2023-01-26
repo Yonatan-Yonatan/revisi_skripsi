@@ -166,6 +166,16 @@ abbr[data-bs-original-title] {
           text-decoration-skip-ink: none;
 }
 
+#forgot-pass{
+  color: red;
+  font-family: "Raleway",sans-serif;
+  font-size: 12px;
+  margin-top: 5px;
+  text-align: left;
+  text-decoration :solid;
+
+}
+
 address {
   margin-bottom: 1rem;
   font-style: normal;
