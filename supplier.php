@@ -5,9 +5,8 @@ session_start();
     {
 	    header("location: logout.php");
  	}
-    else{
-    }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,6 +21,22 @@ session_start();
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
+
+    <script>
+	function konfirmasi()
+	{
+	 	if (!confirm('Yakin hapus data ini ?'))
+		{
+			return false;
+        }
+		else
+		{ 
+			return true;		
+		}
+	}
+  
+</script>
+
     <body class="sb-nav-fixed">
     <?php include "head.php"; ?>
         <div id="layoutSidenav">
@@ -30,47 +45,39 @@ session_start();
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4" style="padding-bottom:15px";>Stok Barang</h1>
+                        <h1 class="mt-4" style="padding-bottom:15px";>Supplier</h1>
                         <div class="card mb-4">
                             <div class="card-body">
-                            <a href="data_masuk.php"><button type="button" class="btn btn-primary">Tambah Barang</button></a>
-                            <a href="import_masuk.php"><button type="button" class="btn btn-success">Import Barang</button></a><br><br>
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>ID Produk</th>
-                                            <th>Nama Produk</th>
-                                            <th>Jenis Produk</th>   
-                                            <th>Quantity</th>  
-                                            <th>Harga</th>         
-                                            <th>Action</th>
+                                            <th>Nama</th>
+                                            <th>Alamat</th>
+                                            <th>No. Telepon</th>
+                                            <th>Action</th>         
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
                                             $sSQL="";
-                                            $sSQL="select * from produk order  by id_produk";
+                                            $sSQL="select * from supplier order  by id_supplier";
                                             $result=mysqli_query($koneksi, $sSQL);
                                             if (mysqli_num_rows($result) > 0) 
                                             {
                                                 while ($row=mysqli_fetch_assoc($result))
                                                 {
-                                                    $id_produk = $row['id_produk'];
-                                                    $nama_produk = $row['nama_produk'];
-                                                    $jenis_produk = $row['jenis_barang'];
-                                                    $qty= $row['qty'];
-                                                    $harga= $row['harga'];
+                                                    $ID = $row['id_supplier'];
+                                                    $nama = $row['nama_supplier'];
+                                                    $alamat = $row['alamat'];
+                                                    $no_telp= $row['no_telp'];
                                         ?>		
                                                             
                                             <tr>
-                                                <td><?php echo $id_produk;?></td>
-                                                <td><?php echo $nama_produk;?></td>
-                                                <td><?php echo $jenis_produk;?></td>
-                                                <td><?php echo $qty;?></td>
-                                                <td><?php echo FormatUang($harga);?></td>
-                                                <td><?php echo "<a href='update_stok.php?id_produk=$id_produk' class='action'>UPDATE</a> | 
-                                                                <a href='delete_stok.php?id_produk=$id_produk' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
-                                            </tr>
+                                                <td><?php echo $nama;?></td>
+                                                <td><?php echo $alamat;?></td>
+                                                <td><?php echo $no_telp;?></td>
+                                                <td><?php echo "<a href='update_supplier.php?id_supplier=$ID' class='action'>UPDATE</a> | 
+                                                                <a href='delete_supplier.php?id_supplier=$ID' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
                                             </tr>
                                         <?php	   
                                                 }
@@ -81,11 +88,15 @@ session_start();
                             </div>
                         </div>
                     </div>
+                    <a href="add_supplier.php" class="act-btn">
+                        +
+                    </a>
+                
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                           <div class="text-muted"><sup>&copy;</sup>2023 Wahana Service. All Rights Reserved</div>
+                            <div class="text-muted"><sup>&copy;</sup>2023 Wahana Service. All Rights Reserved</div>
                         </div>
                     </div>
                 </footer>

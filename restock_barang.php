@@ -30,46 +30,42 @@ session_start();
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4" style="padding-bottom:15px";>Stok Barang</h1>
+                        <h1 class="mt-4" style="padding-bottom:15px";>Data Restock Barang</h1>
                         <div class="card mb-4">
                             <div class="card-body">
-                            <a href="data_masuk.php"><button type="button" class="btn btn-primary">Tambah Barang</button></a>
-                            <a href="import_masuk.php"><button type="button" class="btn btn-success">Import Barang</button></a><br><br>
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>ID Produk</th>
+                                            <th>Tanggal</th>
                                             <th>Nama Produk</th>
-                                            <th>Jenis Produk</th>   
-                                            <th>Quantity</th>  
-                                            <th>Harga</th>         
+                                            <th>Supplier</th>   
+                                            <th>Quantity</th>          
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
                                             $sSQL="";
-                                            $sSQL="select * from produk order  by id_produk";
+                                            $sSQL="select * from produk p, barang_masuk m, supplier s where p.id_produk = m.id_produk and s.id_supplier = m.id_supplier";
                                             $result=mysqli_query($koneksi, $sSQL);
                                             if (mysqli_num_rows($result) > 0) 
                                             {
                                                 while ($row=mysqli_fetch_assoc($result))
                                                 {
-                                                    $id_produk = $row['id_produk'];
+                                                    $id_masuk = $row['id_masuk'];
+                                                    $tanggal = $row['tanggal'];
                                                     $nama_produk = $row['nama_produk'];
-                                                    $jenis_produk = $row['jenis_barang'];
-                                                    $qty= $row['qty'];
-                                                    $harga= $row['harga'];
+                                                    $nama_supplier = $row['nama_supplier'];
+                                                    $stok= $row['stok'];
                                         ?>		
                                                             
                                             <tr>
-                                                <td><?php echo $id_produk;?></td>
+                                                <td><?php echo $tanggal;?></td>
                                                 <td><?php echo $nama_produk;?></td>
-                                                <td><?php echo $jenis_produk;?></td>
-                                                <td><?php echo $qty;?></td>
-                                                <td><?php echo FormatUang($harga);?></td>
-                                                <td><?php echo "<a href='update_stok.php?id_produk=$id_produk' class='action'>UPDATE</a> | 
-                                                                <a href='delete_stok.php?id_produk=$id_produk' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
+                                                <td><?php echo $nama_supplier;?></td>
+                                                <td><?php echo $stok;?></td>
+                                                <td><?php echo "<a href='update_restock_barang.php?id_masuk=$id_masuk' class='action'>UPDATE</a> | 
+                                                                <a href='delete_restock_barang.php?id_masuk=$id_masuk' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
                                             </tr>
                                             </tr>
                                         <?php	   
@@ -81,6 +77,9 @@ session_start();
                             </div>
                         </div>
                     </div>
+                    <a href="add_restock_barang.php" class="act-btn">
+                        +
+                    </a>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">

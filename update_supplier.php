@@ -24,17 +24,17 @@ session_start();
 
     <?php
         
-        $id=$_GET['id'];
+        $ID=$_GET['id_supplier'];
     
-        $sSQL=" select * from user where id='$id' limit 1";
+        $sSQL=" select * from supplier where id_supplier='$ID' limit 1";
         $result=mysqli_query($koneksi, $sSQL);
         if (mysqli_num_rows($result) > 0) 
         {
             while ($row=mysqli_fetch_assoc($result))
             {
-                $username = $row['username'];
-                $fullname = $row['fullname'];
-                $level = $row['level']; 
+                $nama = $row['nama_supplier'];
+                $alamat = $row['alamat'];
+                $no_telp= $row['no_telp'];
             }
         }	 
     ?>  
@@ -46,36 +46,30 @@ session_start();
             </div>
             <div id="layoutSidenav_content">
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4" style="padding-bottom:15px";>Edit User</h1>
-                    <form action="submit_update_user.php" class="form" method="post"> 
-                    <label-form for="id">&nbsp;
-                        ID User
+                    <h1 class="mt-4" style="padding-bottom:15px";>Edit Supplier</h1>
+                    <form action="submit_update_supplier.php" class="form" method="post"> 
+                    <label-form for="id_supplier">&nbsp;
+                        ID Supplier
                     </label-form>
-                    <input id="id" class="form-control" type="text" name="id" value="<?php echo $id;?>" readonly/>
-                    <label-form for="username">&nbsp;
-                        User Name
+                    <input id="id_supplier" class="form-control" type="text" name="id_supplier" value="<?php echo $ID;?>" readonly/>
+                    <label-form for="nama_supplier">&nbsp;
+                        Nama Supplier
                     </label-form>
-                    <input id="username" class="form-control" type="text" name="username" value="<?php echo $username;?>" required/>
-                    <label-form for="fullname">&nbsp;
-                        Full Name
+                    <input id="nama_supplier" class="form-control" type="text" name="nama_supplier" value="<?php echo $nama;?>" required/>
+                    <label-form for="alamat">&nbsp;
+                        Alamat
                     </label-form>
-                    <input id="fullname" class="form-control" type="text" name="fullname" value="<?php echo $fullname;?>" required/>
-                    <label-form for="level">&nbsp;
-                        Jenis Akun
+                    <input id="alamat" class="form-control" type="text" name="alamat" value="<?php echo $alamat;?>" required/>
+                    <label-form for="no_telp">&nbsp;
+                        Nomor Telepon
                     </label-form>
-                        <div>
-                            <select name="level" id="level"  class="form-control"  required>
-                                <option value="">-- Pilih --</option>
-                                <option value="user">User</option>
-                                <option value="admin">Admin</option>
-                            </select>
-                        </div>
+                    <input id="no_telp" class="form-control" type="number" name="no_telp" value="<?php echo $no_telp;?>" required/>   
                        
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label"></label>
                             <div class="col-sm-10">
                                 <input type="submit" name="simpan" value="Simpan" class="btn btn-sm btn-primary" />&nbsp;
-	                            <a href="user.php" class="btn btn-sm btn-danger">Batal </a>
+	                            <a href="supplier.php" class="btn btn-sm btn-danger">Batal </a>
                             </div>
                         </div>
                     </form>

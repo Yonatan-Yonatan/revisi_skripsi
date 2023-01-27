@@ -20,6 +20,9 @@ session_start();
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
     </head>
 
     <body class="sb-nav-fixed">
@@ -30,32 +33,51 @@ session_start();
             <div id="layoutSidenav_content">
                 <div class="container-fluid px-4">
                     <h1 class="mt-4" style="padding-bottom:15px";>Input Data Barang Masuk</h1>
-                    <form action="submit_data_masuk.php" class="form" method="post"> 
-                    <label-form for="id_produk">&nbsp;
-                        ID Produk
-                    </label-form>
-                    <input id="id_produk" class="form-control" type="text" name="id_produk" autocomplete="on" required/>
+                    <form action="submit_restock_barang.php" class="form" method="post"> 
                     <label-form for="nama_produk">&nbsp;
                         Nama Produk
                     </label-form>
-                    <input id="nama_produk" class="form-control" type="text" name="nama_produk" autocomplete="on" required/>
-                    <label-form for="jenis_barang">&nbsp;
-                        Jenis Barang
+                    <select id="id_produk" name="id_produk" class="form-control" required>
+                        <option value="">-- Pilih --</option>
+                            <?php
+                                $ambildata = mysqli_query($koneksi, "select * from produk");
+                                while($fetcharray = mysqli_fetch_array($ambildata)){
+                                    $namaproduk = $fetcharray['nama_produk'];
+                                    $idproduk = $fetcharray['id_produk'];
+                            ?>
+                            <option value="<?=$idproduk;?>"><?=$namaproduk;?></option>
+                            <?php
+                                }
+
+                            ?>
+                    </select>
+                    <label-form for="nama_supplier">&nbsp;
+                        Supplier
                     </label-form>
-                    <input id="jenis_barang" class="form-control" type="text" name="jenis_barang" autocomplete="on" required/>
+                    <select id="id_supplier" name="id_supplier" class="form-control" required>
+                        <option value="">-- Pilih --</option>
+                            <?php
+                                $ambildata = mysqli_query($koneksi, "select * from supplier");
+                                while($fetcharray = mysqli_fetch_array($ambildata)){
+                                    $namasupplier = $fetcharray['nama_supplier'];
+                                    $idsupplier = $fetcharray['id_supplier'];
+                            ?>
+                            <option value="<?=$idsupplier;?>"><?=$namasupplier;?></option>
+                            <?php
+                                }
+
+                            ?>
+                    </select>
                     <label-form for="quantity">&nbsp;
                         Quantity
                     </label-form>
-                    <input id="qty" class="form-control" type="number" name="qty" autocomplete="on" required/>
-                    <label-form for="harga">&nbsp;
-                        Harga
-                    </label-form>
-                    <input id="harga" class="form-control" type="number" name="harga" autocomplete="on" required/>
+                    <input id="stok" class="form-control" type="number" name="stok" autocomplete="on" required/>
                        
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label"></label>
                             <div class="col-sm-10">
                                 <input type="submit" name="simpan" value="Simpan" class="btn btn-sm btn-primary" />&nbsp;
+                                <a href="restock_barang.php" class="btn btn-sm btn-danger">Batal </a>
                             </div>
                         </div>
                     </form>
@@ -76,6 +98,13 @@ session_start();
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
-
+    
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#id_produk').select2();
+                $('#id_supplier').select2();
+            });
+        </script>
+    
     </body>
 </html>

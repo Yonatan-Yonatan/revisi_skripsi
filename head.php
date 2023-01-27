@@ -31,10 +31,23 @@
                         <li><a class="dropdown-item" href="update_password_user.php">Change Password</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <?php } else if($_SESSION['level'] == "user"){ echo "";} ?>
-                        <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                        <li><a class="dropdown-item"  onClick="Logout()">Logout</a></li>
                     </ul>
                 </li>
             </ul>
         </nav>
+
+        <script>
+            function Logout() {
+                let text;
+                if (confirm("Apakah Anda Ingin Keluar?!") == true) {
+                    alert('Anda telah berhasil keluar.'); window.location = 'logout.php'
+                } else {
+                    
+                }
+                document.getElementById("demo").innerHTML = text;
+            }
+        </script>
+
 </body>
 </html>

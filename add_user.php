@@ -22,21 +22,6 @@ session_start();
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
 
-    <script>
-	function konfirmasi()
-	{
-	 	if (!confirm('Yakin hapus data ini ?'))
-		{
-			return false;
-        }
-		else
-		{ 
-			return true;		
-		}
-	}
-  
-</script>
-
     <body class="sb-nav-fixed">
     <?php include "head.php"; ?>
         <div id="layoutSidenav">
@@ -44,7 +29,7 @@ session_start();
             </div>
             <div id="layoutSidenav_content">
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4" style="padding-bottom:15px";>User</h1>
+                    <h1 class="mt-4" style="padding-bottom:15px";>New User</h1>
                     <form action="submit_user.php" class="form" method="post"> 
                     <label-form for="username">&nbsp;
                         User Name
