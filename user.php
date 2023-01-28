@@ -60,7 +60,7 @@ session_start();
                                     <tbody>
                                         <?php 
                                             $sSQL="";
-                                            $sSQL="select * from user order  by id";
+                                            $sSQL="select * from user order by id";
                                             $result=mysqli_query($koneksi, $sSQL);
                                             if (mysqli_num_rows($result) > 0) 
                                             {

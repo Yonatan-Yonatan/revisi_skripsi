@@ -49,10 +49,8 @@ session_start();
                 <div class="container-fluid px-4">
                     <h1 class="mt-4" style="padding-bottom:15px";>Change Password</h1>
                     <form action="submit_update_password_user.php" class="form" method="post"> 
-                    <label-form for="username">&nbsp;
-                        ID User
-                    </label-form>
-                    <input id="id" class="form-control" type="text" name="id" value="<?php echo $id;?>" readonly/>
+                    
+                    <input id="id" class="form-control" type="hidden" name="id" value="<?php echo $id;?>" readonly/>
                     <label-form for="username">&nbsp;
                         User Name
                     </label-form>

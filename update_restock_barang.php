@@ -24,18 +24,19 @@ session_start();
 
     <?php
         
-        $id=$_GET['id'];
-    
-        $sSQL=" select * from user where id='$id' limit 1";
+        $id_masuk=$_GET['id_masuk'];
+
+        
+        
+        $sSQL=" select * from barang_masuk m, produk p where id_masuk = '$id_masuk' and m.id_produk=p.id_produk limit 1";
         $result=mysqli_query($koneksi, $sSQL);
         if (mysqli_num_rows($result) > 0) 
         {
             while ($row=mysqli_fetch_assoc($result))
             {
-                $username = $row['username'];
-                $fullname = $row['fullname'];
-                $password = $row['password'];
-                $level = $row['level']; 
+                $nama_produk = $row['nama_produk'];
+                $stok= $row['stok'];
+                
             }
         }	 
     ?>  
@@ -47,35 +48,27 @@ session_start();
             </div>
             <div id="layoutSidenav_content">
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4" style="padding-bottom:15px";>Change Password</h1>
-                    <form action="submit_update_password.php" class="form" method="post"> 
+                    <h1 class="mt-4" style="padding-bottom:15px";>Edit Stok Restock</h1>
+                    <form action="submit_update_user.php" class="form" method="post"> 
+                    <label-form for="id_masuk">&nbsp;
+                        ID Restock Barang
+                    </label-form>
+                    <input id="id_masuk" class="form-control" type="text" name="id_masuk" value="<?php echo $id_masuk;?>" readonly/>
+                    <label-form for="nama_produk">&nbsp;
+                        Nama Produk
+                    </label-form>
+                    <input id="nama_produk" class="form-control" type="text" name="nama_produk" value="<?php echo $nama_produk;?>" readonly/>
+                    <label-form for="stok">&nbsp;
+                        Stok
+                    </label-form>
+                    <input id="stok" class="form-control" type="number" name="stok" value="<?php echo $stok;?>" required/>
                     
-                    <input id="id" class="form-control" type="hidden" name="id" value="<?php echo $id;?>" readonly/>
-                    <label-form for="username">&nbsp;
-                        User Name
-                    </label-form>
-                    <input id="username" class="form-control" type="text" name="username" value="<?php echo $username;?>" readonly/>
-                    <label-form for="fullname">&nbsp;
-                        Full Name
-                    </label-form>
-                    <input id="fullname" class="form-control" type="text" name="fullname" value="<?php echo $fullname;?>" readonly/>
-                    <label-form for="level">&nbsp;
-                        Jenis Akun
-                    </label-form>
-                    <input id="level" class="form-control" type="text" name="level" value="<?php echo $level;?>" readonly/>
-                    <label-form for="password">&nbsp;
-                        Password
-                    </label-form>
-                    <input id="password" class="form-control" type="password" name="password" required/>
-                    <label for="Show Password" style="padding-top: 15px">
-                        <input type="checkbox" onclick="showPassword()"/> Show Password
-                    </label>
                        
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label"></label>
                             <div class="col-sm-10">
                                 <input type="submit" name="simpan" value="Simpan" class="btn btn-sm btn-primary" />&nbsp;
-	                            <a href="user.php" class="btn btn-sm btn-danger">Batal </a>
+	                            <a href="restock_barang.php" class="btn btn-sm btn-danger">Batal </a>
                             </div>
                         </div>
                     </form>

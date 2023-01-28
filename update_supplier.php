@@ -48,10 +48,8 @@ session_start();
                 <div class="container-fluid px-4">
                     <h1 class="mt-4" style="padding-bottom:15px";>Edit Supplier</h1>
                     <form action="submit_update_supplier.php" class="form" method="post"> 
-                    <label-form for="id_supplier">&nbsp;
-                        ID Supplier
-                    </label-form>
-                    <input id="id_supplier" class="form-control" type="text" name="id_supplier" value="<?php echo $ID;?>" readonly/>
+                    
+                    <input id="id_supplier" class="form-control" type="hidden" name="id_supplier" value="<?php echo $ID;?>" readonly/>
                     <label-form for="nama_supplier">&nbsp;
                         Nama Supplier
                     </label-form>

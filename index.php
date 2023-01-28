@@ -22,6 +22,20 @@ session_start();
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
+    <script>
+	function konfirmasi()
+	{
+	 	if (!confirm('Yakin hapus data ini ?'))
+		{
+			return false;
+        }
+		else
+		{ 
+			return true;		
+		}
+	}
+    </script>
+
     <body class="sb-nav-fixed">
     <?php include "head.php"; ?>
         <div id="layoutSidenav">
@@ -33,7 +47,7 @@ session_start();
                         <h1 class="mt-4" style="padding-bottom:15px";>Stok Barang</h1>
                         <div class="card mb-4">
                             <div class="card-body">
-                            <a href="data_masuk.php"><button type="button" class="btn btn-primary">Tambah Barang</button></a>
+                            <a href="add_barang.php"><button type="button" class="btn btn-primary">Tambah Barang</button></a>
                             <a href="import_masuk.php"><button type="button" class="btn btn-success">Import Barang</button></a><br><br>
                                 <table id="datatablesSimple">
                                     <thead>
@@ -68,10 +82,10 @@ session_start();
                                                 <td><?php echo $jenis_produk;?></td>
                                                 <td><?php echo $qty;?></td>
                                                 <td><?php echo FormatUang($harga);?></td>
-                                                <td><?php echo "<a href='update_stok.php?id_produk=$id_produk' class='action'>UPDATE</a> | 
-                                                                <a href='delete_stok.php?id_produk=$id_produk' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
+                                                <td><?php echo "<a href='update_barang.php?id_produk=$id_produk' class='action'>UPDATE</a> | 
+                                                                <a href='delete_barang.php?id_produk=$id_produk' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
                                             </tr>
-                                            </tr>
+
                                         <?php	   
                                                 }
                                             } 

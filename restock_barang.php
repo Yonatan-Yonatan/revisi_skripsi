@@ -40,19 +40,19 @@ session_start();
                                             <th>Nama Produk</th>
                                             <th>Supplier</th>   
                                             <th>Quantity</th>          
-                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
                                             $sSQL="";
-                                            $sSQL="select * from produk p, barang_masuk m, supplier s where p.id_produk = m.id_produk and s.id_supplier = m.id_supplier";
+                                            $sSQL="select * from barang_masuk m, produk p, supplier s where p.id_produk = m.id_produk and s.id_supplier = m.id_supplier";
                                             $result=mysqli_query($koneksi, $sSQL);
                                             if (mysqli_num_rows($result) > 0) 
                                             {
                                                 while ($row=mysqli_fetch_assoc($result))
                                                 {
                                                     $id_masuk = $row['id_masuk'];
+                                                    $id_produk = $row['id_produk'];
                                                     $tanggal = $row['tanggal'];
                                                     $nama_produk = $row['nama_produk'];
                                                     $nama_supplier = $row['nama_supplier'];
@@ -64,9 +64,6 @@ session_start();
                                                 <td><?php echo $nama_produk;?></td>
                                                 <td><?php echo $nama_supplier;?></td>
                                                 <td><?php echo $stok;?></td>
-                                                <td><?php echo "<a href='update_restock_barang.php?id_masuk=$id_masuk' class='action'>UPDATE</a> | 
-                                                                <a href='delete_restock_barang.php?id_masuk=$id_masuk' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
-                                            </tr>
                                             </tr>
                                         <?php	   
                                                 }
@@ -89,7 +86,7 @@ session_start();
                     </div>
                 </footer>
             </div>
-        </div>
+     
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -97,5 +94,8 @@ session_start();
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
+    
+    
+    
     </body>
 </html>

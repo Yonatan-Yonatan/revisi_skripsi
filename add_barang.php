@@ -22,24 +22,6 @@ session_start();
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
 
-    <?php
-        
-        $id=$_GET['id'];
-    
-        $sSQL=" select * from user where id='$id' limit 1";
-        $result=mysqli_query($koneksi, $sSQL);
-        if (mysqli_num_rows($result) > 0) 
-        {
-            while ($row=mysqli_fetch_assoc($result))
-            {
-                $username = $row['username'];
-                $fullname = $row['fullname'];
-                $password = $row['password'];
-                $level = $row['level']; 
-            }
-        }	 
-    ?>  
-
     <body class="sb-nav-fixed">
     <?php include "head.php"; ?>
         <div id="layoutSidenav">
@@ -47,35 +29,33 @@ session_start();
             </div>
             <div id="layoutSidenav_content">
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4" style="padding-bottom:15px";>Change Password</h1>
-                    <form action="submit_update_password.php" class="form" method="post"> 
-                    
-                    <input id="id" class="form-control" type="hidden" name="id" value="<?php echo $id;?>" readonly/>
-                    <label-form for="username">&nbsp;
-                        User Name
+                    <h1 class="mt-4" style="padding-bottom:15px";>Input Data Barang Masuk</h1>
+                    <form action="submit_barang.php" class="form" method="post"> 
+                    <label-form for="id_produk">&nbsp;
+                        ID Produk
                     </label-form>
-                    <input id="username" class="form-control" type="text" name="username" value="<?php echo $username;?>" readonly/>
-                    <label-form for="fullname">&nbsp;
-                        Full Name
+                    <input id="id_produk" class="form-control" type="text" name="id_produk" autocomplete="on" required/>
+                    <label-form for="nama_produk">&nbsp;
+                        Nama Produk
                     </label-form>
-                    <input id="fullname" class="form-control" type="text" name="fullname" value="<?php echo $fullname;?>" readonly/>
-                    <label-form for="level">&nbsp;
-                        Jenis Akun
+                    <input id="nama_produk" class="form-control" type="text" name="nama_produk" autocomplete="on" required/>
+                    <label-form for="jenis_barang">&nbsp;
+                        Jenis Barang
                     </label-form>
-                    <input id="level" class="form-control" type="text" name="level" value="<?php echo $level;?>" readonly/>
-                    <label-form for="password">&nbsp;
-                        Password
+                    <input id="jenis_barang" class="form-control" type="text" name="jenis_barang" autocomplete="on" required/>
+                    <label-form for="quantity">&nbsp;
+                        Quantity
                     </label-form>
-                    <input id="password" class="form-control" type="password" name="password" required/>
-                    <label for="Show Password" style="padding-top: 15px">
-                        <input type="checkbox" onclick="showPassword()"/> Show Password
-                    </label>
+                    <input id="qty" class="form-control" type="number" name="qty" autocomplete="on" required/>
+                    <label-form for="harga">&nbsp;
+                        Harga
+                    </label-form>
+                    <input id="harga" class="form-control" type="number" name="harga" autocomplete="on" required/>
                        
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label"></label>
                             <div class="col-sm-10">
                                 <input type="submit" name="simpan" value="Simpan" class="btn btn-sm btn-primary" />&nbsp;
-	                            <a href="user.php" class="btn btn-sm btn-danger">Batal </a>
                             </div>
                         </div>
                     </form>
@@ -97,19 +77,5 @@ session_start();
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
 
-        <script>
-            function showPassword()
-            {
-                var x = document.getElementById("password");
-                if (x.type === "password") 
-                {
-                    x.type = "text";
-                } 
-                else 
-                {
-                    x.type = "password";
-                }
-            }
-        </script>
     </body>
 </html>

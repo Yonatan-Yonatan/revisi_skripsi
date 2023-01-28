@@ -22,6 +22,24 @@ session_start();
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
 
+    <?php
+        
+        $id_produk=$_GET['id_produk'];
+    
+        $sSQL=" select * from produk where id_produk='$id_produk' limit 1";
+        $result=mysqli_query($koneksi, $sSQL);
+        if (mysqli_num_rows($result) > 0) 
+        {
+            while ($row=mysqli_fetch_assoc($result))
+            {
+                $id_produk = $row['id_produk'];
+                $nama_produk = $row['nama_produk'];
+                $jenis_produk = $row['jenis_barang'];
+                $harga= $row['harga'];
+            }
+        }	 
+    ?>  
+
     <body class="sb-nav-fixed">
     <?php include "head.php"; ?>
         <div id="layoutSidenav">
@@ -29,33 +47,29 @@ session_start();
             </div>
             <div id="layoutSidenav_content">
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4" style="padding-bottom:15px";>Input Data Barang Masuk</h1>
-                    <form action="submit_data_masuk.php" class="form" method="post"> 
-                    <label-form for="id_produk">&nbsp;
-                        ID Produk
-                    </label-form>
-                    <input id="id_produk" class="form-control" type="text" name="id_produk" autocomplete="on" required/>
+                    <h1 class="mt-4" style="padding-bottom:15px";>Edit Barang</h1>
+                    <form action="submit_update_barang.php" class="form" method="post"> 
+                    
+                    <input id="id_produk" class="form-control" type="hidden" name="id_produk" value="<?php echo $id_produk;?>" readonly/>
                     <label-form for="nama_produk">&nbsp;
                         Nama Produk
                     </label-form>
-                    <input id="nama_produk" class="form-control" type="text" name="nama_produk" autocomplete="on" required/>
+                    <input id="nama_produk" class="form-control" type="text" name="nama_produk" value="<?php echo $nama_produk;?>" required/>
                     <label-form for="jenis_barang">&nbsp;
                         Jenis Barang
                     </label-form>
-                    <input id="jenis_barang" class="form-control" type="text" name="jenis_barang" autocomplete="on" required/>
-                    <label-form for="quantity">&nbsp;
-                        Quantity
-                    </label-form>
-                    <input id="qty" class="form-control" type="number" name="qty" autocomplete="on" required/>
+                    <input id="jenis_barang" class="form-control" type="text" name="jenis_barang" value="<?php echo $jenis_produk;?>" required/>
                     <label-form for="harga">&nbsp;
                         Harga
                     </label-form>
-                    <input id="harga" class="form-control" type="number" name="harga" autocomplete="on" required/>
+                    <input id="harga" class="form-control" type="number" name="harga" value="<?php echo $harga;?>" required/>
+                    
                        
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label"></label>
                             <div class="col-sm-10">
                                 <input type="submit" name="simpan" value="Simpan" class="btn btn-sm btn-primary" />&nbsp;
+	                            <a href="index.php" class="btn btn-sm btn-danger">Batal </a>
                             </div>
                         </div>
                     </form>
@@ -77,5 +91,19 @@ session_start();
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
 
+        <script>
+            function showPassword()
+            {
+                var x = document.getElementById("password");
+                if (x.type === "password") 
+                {
+                    x.type = "text";
+                } 
+                else 
+                {
+                    x.type = "password";
+                }
+            }
+        </script>
     </body>
 </html>

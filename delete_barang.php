@@ -6,15 +6,14 @@ session_start();
 	    header("location: logout.php");
  	}
 
-     $id_masuk = $_GET['id_masuk'];
+     $id_produk = $_GET['id_produk'];
  
-     
-     $sSQL=" delete from barang_masuk 
-              where id_masuk='$id_masuk'";
+     $sSQL=" delete from produk
+              where id_produk='$id_produk'";
         
     
      if (mysqli_query($koneksi,  $sSQL)) {
-            header("location:barang_masuk.php");
+            header("location:index.php");
             exit();
      }	
      else
