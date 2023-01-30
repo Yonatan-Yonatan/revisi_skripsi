@@ -22,20 +22,6 @@ session_start();
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
-    <script>
-	function konfirmasi()
-	{
-	 	if (!confirm('Yakin hapus data ini ?'))
-		{
-			return false;
-        }
-		else
-		{ 
-			return true;		
-		}
-	}
-    </script>
-
     <body class="sb-nav-fixed">
     <?php include "head.php"; ?>
         <div id="layoutSidenav">
@@ -44,64 +30,43 @@ session_start();
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4" style="padding-bottom:15px";>Stok Barang</h1>
+                        <h1 class="mt-4" style="padding-bottom:15px";>Data Restock Barang</h1>
                         <div class="card mb-4">
                             <div class="card-body">
-                                <a href="add_barang.php"><button type="button" class="btn btn-primary">Tambah Barang</button></a>
-                                <a href="import_masuk.php"><button type="button" class="btn btn-success">Import Barang</button></a><br><br>
-
-                                <?php 
-                                    $datastok = mysqli_query($koneksi, "select * from produk where qty < 1");
-                                    while ($fetch=mysqli_fetch_array($datastok)){
-                                        $nama_produk = $fetch['nama_produk'];
-                                    
-                                ?>
-                                    <div class="alert alert-danger alert-dismissible">
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                                        <strong>Perhatian!</strong> Stok <?=$nama_produk;?> Telah Habis
-                                    </div>
-                                <?php
-                                    }
-                                ?>
-
-                    
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>ID Produk</th>
+                                        <th>PK</th>    
+                                        <th>Tanggal</th>
                                             <th>Nama Produk</th>
-                                            <th>Jenis Produk</th>   
-                                            <th>Quantity</th>  
-                                            <th>Harga</th>         
-                                            <th>Action</th>
+                                            <th>Supplier</th>   
+                                            <th>Quantity</th>          
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
                                             $sSQL="";
-                                            $sSQL="select * from produk order  by id_produk";
+                                            $sSQL="select * from barang_masuk m, produk p, supplier s where (tanggal BETWEEN '2023-01-25' AND '2023-01-30')";
                                             $result=mysqli_query($koneksi, $sSQL);
                                             if (mysqli_num_rows($result) > 0) 
                                             {
                                                 while ($row=mysqli_fetch_assoc($result))
                                                 {
+                                                    $id_masuk = $row['id_masuk'];
                                                     $id_produk = $row['id_produk'];
+                                                    $tanggal = $row['tanggal'];
                                                     $nama_produk = $row['nama_produk'];
-                                                    $jenis_produk = $row['jenis_barang'];
-                                                    $qty= $row['qty'];
-                                                    $harga= $row['harga'];
+                                                    $nama_supplier = $row['nama_supplier'];
+                                                    $stok= $row['stok'];
                                         ?>		
                                                             
                                             <tr>
-                                                <td><?php echo $id_produk;?></td>
+                                            <td><?php echo $id_masuk;?></td>    
+                                            <td><?php echo $tanggal;?></td>
                                                 <td><?php echo $nama_produk;?></td>
-                                                <td><?php echo $jenis_produk;?></td>
-                                                <td><?php echo $qty;?></td>
-                                                <td><?php echo FormatUang($harga);?></td>
-                                                <td><?php echo "<a href='update_barang.php?id_produk=$id_produk' class='action'>UPDATE</a> | 
-                                                                <a href='delete_barang.php?id_produk=$id_produk' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
+                                                <td><?php echo $nama_supplier;?></td>
+                                                <td><?php echo $stok;?></td>
                                             </tr>
-
                                         <?php	   
                                                 }
                                             } 
@@ -111,6 +76,7 @@ session_start();
                             </div>
                         </div>
                     </div>
+                    
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
@@ -120,7 +86,7 @@ session_start();
                     </div>
                 </footer>
             </div>
-        </div>
+     
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -128,5 +94,8 @@ session_start();
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
+    
+    
+    
     </body>
 </html>

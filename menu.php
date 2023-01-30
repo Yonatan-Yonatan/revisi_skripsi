@@ -25,11 +25,11 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-box-open"></i></div>
                     Restock Barang
                 </a>
-                <a class="nav-link" href="data_keluar.php">
+                <a class="nav-link" href="barang_keluar.php">
                     <div class="sb-nav-link-icon"><i class="fas fa-box-open"></i></div>
                     Barang Keluar
                 </a>
-                <a class="nav-link" href="laporan.php">
+                <a class="nav-link" href="laporan_data_masuk.php">
                     <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
                     Laporan
                 </a>
