@@ -60,7 +60,7 @@ session_start();
                                         ?>		
                                                             
                                             <tr>
-                                                <td><?php echo $tanggal;?></td>
+                                                <td><?php echo date('d M Y', strtotime($tanggal));?></td>
                                                 <td><?php echo $nama_produk;?></td>
                                                 <td><?php echo $nama_supplier;?></td>
                                                 <td><?php echo $stok;?></td>

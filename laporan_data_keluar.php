@@ -30,30 +30,44 @@ session_start();
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4" style="padding-bottom:15px";>Data Barang Keluar</h1>
+                        <h1 class="mt-4" style="padding-bottom:30px";>Laporan Transaksi Barang Keluar</h1>
+                        <form method="get" style="padding-bottom :50px;">
+                            <div class="row">
+                                <div class="col-sm-4">    
+                                    <label style="padding-bottom :5px;">Dari : </label><br>
+                                    <input type="date" name="dari" class="filter-form-control">
+                                </div>
+                                <div class="col-sm-4">                             
+                                    <label style="padding-bottom :5px;">Sampai : </label><br>
+                                    <input type="date" name="sampai" class="filter-form-control">
+                                </div>
+                                <div class="col-sm-4" style="padding-top :30px;"> 
+                                    <input type="submit" class="btn btn-sm btn-primary" value="Submit">
+                                </div>
+                            </div>
+                        </form>
+                        
                         <div class="card mb-4">
                             <div class="card-body">
-                                <table id="datatablesSimple">
+                                <table class="table">
                                     <thead>
-                                        <tr>
+                                        <tr>   
                                             <th>Tanggal</th>
                                             <th>Nama Produk</th>
                                             <th>Harga Produk</th>   
-                                            <th>Quantity</th>
-                                            <th>Total Harga</th>
-                                            <th>Keterangan</th>          
+                                            <th>Quantity</th>    
+                                            <th>Total Harga</th>  
+                                            <th>Keterangan</th>  
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            $sSQL="";
-                                            $sSQL="select * from barang_keluar k, produk p where k.id_produk = p.id_produk";
-                                            $result=mysqli_query($koneksi, $sSQL);
-                                            if (mysqli_num_rows($result) > 0) 
-                                            {
-                                                while ($row=mysqli_fetch_assoc($result))
-                                                {
-                                                    $id_keluar = $row['id_keluar'];
+                                            $data="";
+                                            
+                                            if(isset($_GET['dari']) && isset($_GET['sampai'])){
+                                                // tampilkan data yang sesuai dengan range tanggal yang dicari 
+                                                $data = mysqli_query($koneksi, "select * from barang_keluar k, produk p where (tanggal BETWEEN '".$_GET['dari']."' and '".$_GET['sampai']."') and k.id_produk = p.id_produk");
+                                                while($row = mysqli_fetch_array($data)){
                                                     $tanggal = $row['tanggal'];
                                                     $id_produk = $row['id_produk'];
                                                     $nama_produk = $row['nama_produk'];
@@ -61,9 +75,9 @@ session_start();
                                                     $jumlah= $row['jumlah_barang'];
                                                     $totalharga = $row['total_harga'];
                                                     $deskripsi = $row['deskripsi'];
-                                        ?>		
-                                                            
-                                            <tr>
+                                        ?>	
+                                                                        
+                                            <tr>   
                                                 <td><?php echo date('d M Y', strtotime($tanggal));?></td>
                                                 <td><?php echo $nama_produk;?></td>
                                                 <td><?php echo FormatUang($harga);?></td>
@@ -72,17 +86,29 @@ session_start();
                                                 <td><?php echo $deskripsi;?></td>
                                             </tr>
                                         <?php	   
-                                                }
-                                            } 
-                                         ?>
+                                                }     
+                                        ?>
                                     </tbody>
-                                </table>
+                                    <tfoot>
+                                        <form method="POST" action="print_laporan_keluar.php" target="_BLANK">
+                                            <div class="col-sm-4" style="padding-bottom:15px">
+                                                <input type="hidden" name="dari" class="filter-form-control" value="<?php echo $_GET['dari'];?>">
+                                                <input type="hidden" name="sampai" class="filter-form-control" value="<?php echo $_GET['sampai'];?>">
+                                            </div>
+                                            <input type="submit" name="print" value="print" class="btn btn-sm btn-primary" />&nbsp
+                                        </form>
+                                    </tfoot>
+                                        <?php   
+                                            }else{
+                                                //jika tidak ada tanggal dari dan tanggal ke maka tampilkan seluruh data		
+                                            }
+                                        ?>
+                                    </table>
+                                </div> 
                             </div>
-                        </div>
-                    </div>
-                    <a href="add_barang_keluar.php" class="act-btn">
-                        +
-                    </a>
+                        </div>       
+                                
+                    
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
