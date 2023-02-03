@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 31, 2023 at 09:55 AM
+-- Generation Time: Feb 03, 2023 at 04:41 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -47,7 +47,11 @@ INSERT INTO `barang_keluar` (`id_keluar`, `id_produk`, `tanggal`, `jumlah_barang
 (25, 'Ba002', '2023-01-31', 4, 2200000, 'Terjual'),
 (26, 'Ba001', '2023-01-31', 4, 1600000, 'Terjual'),
 (27, 'B001', '2023-01-31', 2, 760000, 'Terjual'),
-(28, 'B002', '2023-01-31', 2, 190000, 'Terjual');
+(28, 'B002', '2023-01-31', 2, 190000, 'Terjual'),
+(29, 'OM001', '2023-02-01', 1, 500000, 'Terjual'),
+(30, 'Ak002', '2023-02-02', 1, 700000, 'Terjual'),
+(31, 'OM001', '2023-02-02', 3, 1500000, 'Terjual'),
+(32, 'KR002', '2023-02-03', 1, 230000, 'Terjual');
 
 -- --------------------------------------------------------
 
@@ -78,7 +82,7 @@ INSERT INTO `barang_masuk` (`id_masuk`, `id_produk`, `id_supplier`, `tanggal`, `
 (42, 'Ba002', 10, '2023-01-31', 100),
 (43, 'OM001', 11, '2023-01-31', 100),
 (44, 'OM002', 11, '2023-01-31', 100),
-(45, 'OM003', 11, '2023-01-31', 100),
+(45, 'OM003', 11, '2023-01-31', 8),
 (46, 'KR001', 12, '2023-01-31', 100),
 (47, 'KR002', 12, '2023-01-31', 100),
 (48, 'FU002', 13, '2023-01-31', 100);
@@ -103,7 +107,7 @@ CREATE TABLE `produk` (
 
 INSERT INTO `produk` (`id_produk`, `nama_produk`, `jenis_barang`, `qty`, `harga`) VALUES
 ('Ak001', 'GS Astra', 'Aki', 99, 620000),
-('Ak002', 'Boch SM Mega Power', 'Aki', 100, 700000),
+('Ak002', 'Boch SM Mega Power', 'Aki', 99, 700000),
 ('Ak003', 'Amarin Hi Life', 'Aki', 100, 600000),
 ('Ak004', 'Yuasa', 'Aki', 100, 570000),
 ('B001', 'Duration Ultra Iridium', 'Busi', 98, 380000),
@@ -113,10 +117,10 @@ INSERT INTO `produk` (`id_produk`, `nama_produk`, `jenis_barang`, `qty`, `harga`
 ('FU001', 'K&N', 'Filter Udara', 0, 1300000),
 ('FU002', 'Ferrox', 'Filter Udara', 100, 1300000),
 ('KR001', 'Akebono Brake', 'Kampas Rem', 100, 250000),
-('KR002', 'Birkens', 'Kampas Rem', 98, 230000),
-('OM001', 'Top Zenzation', 'Oli Mesin', 99, 500000),
+('KR002', 'Birkens', 'Kampas Rem', 97, 230000),
+('OM001', 'Top Zenzation', 'Oli Mesin', 95, 500000),
 ('OM002', 'Castrol Magnetic', 'Oli Mesin', 100, 360000),
-('OM003', 'Lucas Semi-Synthetic', 'Oli Mesin', 100, 700000);
+('OM003', 'Lucas Semi-Synthetic', 'Oli Mesin', 8, 700000);
 
 -- --------------------------------------------------------
 
@@ -142,33 +146,6 @@ INSERT INTO `supplier` (`id_supplier`, `nama_supplier`, `alamat`, `no_telp`) VAL
 (11, 'PT Jayadipa Perkasa', 'Central Bisnis Blok SS 8, JL. Harapan Indah Raya, No. 20, Bekasi City, West Java', '085293938815'),
 (12, 'PT. Dirgaputra Ekapratama', 'Jl.Pulobuaran Raya Blok III Kav.2-3-6 Pulogadung Jakarta Timur', '02129826633'),
 (13, 'FERROX Air Filter Indonesia', 'NUR AZ Islamic Town House, Jl. Raya Klp. Dua Wetan, RT.4/RW.8, Ciracas, Jakarta', '081299429490');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `transaksi`
---
-
-CREATE TABLE `transaksi` (
-  `id` int(20) NOT NULL,
-  `tanggal` date NOT NULL,
-  `rack_no` varchar(50) NOT NULL,
-  `id_produk` varchar(50) NOT NULL,
-  `nama_produk` varchar(255) NOT NULL,
-  `qty` varchar(10) NOT NULL,
-  `satuan` varchar(10) NOT NULL,
-  `status` varchar(5) NOT NULL,
-  `pic` varchar(100) NOT NULL,
-  `note` varchar(255) NOT NULL,
-  `entry` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `transaksi`
---
-
-INSERT INTO `transaksi` (`id`, `tanggal`, `rack_no`, `id_produk`, `nama_produk`, `qty`, `satuan`, `status`, `pic`, `note`, `entry`) VALUES
-(0, '2023-01-18', '001', 'P001', 'Astrol', '1', 'Pcs', 'OUT', 'Customer', 'terjual', 'admin');
 
 -- --------------------------------------------------------
 
@@ -235,7 +212,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `barang_keluar`
 --
 ALTER TABLE `barang_keluar`
-  MODIFY `id_keluar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id_keluar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `barang_masuk`

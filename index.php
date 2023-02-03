@@ -60,6 +60,20 @@ session_start();
                                         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                                         <strong>Perhatian!</strong> Stok <?=$nama_produk;?> Telah Habis
                                     </div>
+                               
+                               <?php
+                                    }
+
+                                    $datastok1 = mysqli_query($koneksi, "select * from produk where qty < 10 and qty > 0");
+                                    while ($fetch=mysqli_fetch_array($datastok1)){
+                                        $nama_produk = $fetch['nama_produk'];
+                                        $qty = $fetch['qty'];
+                                    
+                                ?>
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                        <strong>Perhatian!</strong> Stok <?=$nama_produk;?> Hanya Tersisa <?=$qty;?>. Harap Direstock!
+                                    </div>
                                 <?php
                                     }
                                 ?>

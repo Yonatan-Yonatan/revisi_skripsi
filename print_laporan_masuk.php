@@ -99,7 +99,7 @@ if(isset($_POST['print'])){
 
 <br><br><br><br><br>
 <p>Singkawang, <?php echo date('d F Y');?></p>
-<br><br>
+<br><br><br><br>
 <p>Wahana Service </p>
 </body>
 
