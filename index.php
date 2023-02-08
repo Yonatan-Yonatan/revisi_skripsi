@@ -47,9 +47,6 @@ session_start();
                         <h1 class="mt-4" style="padding-bottom:15px";>Stok Barang</h1>
                         <div class="card mb-4">
                             <div class="card-body">
-                                <a href="add_barang.php"><button type="button" class="btn btn-primary">Tambah Barang</button></a>
-                                <a href="import_masuk.php"><button type="button" class="btn btn-success">Import Barang</button></a><br><br>
-
                                 <?php 
                                     $datastok = mysqli_query($koneksi, "select * from produk where qty < 1");
                                     while ($fetch=mysqli_fetch_array($datastok)){
@@ -125,6 +122,9 @@ session_start();
                             </div>
                         </div>
                     </div>
+                    <a href="add_barang.php" class="act-btn">
+                        +
+                    </a>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">

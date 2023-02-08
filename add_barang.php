@@ -43,10 +43,6 @@ session_start();
                         Jenis Barang
                     </label-form>
                     <input id="jenis_barang" class="form-control" type="text" name="jenis_barang" autocomplete="on" required/>
-                    <label-form for="quantity">&nbsp;
-                        Quantity
-                    </label-form>
-                    <input id="qty" class="form-control" type="number" name="qty" autocomplete="on" required/>
                     <label-form for="harga">&nbsp;
                         Harga
                     </label-form>
@@ -56,6 +52,7 @@ session_start();
                             <label class="col-sm-2 col-sm-2 control-label"></label>
                             <div class="col-sm-10">
                                 <input type="submit" name="simpan" value="Simpan" class="btn btn-sm btn-primary" />&nbsp;
+                                <a href="index.php" class="btn btn-sm btn-danger">Batal </a>
                             </div>
                         </div>
                     </form>

@@ -32,8 +32,9 @@
   {
    // import data excel mulai baris ke-2 (karena ada header pada baris 1)
    if ($Key < 1) continue;   
-   $query = mysqli_query($koneksi, "INSERT INTO produk(id_produk, nama_produk, jenis_barang, qty, harga) VALUES ('".$Row[0]."', '".$Row[1]."','".$Row[2]."','".$Row[3]."','".$Row[4]."')");
+   $query = mysqli_query($koneksi, "INSERT INTO produk(id_produk, nama_produk, jenis_barang, harga) VALUES ('".$Row[0]."', '".$Row[1]."','".$Row[2]."','".$Row[4]."')");
   }
+  unlink($_FILES['importdata']['name']);
   if ($query) {
     header("location:index.php");
         exit();

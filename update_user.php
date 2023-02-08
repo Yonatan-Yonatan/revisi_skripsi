@@ -63,7 +63,7 @@ session_start();
                     </label-form>
                         <div>
                             <select name="level" id="level"  class="form-control"  required>
-                                <option value="">-- Pilih --</option>
+                                <option value="<?php echo $level;?>"><?php echo $level;?></option>
                                 <option value="user">User</option>
                                 <option value="admin">Admin</option>
                             </select>
