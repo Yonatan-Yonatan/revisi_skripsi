@@ -58,6 +58,10 @@ if(isset($_POST['print'])){
         padding: 8px;
     }
     .right { text-align: right;}
+    .subtotal {
+        text-align: center;
+        font-weight: bold;
+    }
 </style>
 </head>
 
@@ -82,7 +86,7 @@ if(isset($_POST['print'])){
             $data = mysqli_query($koneksi, "select * from barang_keluar k, produk p where (tanggal BETWEEN '$dari' and '$sampai') and k.id_produk = p.id_produk");
             while($row = mysqli_fetch_array($data)){
                 $tanggal = $row['tanggal'];
-                 $nama_produk = $row['nama_produk'];
+                $nama_produk = $row['nama_produk'];
                 $harga = $row['harga'];
                 $jumlah= $row['jumlah_barang'];
                 $totalharga = $row['total_harga'];
@@ -97,8 +101,22 @@ if(isset($_POST['print'])){
             <td><?php echo $deskripsi;?></td>
         </tr>
         <?php	   
-            }  
-        }
+            }
+            $subtotal = mysqli_query($koneksi, "select SUM(total_harga) AS subtotal, SUM(jumlah_barang) as jumlah_terjual from barang_keluar where (tanggal BETWEEN '$dari' and '$sampai');");
+            $row1 = mysqli_fetch_array($subtotal);
+            $jumlah_terjual=$row1['jumlah_terjual'];
+            $sub_total_harga=$row1['subtotal'];
+               
+         ?>	                         
+        <tr>   
+            <td colspan="3" class="subtotal">Subtotal</td>
+            <td><?php echo $jumlah_terjual;?></td>
+            <td colspan="2" style="text-align:right"><?php echo FormatUang($sub_total_harga);?></td>
+           
+        </tr>
+        <?php
+            }
+        
         ?>
     </tbody>
 </table>

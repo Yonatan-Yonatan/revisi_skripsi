@@ -45,7 +45,7 @@ session_start();
                                     <tbody>
                                         <?php 
                                             $sSQL="";
-                                            $sSQL="select * from barang_masuk m, produk p, supplier s where p.id_produk = m.id_produk and s.id_supplier = m.id_supplier";
+                                            $sSQL="select * from barang_masuk m, produk p, supplier s where p.id_produk = m.id_produk and s.id_supplier = m.id_supplier order by m.id_masuk DESC";
                                             $result=mysqli_query($koneksi, $sSQL);
                                             if (mysqli_num_rows($result) > 0) 
                                             {
