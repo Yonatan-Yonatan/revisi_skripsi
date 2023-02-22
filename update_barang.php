@@ -20,13 +20,16 @@ session_start();
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
     </head>
 
     <?php
         
         $id_produk=$_GET['id_produk'];
     
-        $sSQL=" select * from produk where id_produk='$id_produk' limit 1";
+        $sSQL=" select * from produk p, supplier s where p.id_supplier = s.id_supplier and p.id_produk='$id_produk' limit 1";
         $result=mysqli_query($koneksi, $sSQL);
         if (mysqli_num_rows($result) > 0) 
         {
@@ -36,6 +39,7 @@ session_start();
                 $nama_produk = $row['nama_produk'];
                 $jenis_produk = $row['jenis_barang'];
                 $harga= $row['harga'];
+                $nama_supplier=$row['nama_supplier'];
             }
         }	 
     ?>  
@@ -63,7 +67,23 @@ session_start();
                         Harga
                     </label-form>
                     <input id="harga" class="form-control" type="number" name="harga" value="<?php echo $harga;?>" required/>
-                    
+                    <label-form for="nama_supplier">&nbsp;
+                        Supplier
+                    </label-form>
+                    <select id="id_supplier" name="id_supplier" class="form-control" required>
+                    <option value="<?php echo $level;?>"><?php echo $nama_supplier;?></option>
+                            <?php
+                                $ambildata = mysqli_query($koneksi, "select * from supplier");
+                                while($fetcharray = mysqli_fetch_array($ambildata)){
+                                    $namasupplier = $fetcharray['nama_supplier'];
+                                    $idsupplier = $fetcharray['id_supplier'];
+                            ?>
+                            <option value="<?=$idsupplier;?>"><?=$namasupplier;?></option>
+                            <?php
+                                }
+
+                            ?>
+                    </select>
                        
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label"></label>

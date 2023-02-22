@@ -8,20 +8,21 @@ session_start();
  	}
 
 if(isset($_POST['simpan'])){
-    $id_produk   = $_POST['id_produk'];
+    $produk   = $_POST['id_produk'];
+    $id_produk = explode(':', $produk);
     $id_supplier   = $_POST['id_supplier'];
     $stok   = $_POST['stok'];
 
 
-    $cekstok = mysqli_query($koneksi, "select * from produk where id_produk= '$id_produk'");
+    $cekstok = mysqli_query($koneksi, "select * from produk where id_produk= '$id_produk[0]'");
     $ambil_data_stok = mysqli_fetch_array($cekstok);
 
     $data_stok = $ambil_data_stok['qty'];
     $tambah_stok = $data_stok + $stok;
 
 
-    $query = mysqli_query($koneksi, "INSERT INTO barang_masuk (id_produk, id_supplier, stok) VALUES ('$id_produk', '$id_supplier', '$stok')");
-    $update_stok = mysqli_query($koneksi, "update produk set qty='$tambah_stok' where id_produk='$id_produk'");
+    $query = mysqli_query($koneksi, "INSERT INTO barang_masuk (id_produk, id_supplier, stok) VALUES ('$id_produk[0]', '$id_supplier', '$stok')");
+    $update_stok = mysqli_query($koneksi, "update produk set qty='$tambah_stok' where id_produk='$id_produk[0]'");
     if ($query && $update_stok){
         header("location:restock_barang.php");
         exit();

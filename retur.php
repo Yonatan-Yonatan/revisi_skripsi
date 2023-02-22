@@ -35,7 +35,6 @@ session_start();
 		}
 	}
     </script>
-
     <body class="sb-nav-fixed">
     <?php include "head.php"; ?>
         <div id="layoutSidenav">
@@ -44,77 +43,50 @@ session_start();
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4" style="padding-bottom:15px";>Stok Barang</h1>
+                        <h1 class="mt-4" style="padding-bottom:15px";>Data Barang Retur</h1>
                         <div class="card mb-4">
                             <div class="card-body">
-                                <?php 
-                                    $datastok = mysqli_query($koneksi, "select * from produk where qty < 1");
-                                    while ($fetch=mysqli_fetch_array($datastok)){
-                                        $nama_produk = $fetch['nama_produk'];
-                                    
-                                ?>
-                                    <div class="alert alert-danger alert-dismissible">
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                                        <strong>Perhatian!</strong> Stok <?=$nama_produk;?> Telah Habis
-                                    </div>
-                               
-                               <?php
-                                    }
-
-                                    $datastok1 = mysqli_query($koneksi, "select * from produk where qty < 10 and qty > 0");
-                                    while ($fetch=mysqli_fetch_array($datastok1)){
-                                        $nama_produk = $fetch['nama_produk'];
-                                        $qty = $fetch['qty'];
-                                    
-                                ?>
-                                    <div class="alert alert-danger alert-dismissible">
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                                        <strong>Perhatian!</strong> Stok <?=$nama_produk;?> Hanya Tersisa <?=$qty;?>. Harap Direstock!
-                                    </div>
-                                <?php
-                                    }
-                                ?>
-
-                    
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
+                                            <th>Tanggal</th>
                                             <th>Nama Produk</th>
-                                            <th>Jenis Produk</th>   
-                                            <th>Stok</th>  
-                                            <th>Harga</th>        
-                                            <th>Supplier</th>  
-                                            <th>Action</th>
+                                            <th>Quantity</th>
+                                            <th>Supplier</th>
+                                            <th>Keterangan</th>   
+                                            <?php if($_SESSION['level'] == "admin"){?>
+                                            <th>Action</th>          
+                                            <?php } else if($_SESSION['level'] == "user"){ echo "";} ?>       
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
                                             $sSQL="";
-                                            $sSQL="select * from produk p, supplier s where p.id_supplier = s.id_supplier  order  by id_produk";
+                                            $sSQL="select * from retur_barang r, produk p, supplier s where p.id_produk = r.id_produk and s.id_supplier = r.id_supplier  order by r.id_retur DESC";
                                             $result=mysqli_query($koneksi, $sSQL);
                                             if (mysqli_num_rows($result) > 0) 
                                             {
                                                 while ($row=mysqli_fetch_assoc($result))
                                                 {
+                                                    $id_retur = $row['id_retur'];
+                                                    $tanggal = $row['tanggal'];
                                                     $id_produk = $row['id_produk'];
                                                     $nama_produk = $row['nama_produk'];
-                                                    $jenis_produk = $row['jenis_barang'];
-                                                    $qty= $row['qty'];
-                                                    $harga= $row['harga'];
-                                                    $id_supplier=$row['id_supplier'];
-                                                    $nama_supplier=$row['nama_supplier'];
+                                                    $id_supplier = $row['nama_supplier'];
+                                                    $quantity = $row['quantity'];
+                                                    $deskripsi = $row['deskripsi'];
                                         ?>		
                                                             
                                             <tr>
+                                                <td><?php echo date('d M Y', strtotime($tanggal));?></td>
                                                 <td><?php echo $nama_produk;?></td>
-                                                <td><?php echo $jenis_produk;?></td>
-                                                <td><?php echo $qty;?></td>
-                                                <td><?php echo FormatUang($harga);?></td>
-                                                <td><?php echo $nama_supplier;?></td>
-                                                <td><?php echo "<a href='update_barang.php?id_produk=$id_produk' class='action'>UPDATE</a> | 
-                                                                <a href='delete_barang.php?id_produk=$id_produk' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
+                                                <td><?php echo $quantity;?></td>
+                                                <td><?php echo $id_supplier;?></td>
+                                                <td><?php echo $deskripsi;?></td>
+                                                <?php if($_SESSION['level'] == "admin"){?>
+                                                <td><?php echo "<a href='delete_retur.php?id_retur=$id_retur' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
+                                                <?php } else if($_SESSION['level'] == "user"){ echo "";} ?>
                                             </tr>
-
                                         <?php	   
                                                 }
                                             } 
@@ -124,7 +96,7 @@ session_start();
                             </div>
                         </div>
                     </div>
-                    <a href="add_barang.php" class="act-btn">
+                    <a href="add_retur.php" class="act-btn">
                         +
                     </a>
                 </main>
@@ -136,7 +108,7 @@ session_start();
                     </div>
                 </footer>
             </div>
-        </div>
+     
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
@@ -144,5 +116,8 @@ session_start();
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
+    
+    
+    
     </body>
 </html>

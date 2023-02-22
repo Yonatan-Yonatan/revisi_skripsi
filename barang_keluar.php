@@ -22,6 +22,19 @@ session_start();
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
+    <script>
+	function konfirmasi()
+	{
+	 	if (!confirm('Yakin hapus data ini ?'))
+		{
+			return false;
+        }
+		else
+		{ 
+			return true;		
+		}
+	}
+    </script>
     <body class="sb-nav-fixed">
     <?php include "head.php"; ?>
         <div id="layoutSidenav">
@@ -41,7 +54,10 @@ session_start();
                                             <th>Harga Produk</th>   
                                             <th>Quantity</th>
                                             <th>Total Harga</th>
-                                            <th>Keterangan</th>          
+                                            <th>Keterangan</th>   
+                                            <?php if($_SESSION['level'] == "admin"){?>
+                                            <th>Action</th>          
+                                            <?php } else if($_SESSION['level'] == "user"){ echo "";} ?>       
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -70,6 +86,9 @@ session_start();
                                                 <td><?php echo $jumlah;?></td>
                                                 <td><?php echo FormatUang($totalharga);?></td>
                                                 <td><?php echo $deskripsi;?></td>
+                                                <?php if($_SESSION['level'] == "admin"){?>
+                                                <td><?php echo "<a href='delete_barang_keluar.php?id_keluar=$id_keluar' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
+                                                <?php } else if($_SESSION['level'] == "user"){ echo "";} ?>
                                             </tr>
                                         <?php	   
                                                 }

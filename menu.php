@@ -29,6 +29,10 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-box-open"></i></div>
                     Barang Keluar
                 </a>
+                <a class="nav-link" href="retur.php">
+                    <div class="sb-nav-link-icon"><i class="fa fa-reply"></i></div>
+                    Retur Barang
+                </a>
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                     <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
                     Laporan

@@ -11,7 +11,7 @@ session_start();
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8" />
+    <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
@@ -20,6 +20,9 @@ session_start();
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
     </head>
 
     <body class="sb-nav-fixed">
@@ -47,6 +50,24 @@ session_start();
                         Harga
                     </label-form>
                     <input id="harga" class="form-control" type="number" name="harga" autocomplete="on" required/>
+                    
+                    <label-form for="nama_supplier">&nbsp;
+                        Supplier
+                    </label-form>
+                    <select id="id_supplier" name="id_supplier" class="form-control" required>
+                        <option value="">-- Pilih --</option>
+                            <?php
+                                $ambildata = mysqli_query($koneksi, "select * from supplier");
+                                while($fetcharray = mysqli_fetch_array($ambildata)){
+                                    $namasupplier = $fetcharray['nama_supplier'];
+                                    $idsupplier = $fetcharray['id_supplier'];
+                            ?>
+                            <option value="<?=$idsupplier;?>"><?=$namasupplier;?></option>
+                            <?php
+                                }
+
+                            ?>
+                    </select>
                        
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label"></label>
@@ -73,6 +94,12 @@ session_start();
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#id_supplier').select2();
+            });
+        </script>
 
     </body>
 </html>

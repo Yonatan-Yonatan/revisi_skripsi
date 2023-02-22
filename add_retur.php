@@ -5,6 +5,7 @@ session_start();
     {
 	    header("location: logout.php");
  	}
+   
 ?>
 
 
@@ -32,8 +33,8 @@ session_start();
             </div>
             <div id="layoutSidenav_content">
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4" style="padding-bottom:15px";>Input Data Barang Masuk</h1>
-                    <form action="submit_restock_barang.php" class="form" method="post"> 
+                    <h1 class="mt-4" style="padding-bottom:15px";>Input Retur Barang</h1>
+                    <form action="submit_retur.php" class="form" name="form1" method="post"> 
                     <label-form for="nama_produk">&nbsp;
                         Nama Produk
                     </label-form>
@@ -55,20 +56,23 @@ session_start();
                                 }
                             ?>
                     </select>
-                    <label-form for="nama_supplier">&nbsp;
-                        Supplier
+                    <label-form for="supplier">&nbsp;
+                        ID Supplier
                     </label-form>
-                    <input id="id_supplier" class="form-control" type="text" name="id_supplier" value="" readonly/>
-                    <label-form for="quantity">&nbsp;
+                    <input id="id_supplier" class="form-control" type="text" name="id_supplier"  readonly/>
+                    <label-form for="jumlah_barang">&nbsp;
                         Quantity
                     </label-form>
-                    <input id="stok" class="form-control" type="number" name="stok" autocomplete="on" required/>
-                       
+                    <input id="quantity" class="form-control" type="number" name="quantity" autocomplete="on" required/>
+                    <label-form for="deskripsi">&nbsp;
+                        Ket:
+                    </label-form>
+                    <input id="deskripsi" class="form-control" type="text" name="deskripsi" autocomplete="on" required/>
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label"></label>
                             <div class="col-sm-10">
-                                <input type="submit" name="simpan" value="Simpan" class="btn btn-sm btn-primary" />&nbsp;
-                                <a href="restock_barang.php" class="btn btn-sm btn-danger">Batal </a>
+                                <input type="submit" name="simpan" value="Retur" class="btn btn-sm btn-primary" />&nbsp;
+                                <a href="retur.php" class="btn btn-sm btn-danger">Batal </a>
                             </div>
                         </div>
                     </form>
@@ -103,6 +107,7 @@ session_start();
                 document.getElementById('id_supplier').value=arrx[1];
                 
             }
+
         </script>
     
     </body>

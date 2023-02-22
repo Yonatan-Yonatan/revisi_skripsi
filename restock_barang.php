@@ -22,6 +22,19 @@ session_start();
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
+    <script>
+	function konfirmasi()
+	{
+	 	if (!confirm('Yakin hapus data ini ?'))
+		{
+			return false;
+        }
+		else
+		{ 
+			return true;		
+		}
+	}
+    </script>
     <body class="sb-nav-fixed">
     <?php include "head.php"; ?>
         <div id="layoutSidenav">
@@ -39,7 +52,10 @@ session_start();
                                             <th>Tanggal</th>
                                             <th>Nama Produk</th>
                                             <th>Supplier</th>   
-                                            <th>Quantity</th>          
+                                            <th>Quantity</th> 
+                                            <?php if($_SESSION['level'] == "admin"){?>
+                                            <th>Action</th>          
+                                            <?php } else if($_SESSION['level'] == "user"){ echo "";} ?>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -64,6 +80,9 @@ session_start();
                                                 <td><?php echo $nama_produk;?></td>
                                                 <td><?php echo $nama_supplier;?></td>
                                                 <td><?php echo $stok;?></td>
+                                                <?php if($_SESSION['level'] == "admin"){?>
+                                                <td><?php echo "<a href='delete_restok.php?id_masuk=$id_masuk' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
+                                                <?php } else if($_SESSION['level'] == "user"){ echo "";} ?>
                                             </tr>
                                         <?php	   
                                                 }

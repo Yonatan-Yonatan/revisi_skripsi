@@ -13,8 +13,9 @@ if(isset($_POST['simpan'])){
     $nama_produk = $_POST['nama_produk'];
     $jenis_barang = $_POST['jenis_barang'];
     $harga= $_POST['harga'];
+    $id_supplier   = $_POST['id_supplier'];
 
-    $query = mysqli_query($koneksi, "INSERT INTO produk (id_produk, nama_produk, jenis_barang, harga) VALUES ('$id_produk', '$nama_produk', '$jenis_barang', '$harga')");
+    $query = mysqli_query($koneksi, "INSERT INTO produk (id_produk, nama_produk, jenis_barang, harga, id_supplier) VALUES ('$id_produk', '$nama_produk', '$jenis_barang', '$harga','$id_supplier')");
     if ($query){
         header("location:index.php");
         exit();
