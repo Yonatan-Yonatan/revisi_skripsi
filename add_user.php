@@ -52,8 +52,9 @@ session_start();
                         <div>
                             <select name="level" id="level"  class="form-control" required>
                                 <option value="">-- Pilih --</option>
-                                <option value="user">User</option>
+                                <option value="owner">Owner</option>
                                 <option value="admin">Admin</option>
+                                <option value="kasir">Kasir</option>
                             </select>
                         </div>
                        

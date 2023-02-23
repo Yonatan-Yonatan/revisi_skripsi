@@ -27,10 +27,10 @@
                 <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i> <?php echo $_SESSION['fullname']; ?></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <?php if($_SESSION['level'] == "user"){?>
+                        <?php if($_SESSION['level'] == "admin" || $_SESSION['level'] == "kasir"){?>
                         <li><a class="dropdown-item" href="update_password_user.php">Change Password</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <?php } else if($_SESSION['level'] == "user"){ echo "";} ?>
+                        <?php } ?>
                         <li><a class="dropdown-item"  onClick="Logout()">Logout</a></li>
                     </ul>
                 </li>

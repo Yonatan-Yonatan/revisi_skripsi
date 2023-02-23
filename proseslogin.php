@@ -29,9 +29,11 @@ if (mysqli_num_rows($q) == 1) {
     $_SESSION['fullname'] = $row['fullname'];
     $_SESSION['level']    = $row['level'];
     
-    if ($_SESSION['level'] == 'admin'){
+    if ($_SESSION['level'] == 'owner'){
         header('location:index.php');
-    } else if ($_SESSION['level'] == 'user'){
+    } else if ($_SESSION['level'] == 'admin'){
+        header('location:index.php');
+    } else if ($_SESSION['level'] == 'kasir'){
         header('location:index.php');
     }
 

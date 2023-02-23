@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 22, 2023 at 07:45 AM
+-- Generation Time: Feb 23, 2023 at 10:39 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -33,16 +33,17 @@ CREATE TABLE `barang_keluar` (
   `tanggal` date NOT NULL DEFAULT current_timestamp(),
   `jumlah_barang` int(11) NOT NULL,
   `total_harga` int(11) NOT NULL,
-  `deskripsi` varchar(500) CHARACTER SET latin1 NOT NULL
+  `deskripsi` varchar(500) CHARACTER SET latin1 NOT NULL,
+  `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `barang_keluar`
 --
 
-INSERT INTO `barang_keluar` (`id_keluar`, `id_produk`, `tanggal`, `jumlah_barang`, `total_harga`, `deskripsi`) VALUES
-(41, '0002', '2023-02-22', 1, 75000, 'Terjual'),
-(42, '0004', '2023-02-22', 1, 450000, 'Terjual');
+INSERT INTO `barang_keluar` (`id_keluar`, `id_produk`, `tanggal`, `jumlah_barang`, `total_harga`, `deskripsi`, `id`) VALUES
+(47, '0001', '2023-02-23', 1, 450000, 'Terjual', 1),
+(49, '0009', '2023-02-23', 1, 55000, 'Terjual', 13);
 
 -- --------------------------------------------------------
 
@@ -55,23 +56,24 @@ CREATE TABLE `barang_masuk` (
   `id_produk` varchar(10) CHARACTER SET latin1 NOT NULL,
   `id_supplier` int(11) NOT NULL,
   `tanggal` date NOT NULL DEFAULT current_timestamp(),
-  `stok` int(11) NOT NULL
+  `stok` int(11) NOT NULL,
+  `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `barang_masuk`
 --
 
-INSERT INTO `barang_masuk` (`id_masuk`, `id_produk`, `id_supplier`, `tanggal`, `stok`) VALUES
-(65, '0001', 14, '2023-02-22', 30),
-(66, '0002', 14, '2023-02-22', 63),
-(67, '0003', 14, '2023-02-22', 63),
-(68, '0009', 14, '2023-02-22', 24),
-(69, '0008', 15, '2023-02-22', 1),
-(70, '0007', 15, '2023-02-22', 1),
-(71, '0006', 15, '2023-02-22', 1),
-(72, '0005', 15, '2023-02-22', 1),
-(73, '0004', 15, '2023-02-22', 1);
+INSERT INTO `barang_masuk` (`id_masuk`, `id_produk`, `id_supplier`, `tanggal`, `stok`, `id`) VALUES
+(91, '0001', 15, '2022-12-26', 1, 2),
+(92, '0002', 15, '2022-12-26', 1, 2),
+(93, '0003', 15, '2022-12-26', 1, 2),
+(94, '0004', 15, '2022-12-26', 1, 2),
+(95, '0005', 15, '2022-12-26', 1, 2),
+(96, '0009', 14, '2023-02-14', 24, 1),
+(97, '0008', 14, '2023-02-14', 63, 1),
+(98, '0007', 14, '2023-02-14', 63, 1),
+(99, '0006', 14, '2023-02-14', 30, 1);
 
 -- --------------------------------------------------------
 
@@ -93,15 +95,15 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id_produk`, `id_supplier`, `nama_produk`, `jenis_barang`, `qty`, `harga`) VALUES
-('0001', 14, 'Wiper Blade DCS-G016', 'Wiper Blade', 29, 50000),
-('0002', 14, 'STP.SYN Gear Oil 80W-90.946ML', 'Pelumas', 62, 75000),
-('0003', 14, 'STP.SYN Gear Oil SAE140GL-5', 'Pelumas', 63, 75000),
-('0004', 15, 'Cable A/S Park Barke', 'Kabel ', 0, 450000),
-('0005', 15, 'ARM S/A SUSP LWR LH', 'Shockbreaker & Kaki Mobil', 1, 1400000),
-('0006', 15, 'ARM S/A SUSP LWR RH', 'Shockbreaker & Kaki Mobil', 1, 1400000),
-('0007', 15, 'Absorber Assy FR LH', 'Shockbreaker & Kaki Mobil', 1, 950000),
-('0008', 15, 'Absorber Assy FR RH', 'Shockbreaker & Kaki Mobil', 1, 950000),
-('0009', 14, 'Rotary Lith EP-3 WB COPBM Red', 'Pelumas', 24, 60000);
+('0001', 15, 'Cable A/S Park Barke', 'Kabel ', 0, 450000),
+('0002', 15, 'ARM S/A SUSP LWR LH', 'Shockbreaker & Kaki Mobil', 1, 1450000),
+('0003', 15, 'ARM S/A SUSP LWR RH', 'Shockbreaker & Kaki Mobil', 1, 1450000),
+('0004', 15, 'Absorber Assy FR LH', 'Shockbreaker & Kaki Mobil', 1, 950000),
+('0005', 15, 'Absorber Assy FR RH', 'Shockbreaker & Kaki Mobil', 1, 950000),
+('0006', 14, 'Wiper Blade DCS-G016', 'Wiper Blade', 29, 50000),
+('0007', 14, 'STP.SYN Gear Oil 80W-90.946ML', 'Oli Mesin', 63, 75000),
+('0008', 14, 'STP.SYN Gear Oil SAE140GL-5', 'Oli Mesin', 63, 75000),
+('0009', 14, 'Rotary Lith EP-3 WB COPBM Red', 'Oli Mesin', 23, 55000);
 
 -- --------------------------------------------------------
 
@@ -115,15 +117,16 @@ CREATE TABLE `retur_barang` (
   `id_supplier` int(11) NOT NULL,
   `tanggal` date NOT NULL DEFAULT current_timestamp(),
   `quantity` int(11) NOT NULL,
-  `deskripsi` varchar(150) CHARACTER SET latin1 NOT NULL
+  `deskripsi` varchar(150) CHARACTER SET latin1 NOT NULL,
+  `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `retur_barang`
 --
 
-INSERT INTO `retur_barang` (`id_retur`, `id_produk`, `id_supplier`, `tanggal`, `quantity`, `deskripsi`) VALUES
-(18, '0001', 14, '2023-02-22', 1, 'Patah');
+INSERT INTO `retur_barang` (`id_retur`, `id_produk`, `id_supplier`, `tanggal`, `quantity`, `deskripsi`, `id`) VALUES
+(21, '0006', 14, '2023-02-23', 1, 'Patah', 1);
 
 -- --------------------------------------------------------
 
@@ -157,7 +160,7 @@ CREATE TABLE `user` (
   `username` varchar(200) CHARACTER SET latin1 NOT NULL,
   `password` text CHARACTER SET latin1 NOT NULL,
   `fullname` varchar(200) CHARACTER SET latin1 NOT NULL,
-  `level` enum('user','admin') CHARACTER SET latin1 NOT NULL
+  `level` enum('owner','admin','kasir') CHARACTER SET latin1 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -165,9 +168,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `fullname`, `level`) VALUES
-(1, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'admin', 'admin'),
-(2, 'yonatan', 'b30f5421ee44c0904eef5d0626c92b32aa569a65', 'Yonatan', 'user'),
-(13, 'wahana', '38d719adee9173c4135d3b212d9788b56f8e0358', 'Wahana Service', 'admin');
+(1, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'Administrator', 'owner'),
+(2, 'yonatan', 'b30f5421ee44c0904eef5d0626c92b32aa569a65', 'Yonatan', 'admin'),
+(13, 'tepi', '01be59ba0e9ea7ac1a04e7d09b7ec7a647256328', 'Tepi Krisdayanti', 'kasir');
 
 --
 -- Indexes for dumped tables
@@ -178,7 +181,8 @@ INSERT INTO `user` (`id`, `username`, `password`, `fullname`, `level`) VALUES
 --
 ALTER TABLE `barang_keluar`
   ADD PRIMARY KEY (`id_keluar`),
-  ADD KEY `id_produk` (`id_produk`);
+  ADD KEY `id_produk` (`id_produk`),
+  ADD KEY `id` (`id`);
 
 --
 -- Indexes for table `barang_masuk`
@@ -186,7 +190,8 @@ ALTER TABLE `barang_keluar`
 ALTER TABLE `barang_masuk`
   ADD PRIMARY KEY (`id_masuk`),
   ADD KEY `barang_masuk_ibfk_2` (`id_supplier`),
-  ADD KEY `barang_masuk_ibfk_3` (`id_produk`);
+  ADD KEY `barang_masuk_ibfk_3` (`id_produk`),
+  ADD KEY `id` (`id`);
 
 --
 -- Indexes for table `produk`
@@ -201,7 +206,8 @@ ALTER TABLE `produk`
 ALTER TABLE `retur_barang`
   ADD PRIMARY KEY (`id_retur`),
   ADD KEY `id_supplier` (`id_supplier`),
-  ADD KEY `id_produk` (`id_produk`);
+  ADD KEY `id_produk` (`id_produk`),
+  ADD KEY `id` (`id`);
 
 --
 -- Indexes for table `supplier`
@@ -223,19 +229,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `barang_keluar`
 --
 ALTER TABLE `barang_keluar`
-  MODIFY `id_keluar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id_keluar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `barang_masuk`
 --
 ALTER TABLE `barang_masuk`
-  MODIFY `id_masuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id_masuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT for table `retur_barang`
 --
 ALTER TABLE `retur_barang`
-  MODIFY `id_retur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_retur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `supplier`
@@ -247,7 +253,7 @@ ALTER TABLE `supplier`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables
@@ -257,14 +263,16 @@ ALTER TABLE `user`
 -- Constraints for table `barang_keluar`
 --
 ALTER TABLE `barang_keluar`
-  ADD CONSTRAINT `barang_keluar_ibfk_1` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `barang_keluar_ibfk_1` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `barang_keluar_ibfk_2` FOREIGN KEY (`id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `barang_masuk`
 --
 ALTER TABLE `barang_masuk`
   ADD CONSTRAINT `barang_masuk_ibfk_2` FOREIGN KEY (`id_supplier`) REFERENCES `supplier` (`id_supplier`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `barang_masuk_ibfk_3` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `barang_masuk_ibfk_3` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `barang_masuk_ibfk_4` FOREIGN KEY (`id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `produk`
@@ -277,7 +285,8 @@ ALTER TABLE `produk`
 --
 ALTER TABLE `retur_barang`
   ADD CONSTRAINT `retur_barang_ibfk_1` FOREIGN KEY (`id_supplier`) REFERENCES `supplier` (`id_supplier`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `retur_barang_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `retur_barang_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `retur_barang_ibfk_3` FOREIGN KEY (`id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

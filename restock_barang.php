@@ -53,15 +53,16 @@ session_start();
                                             <th>Nama Produk</th>
                                             <th>Supplier</th>   
                                             <th>Quantity</th> 
-                                            <?php if($_SESSION['level'] == "admin"){?>
+                                            <th>PIC</th> 
+                                            <?php if($_SESSION['level'] == "owner"){?>
                                             <th>Action</th>          
-                                            <?php } else if($_SESSION['level'] == "user"){ echo "";} ?>
+                                            <?php } ?>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
                                             $sSQL="";
-                                            $sSQL="select * from barang_masuk m, produk p, supplier s where p.id_produk = m.id_produk and s.id_supplier = m.id_supplier order by m.id_masuk DESC";
+                                            $sSQL="select * from barang_masuk m, produk p, supplier s, user u where p.id_produk = m.id_produk and s.id_supplier = m.id_supplier and m.id = u.id order by m.id_masuk DESC";
                                             $result=mysqli_query($koneksi, $sSQL);
                                             if (mysqli_num_rows($result) > 0) 
                                             {
@@ -73,6 +74,7 @@ session_start();
                                                     $nama_produk = $row['nama_produk'];
                                                     $nama_supplier = $row['nama_supplier'];
                                                     $stok= $row['stok'];
+                                                    $fullname = $row['fullname'];
                                         ?>		
                                                             
                                             <tr>
@@ -80,9 +82,10 @@ session_start();
                                                 <td><?php echo $nama_produk;?></td>
                                                 <td><?php echo $nama_supplier;?></td>
                                                 <td><?php echo $stok;?></td>
-                                                <?php if($_SESSION['level'] == "admin"){?>
+                                                <td><?php echo $fullname;?></td>
+                                                <?php if($_SESSION['level'] == "owner"){?>
                                                 <td><?php echo "<a href='delete_restok.php?id_masuk=$id_masuk' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
-                                                <?php } else if($_SESSION['level'] == "user"){ echo "";} ?>
+                                                <?php } ?>
                                             </tr>
                                         <?php	   
                                                 }

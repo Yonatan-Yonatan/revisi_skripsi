@@ -12,6 +12,7 @@ if(isset($_POST['simpan'])){
     $id_produk = explode(':', $produk);
     $id_supplier   = $_POST['id_supplier'];
     $stok   = $_POST['stok'];
+    $id = $_SESSION['id'];
 
 
     $cekstok = mysqli_query($koneksi, "select * from produk where id_produk= '$id_produk[0]'");
@@ -21,7 +22,7 @@ if(isset($_POST['simpan'])){
     $tambah_stok = $data_stok + $stok;
 
 
-    $query = mysqli_query($koneksi, "INSERT INTO barang_masuk (id_produk, id_supplier, stok) VALUES ('$id_produk[0]', '$id_supplier', '$stok')");
+    $query = mysqli_query($koneksi, "INSERT INTO barang_masuk (id_produk, id_supplier, stok,id) VALUES ('$id_produk[0]', '$id_supplier', '$stok','$id')");
     $update_stok = mysqli_query($koneksi, "update produk set qty='$tambah_stok' where id_produk='$id_produk[0]'");
     if ($query && $update_stok){
         header("location:restock_barang.php");

@@ -84,7 +84,9 @@ session_start();
                                             <th>Stok</th>  
                                             <th>Harga</th>        
                                             <th>Supplier</th>  
-                                            <th>Action</th>
+                                            <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "admin"){?>
+                                            <th>Action</th>          
+                                            <?php } ?>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -111,8 +113,10 @@ session_start();
                                                 <td><?php echo $qty;?></td>
                                                 <td><?php echo FormatUang($harga);?></td>
                                                 <td><?php echo $nama_supplier;?></td>
+                                                <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "admin"){?>
                                                 <td><?php echo "<a href='update_barang.php?id_produk=$id_produk' class='action'>UPDATE</a> | 
                                                                 <a href='delete_barang.php?id_produk=$id_produk' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
+                                                <?php } ?>
                                             </tr>
 
                                         <?php	   
@@ -124,9 +128,11 @@ session_start();
                             </div>
                         </div>
                     </div>
-                    <a href="add_barang.php" class="act-btn">
-                        +
-                    </a>
+                    <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "admin"){?>
+                        <a href="add_barang.php" class="act-btn">
+                            +
+                        </a>
+                    <?php } ?>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">

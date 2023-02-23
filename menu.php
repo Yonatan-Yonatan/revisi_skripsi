@@ -21,18 +21,24 @@
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
                     Stok Barang
                 </a>
+                <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "admin"){?>
                 <a class="nav-link" href="restock_barang.php">
                     <div class="sb-nav-link-icon"><i class="fas fa-box-open"></i></div>
                     Restock Barang
                 </a>
+                <?php } ?>
+                <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "kasir"){?>
                 <a class="nav-link" href="barang_keluar.php">
                     <div class="sb-nav-link-icon"><i class="fas fa-box-open"></i></div>
                     Barang Keluar
                 </a>
+                <?php } ?>
+                <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "admin"){?>
                 <a class="nav-link" href="retur.php">
                     <div class="sb-nav-link-icon"><i class="fa fa-reply"></i></div>
                     Retur Barang
                 </a>
+                <?php } ?>
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                     <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
                     Laporan
@@ -40,20 +46,26 @@
                 </a>
                 <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="laporan_data_masuk.php">Laporan Transaksi Masuk</a>
-                        <a class="nav-link" href="laporan_data_keluar.php">Laporan Transaksi Keluar</a>
+                        <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "admin"){?>
+                            <a class="nav-link" href="laporan_data_masuk.php">Laporan Transaksi Masuk</a>
+                        <?php } ?>
+                        <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "kasir"){?>
+                            <a class="nav-link" href="laporan_data_keluar.php">Laporan Transaksi Keluar</a>
+                        <?php } ?>
                     </nav>
                 </div>
+                <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "admin"){?>
                 <a class="nav-link" href="supplier.php">
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-cart-flatbed"></i></div>
                     Supplier
                 </a>
-                <?php if($_SESSION['level'] == "admin"){?>
+                <?php } ?>
+                <?php if($_SESSION['level'] == "owner"){?>
                 <a class="nav-link" href="user.php">
                     <div class="sb-nav-link-icon"><i class='fa-solid fa-user-large'></i></div>
                     User
                 </a>
-                <?php } else if($_SESSION['level'] == "user"){ echo "";} ?>
+                <?php } ?>
             </div>
         </div>
     </nav>

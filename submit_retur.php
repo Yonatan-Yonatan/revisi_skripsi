@@ -13,6 +13,7 @@ if(isset($_POST['simpan'])){
     $id_supplier = $_POST['id_supplier'];
     $quantity = $_POST['quantity'];
     $deskripsi   = $_POST['deskripsi'];
+    $id = $_SESSION['id'];
 
     
     $cekstok = mysqli_query($koneksi, "select * from produk where id_produk= '$id_produk[0]'");
@@ -23,7 +24,7 @@ if(isset($_POST['simpan'])){
     if ($data_stok >= $quantity) {
         $kurang_stok = $data_stok - $quantity;
 
-        $query = mysqli_query($koneksi, "INSERT INTO retur_barang (id_produk, id_supplier, quantity, deskripsi) VALUES ('$id_produk[0]', '$id_supplier', '$quantity', '$deskripsi')");
+        $query = mysqli_query($koneksi, "INSERT INTO retur_barang (id_produk, id_supplier, quantity, deskripsi,id) VALUES ('$id_produk[0]', '$id_supplier', '$quantity', '$deskripsi','$id')");
         $update_stok = mysqli_query($koneksi, "update produk set qty='$kurang_stok' where id_produk='$id_produk[0]'");
         if ($query && $update_stok){
             header("location:retur.php");

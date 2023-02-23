@@ -53,16 +53,17 @@ session_start();
                                             <th>Nama Produk</th>
                                             <th>Quantity</th>
                                             <th>Supplier</th>
-                                            <th>Keterangan</th>   
-                                            <?php if($_SESSION['level'] == "admin"){?>
+                                            <th>Keterangan</th> 
+                                            <th>PIC</th>  
+                                            <?php if($_SESSION['level'] == "owner"){?>
                                             <th>Action</th>          
-                                            <?php } else if($_SESSION['level'] == "user"){ echo "";} ?>       
+                                            <?php } ?>       
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php 
                                             $sSQL="";
-                                            $sSQL="select * from retur_barang r, produk p, supplier s where p.id_produk = r.id_produk and s.id_supplier = r.id_supplier  order by r.id_retur DESC";
+                                            $sSQL="select * from retur_barang r, produk p, supplier s, user u where p.id_produk = r.id_produk and s.id_supplier = r.id_supplier and r.id = u.id order by r.id_retur DESC";
                                             $result=mysqli_query($koneksi, $sSQL);
                                             if (mysqli_num_rows($result) > 0) 
                                             {
@@ -75,6 +76,7 @@ session_start();
                                                     $id_supplier = $row['nama_supplier'];
                                                     $quantity = $row['quantity'];
                                                     $deskripsi = $row['deskripsi'];
+                                                    $fullname = $row['fullname'];
                                         ?>		
                                                             
                                             <tr>
@@ -83,9 +85,10 @@ session_start();
                                                 <td><?php echo $quantity;?></td>
                                                 <td><?php echo $id_supplier;?></td>
                                                 <td><?php echo $deskripsi;?></td>
-                                                <?php if($_SESSION['level'] == "admin"){?>
+                                                <td><?php echo $fullname;?></td>
+                                                <?php if($_SESSION['level'] == "owner"){?>
                                                 <td><?php echo "<a href='delete_retur.php?id_retur=$id_retur' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
-                                                <?php } else if($_SESSION['level'] == "user"){ echo "";} ?>
+                                                <?php }  ?>
                                             </tr>
                                         <?php	   
                                                 }

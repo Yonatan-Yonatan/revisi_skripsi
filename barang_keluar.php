@@ -54,8 +54,9 @@ session_start();
                                             <th>Harga Produk</th>   
                                             <th>Quantity</th>
                                             <th>Total Harga</th>
-                                            <th>Keterangan</th>   
-                                            <?php if($_SESSION['level'] == "admin"){?>
+                                            <th>Keterangan</th> 
+                                            <th>PIC</th>   
+                                            <?php if($_SESSION['level'] == "owner"){?>
                                             <th>Action</th>          
                                             <?php } else if($_SESSION['level'] == "user"){ echo "";} ?>       
                                         </tr>
@@ -63,7 +64,7 @@ session_start();
                                     <tbody>
                                         <?php 
                                             $sSQL="";
-                                            $sSQL="select * from barang_keluar k, produk p where k.id_produk = p.id_produk order by k.id_keluar DESC";
+                                            $sSQL="select * from barang_keluar k, produk p, user u where k.id_produk = p.id_produk and k.id = u.id order by k.id_keluar DESC";
                                             $result=mysqli_query($koneksi, $sSQL);
                                             if (mysqli_num_rows($result) > 0) 
                                             {
@@ -77,6 +78,7 @@ session_start();
                                                     $jumlah= $row['jumlah_barang'];
                                                     $totalharga = $row['total_harga'];
                                                     $deskripsi = $row['deskripsi'];
+                                                    $fullname = $row['fullname'];
                                         ?>		
                                                             
                                             <tr>
@@ -86,7 +88,8 @@ session_start();
                                                 <td><?php echo $jumlah;?></td>
                                                 <td><?php echo FormatUang($totalharga);?></td>
                                                 <td><?php echo $deskripsi;?></td>
-                                                <?php if($_SESSION['level'] == "admin"){?>
+                                                <td><?php echo $fullname;?></td>
+                                                <?php if($_SESSION['level'] == "owner"){?>
                                                 <td><?php echo "<a href='delete_barang_keluar.php?id_keluar=$id_keluar' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
                                                 <?php } else if($_SESSION['level'] == "user"){ echo "";} ?>
                                             </tr>
