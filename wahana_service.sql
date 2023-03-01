@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 23, 2023 at 10:39 AM
+-- Generation Time: Mar 01, 2023 at 09:00 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -42,8 +42,8 @@ CREATE TABLE `barang_keluar` (
 --
 
 INSERT INTO `barang_keluar` (`id_keluar`, `id_produk`, `tanggal`, `jumlah_barang`, `total_harga`, `deskripsi`, `id`) VALUES
-(47, '0001', '2023-02-23', 1, 450000, 'Terjual', 1),
-(49, '0009', '2023-02-23', 1, 55000, 'Terjual', 13);
+(1, '0009', '2023-02-23', 1, 55000, 'Terjual', 3),
+(2, '0001', '2023-02-24', 1, 450000, 'Terjual', 1);
 
 -- --------------------------------------------------------
 
@@ -65,15 +65,15 @@ CREATE TABLE `barang_masuk` (
 --
 
 INSERT INTO `barang_masuk` (`id_masuk`, `id_produk`, `id_supplier`, `tanggal`, `stok`, `id`) VALUES
-(91, '0001', 15, '2022-12-26', 1, 2),
-(92, '0002', 15, '2022-12-26', 1, 2),
-(93, '0003', 15, '2022-12-26', 1, 2),
-(94, '0004', 15, '2022-12-26', 1, 2),
-(95, '0005', 15, '2022-12-26', 1, 2),
-(96, '0009', 14, '2023-02-14', 24, 1),
-(97, '0008', 14, '2023-02-14', 63, 1),
-(98, '0007', 14, '2023-02-14', 63, 1),
-(99, '0006', 14, '2023-02-14', 30, 1);
+(1, '0001', 2, '2022-12-26', 1, 2),
+(2, '0002', 2, '2022-12-26', 1, 2),
+(3, '0003', 2, '2022-12-26', 1, 2),
+(4, '0004', 2, '2022-12-26', 1, 2),
+(5, '0005', 2, '2022-12-26', 1, 2),
+(6, '0009', 1, '2023-02-14', 24, 1),
+(7, '0008', 1, '2023-02-14', 63, 1),
+(8, '0007', 1, '2023-02-14', 63, 1),
+(9, '0006', 1, '2023-02-14', 30, 1);
 
 -- --------------------------------------------------------
 
@@ -95,15 +95,15 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id_produk`, `id_supplier`, `nama_produk`, `jenis_barang`, `qty`, `harga`) VALUES
-('0001', 15, 'Cable A/S Park Barke', 'Kabel ', 0, 450000),
-('0002', 15, 'ARM S/A SUSP LWR LH', 'Shockbreaker & Kaki Mobil', 1, 1450000),
-('0003', 15, 'ARM S/A SUSP LWR RH', 'Shockbreaker & Kaki Mobil', 1, 1450000),
-('0004', 15, 'Absorber Assy FR LH', 'Shockbreaker & Kaki Mobil', 1, 950000),
-('0005', 15, 'Absorber Assy FR RH', 'Shockbreaker & Kaki Mobil', 1, 950000),
-('0006', 14, 'Wiper Blade DCS-G016', 'Wiper Blade', 29, 50000),
-('0007', 14, 'STP.SYN Gear Oil 80W-90.946ML', 'Oli Mesin', 63, 75000),
-('0008', 14, 'STP.SYN Gear Oil SAE140GL-5', 'Oli Mesin', 63, 75000),
-('0009', 14, 'Rotary Lith EP-3 WB COPBM Red', 'Oli Mesin', 23, 55000);
+('0001', 2, 'Cable A/S Park Barke', 'Kabel ', 0, 450000),
+('0002', 2, 'ARM S/A SUSP LWR LH', 'Shockbreaker & Kaki Mobil', 1, 1450000),
+('0003', 2, 'ARM S/A SUSP LWR RH', 'Shockbreaker & Kaki Mobil', 1, 1450000),
+('0004', 2, 'Absorber Assy FR LH', 'Shockbreaker & Kaki Mobil', 1, 950000),
+('0005', 2, 'Absorber Assy FR RH', 'Shockbreaker & Kaki Mobil', 1, 950000),
+('0006', 1, 'Wiper Blade DCS-G016', 'Wiper Blade', 29, 50000),
+('0007', 1, 'STP.SYN Gear Oil 80W-90.946ML', 'Oli Mesin', 63, 75000),
+('0008', 1, 'STP.SYN Gear Oil SAE140GL-5', 'Oli Mesin', 63, 75000),
+('0009', 1, 'Rotary Lith EP-3 WB COPBM Red', 'Oli Mesin', 23, 55000);
 
 -- --------------------------------------------------------
 
@@ -126,7 +126,7 @@ CREATE TABLE `retur_barang` (
 --
 
 INSERT INTO `retur_barang` (`id_retur`, `id_produk`, `id_supplier`, `tanggal`, `quantity`, `deskripsi`, `id`) VALUES
-(21, '0006', 14, '2023-02-23', 1, 'Patah', 1);
+(1, '0006', 1, '2023-02-23', 1, 'Patah', 1);
 
 -- --------------------------------------------------------
 
@@ -146,8 +146,8 @@ CREATE TABLE `supplier` (
 --
 
 INSERT INTO `supplier` (`id_supplier`, `nama_supplier`, `alamat`, `no_telp`) VALUES
-(14, 'CV Putera Jaya Sentosa', 'Jl. Tanjung Pura Darat Sekip No 77, Kota Pontianak, Kalimantan Barat, 78243', '0561734103'),
-(15, 'PT Tasti Anugerah Mandiri', 'Jl. Gaya Motor Selatan No. 5, Sungai Bambu, Tanjuk Priok, Jakarta Utara', '0216521866');
+(1, 'CV Putera Jaya Sentosa', 'Jl. Tanjung Pura Darat Sekip No 77, Kota Pontianak, Kalimantan Barat, 78243', '0561734103'),
+(2, 'PT Tasti Anugerah Mandiri', 'Jl. Gaya Motor Selatan No. 5, Sungai Bambu, Tanjuk Priok, Jakarta Utara', '0216521866');
 
 -- --------------------------------------------------------
 
@@ -170,7 +170,7 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `username`, `password`, `fullname`, `level`) VALUES
 (1, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'Administrator', 'owner'),
 (2, 'yonatan', 'b30f5421ee44c0904eef5d0626c92b32aa569a65', 'Yonatan', 'admin'),
-(13, 'tepi', '01be59ba0e9ea7ac1a04e7d09b7ec7a647256328', 'Tepi Krisdayanti', 'kasir');
+(3, 'tepi', '01be59ba0e9ea7ac1a04e7d09b7ec7a647256328', 'Tepi Krisdayanti', 'kasir');
 
 --
 -- Indexes for dumped tables
@@ -229,31 +229,31 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `barang_keluar`
 --
 ALTER TABLE `barang_keluar`
-  MODIFY `id_keluar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id_keluar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `barang_masuk`
 --
 ALTER TABLE `barang_masuk`
-  MODIFY `id_masuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id_masuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `retur_barang`
 --
 ALTER TABLE `retur_barang`
-  MODIFY `id_retur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_retur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `supplier`
 --
 ALTER TABLE `supplier`
-  MODIFY `id_supplier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_supplier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
