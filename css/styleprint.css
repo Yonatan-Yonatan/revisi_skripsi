@@ -1,0 +1,60 @@
+h1 {
+    margin: auto;
+    margin-right: 10%;
+    font-family: Times New Roman;
+    font-size: 48px;
+    text-align: center;
+    text-decoration: bold;
+    padding-bottom: 0;
+}
+h3 {
+    margin-top: 2%;
+    font-family: Times New Roman;
+    font-size: 24px;
+    text-align: center;
+    text-decoration: bold;
+    padding-bottom: 0;
+}
+p {
+    font-family: Times New Roman;
+    font-size: 18px;
+    text-align: right;
+    text-decoration: none;
+    padding-top: 0;
+}
+
+f {
+    font-family: Times New Roman;
+    font-size: 18px;
+    text-align: right;
+    text-decoration: none;
+    padding-top: 0;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+.right { 
+    text-align: right;
+}
+.subtotal {
+    text-align: center;
+    font-weight: bold;
+}
+.garis1{
+    border-top:3px solid black;
+    height: 2px;
+    border-bottom:1px solid black;  
+}
+#logo{
+    margin: auto;
+    margin-left: 55%;
+    margin-right: auto;
+}
