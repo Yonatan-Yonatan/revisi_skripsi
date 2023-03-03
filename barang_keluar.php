@@ -46,59 +46,61 @@ session_start();
                         <h1 class="mt-4" style="padding-bottom:15px";>Data Barang Keluar</h1>
                         <div class="card mb-4">
                             <div class="card-body">
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <th>Tanggal</th>
-                                            <th>Nama Produk</th>
-                                            <th>Harga Produk</th>   
-                                            <th>Quantity</th>
-                                            <th>Total Harga</th>
-                                            <th>Keterangan</th> 
-                                            <th>PIC</th>   
-                                            <?php if($_SESSION['level'] == "owner"){?>
-                                            <th>Action</th>          
-                                            <?php } else if($_SESSION['level'] == "user"){ echo "";} ?>       
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php 
-                                            $sSQL="";
-                                            $sSQL="select * from barang_keluar k, produk p, user u where k.id_produk = p.id_produk and k.id = u.id order by k.id_keluar DESC";
-                                            $result=mysqli_query($koneksi, $sSQL);
-                                            if (mysqli_num_rows($result) > 0) 
-                                            {
-                                                while ($row=mysqli_fetch_assoc($result))
-                                                {
-                                                    $id_keluar = $row['id_keluar'];
-                                                    $tanggal = $row['tanggal'];
-                                                    $id_produk = $row['id_produk'];
-                                                    $nama_produk = $row['nama_produk'];
-                                                    $harga = $row['harga'];
-                                                    $jumlah= $row['jumlah_barang'];
-                                                    $totalharga = $row['total_harga'];
-                                                    $deskripsi = $row['deskripsi'];
-                                                    $fullname = $row['fullname'];
-                                        ?>		
-                                                            
+                                <div class="table-responsive">
+                                    <table id="datatablesSimple">
+                                        <thead>
                                             <tr>
-                                                <td><?php echo date('d M Y', strtotime($tanggal));?></td>
-                                                <td><?php echo $nama_produk;?></td>
-                                                <td><?php echo FormatUang($harga);?></td>
-                                                <td><?php echo $jumlah;?></td>
-                                                <td><?php echo FormatUang($totalharga);?></td>
-                                                <td><?php echo $deskripsi;?></td>
-                                                <td><?php echo $fullname;?></td>
+                                                <th>Tanggal</th>
+                                                <th>Nama Produk</th>
+                                                <th>Harga Produk</th>   
+                                                <th>Quantity</th>
+                                                <th>Total Harga</th>
+                                                <th>Keterangan</th> 
+                                                <th>PIC</th>   
                                                 <?php if($_SESSION['level'] == "owner"){?>
-                                                <td><?php echo "<a href='delete_barang_keluar.php?id_keluar=$id_keluar' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
-                                                <?php } else if($_SESSION['level'] == "user"){ echo "";} ?>
+                                                <th>Action</th>          
+                                                <?php } else if($_SESSION['level'] == "user"){ echo "";} ?>       
                                             </tr>
-                                        <?php	   
-                                                }
-                                            } 
-                                         ?>
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            <?php 
+                                                $sSQL="";
+                                                $sSQL="select * from barang_keluar k, produk p, user u where k.id_produk = p.id_produk and k.id = u.id order by k.id_keluar DESC";
+                                                $result=mysqli_query($koneksi, $sSQL);
+                                                if (mysqli_num_rows($result) > 0) 
+                                                {
+                                                    while ($row=mysqli_fetch_assoc($result))
+                                                    {
+                                                        $id_keluar = $row['id_keluar'];
+                                                        $tanggal = $row['tanggal'];
+                                                        $id_produk = $row['id_produk'];
+                                                        $nama_produk = $row['nama_produk'];
+                                                        $harga = $row['harga'];
+                                                        $jumlah= $row['jumlah_barang'];
+                                                        $totalharga = $row['total_harga'];
+                                                        $deskripsi = $row['deskripsi'];
+                                                        $fullname = $row['fullname'];
+                                            ?>		
+                                                                
+                                                <tr>
+                                                    <td><?php echo date('d M Y', strtotime($tanggal));?></td>
+                                                    <td><?php echo $nama_produk;?></td>
+                                                    <td><?php echo FormatUang($harga);?></td>
+                                                    <td><?php echo $jumlah;?></td>
+                                                    <td><?php echo FormatUang($totalharga);?></td>
+                                                    <td><?php echo $deskripsi;?></td>
+                                                    <td><?php echo $fullname;?></td>
+                                                    <?php if($_SESSION['level'] == "owner"){?>
+                                                    <td><?php echo "<a href='delete_barang_keluar.php?id_keluar=$id_keluar' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
+                                                    <?php } else if($_SESSION['level'] == "user"){ echo "";} ?>
+                                                </tr>
+                                            <?php	   
+                                                    }
+                                                } 
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

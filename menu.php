@@ -52,6 +52,9 @@
                         <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "kasir"){?>
                             <a class="nav-link" href="laporan_data_keluar.php">Laporan Transaksi Keluar</a>
                         <?php } ?>
+                        <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "admin"){?>
+                            <a class="nav-link" href="laporan_retur.php">Laporan Retur Barang</a>
+                        <?php } ?>
                     </nav>
                 </div>
                 <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "admin"){?>

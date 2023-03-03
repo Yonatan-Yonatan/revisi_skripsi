@@ -48,44 +48,46 @@ session_start();
                         <h1 class="mt-4" style="padding-bottom:15px";>User</h1>
                         <div class="card mb-4">
                             <div class="card-body">
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <th>User Name</th>
-                                            <th>Full Name</th>
-                                            <th>Level</th>
-                                            <th>Action</th>         
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php 
-                                            $sSQL="";
-                                            $sSQL="select * from user order by id";
-                                            $result=mysqli_query($koneksi, $sSQL);
-                                            if (mysqli_num_rows($result) > 0) 
-                                            {
-                                                while ($row=mysqli_fetch_assoc($result))
-                                                {
-                                                    $ID = $row['id'];
-                                                    $UserName = $row['username'];
-                                                    $FullName = $row['fullname'];
-                                                    $level= $row['level'];
-                                        ?>		
-                                                            
+                                <div class="table-responsive">
+                                    <table id="datatablesSimple">
+                                        <thead>
                                             <tr>
-                                                <td><?php echo $UserName;?></td>
-                                                <td><?php echo $FullName;?></td>
-                                                <td><?php echo $level;?></td>
-                                                <td><?php echo "<a href='update_user.php?id=$ID' class='action'>UPDATE</a> | 
-                                                                <a href='update_password.php?id=$ID' class='action'>UPDATE PASSWORD</a> | 
-                                                                <a href='delete_user.php?id=$ID' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
+                                                <th>User Name</th>
+                                                <th>Full Name</th>
+                                                <th>Level</th>
+                                                <th>Action</th>         
                                             </tr>
-                                        <?php	   
-                                                }
-                                            } 
-                                         ?>
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            <?php 
+                                                $sSQL="";
+                                                $sSQL="select * from user order by id";
+                                                $result=mysqli_query($koneksi, $sSQL);
+                                                if (mysqli_num_rows($result) > 0) 
+                                                {
+                                                    while ($row=mysqli_fetch_assoc($result))
+                                                    {
+                                                        $ID = $row['id'];
+                                                        $UserName = $row['username'];
+                                                        $FullName = $row['fullname'];
+                                                        $level= $row['level'];
+                                            ?>		
+                                                                
+                                                <tr>
+                                                    <td><?php echo $UserName;?></td>
+                                                    <td><?php echo $FullName;?></td>
+                                                    <td><?php echo $level;?></td>
+                                                    <td><?php echo "<a href='update_user.php?id=$ID' class='action'>UPDATE</a> | 
+                                                                    <a href='update_password.php?id=$ID' class='action'>UPDATE PASSWORD</a> | 
+                                                                    <a href='delete_user.php?id=$ID' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
+                                                </tr>
+                                            <?php	   
+                                                    }
+                                                } 
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

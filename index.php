@@ -75,64 +75,63 @@ session_start();
                                     }
                                 ?>
 
-                    
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <th>Nama Produk</th>
-                                            <th>Jenis Produk</th>   
-                                            <th>Stok</th>  
-                                            <th>Harga</th>        
-                                            <th>Supplier</th>  
-                                            <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "admin"){?>
-                                            <th>Action</th>          
-                                            <?php } ?>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php 
-                                            $sSQL="";
-                                            $sSQL="select * from produk p, supplier s where p.id_supplier = s.id_supplier  order  by id_produk";
-                                            $result=mysqli_query($koneksi, $sSQL);
-                                            if (mysqli_num_rows($result) > 0) 
-                                            {
-                                                while ($row=mysqli_fetch_assoc($result))
-                                                {
-                                                    $id_produk = $row['id_produk'];
-                                                    $nama_produk = $row['nama_produk'];
-                                                    $jenis_produk = $row['jenis_barang'];
-                                                    $qty= $row['qty'];
-                                                    $harga= $row['harga'];
-                                                    $id_supplier=$row['id_supplier'];
-                                                    $nama_supplier=$row['nama_supplier'];
-                                        ?>		
-                                                            
+                                <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "admin"){?>
+                                    <a href="add_barang.php"><button type="button" class="btn btn-outline-primary">Add Barang</button></a>
+                                    <a href="print_laporan_stok.php" target="_BLANK"><button type="button" class="btn btn-outline-success">Print</button></a><br><br>
+                                <?php } ?>
+                                <div class="table-responsive">
+                                    <table id="datatablesSimple">
+                                        <thead>
                                             <tr>
-                                                <td><?php echo $nama_produk;?></td>
-                                                <td><?php echo $jenis_produk;?></td>
-                                                <td><?php echo $qty;?></td>
-                                                <td><?php echo FormatUang($harga);?></td>
-                                                <td><?php echo $nama_supplier;?></td>
+                                                <th>Nama Produk</th>
+                                                <th>Jenis Produk</th>   
+                                                <th>Stok</th>  
+                                                <th>Harga</th>        
+                                                <th>Supplier</th>  
                                                 <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "admin"){?>
-                                                <td><?php echo "<a href='update_barang.php?id_produk=$id_produk' class='action'>UPDATE</a> | 
-                                                                <a href='delete_barang.php?id_produk=$id_produk' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
+                                                <th>Action</th>          
                                                 <?php } ?>
                                             </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php 
+                                                $sSQL="";
+                                                $sSQL="select * from produk p, supplier s where p.id_supplier = s.id_supplier  order  by id_produk";
+                                                $result=mysqli_query($koneksi, $sSQL);
+                                                if (mysqli_num_rows($result) > 0) 
+                                                {
+                                                    while ($row=mysqli_fetch_assoc($result))
+                                                    {
+                                                        $id_produk = $row['id_produk'];
+                                                        $nama_produk = $row['nama_produk'];
+                                                        $jenis_produk = $row['jenis_barang'];
+                                                        $qty= $row['qty'];
+                                                        $harga= $row['harga'];
+                                                        $nama_supplier=$row['nama_supplier'];
+                                            ?>		
+                                                                
+                                                <tr>
+                                                    <td><?php echo $nama_produk;?></td>
+                                                    <td><?php echo $jenis_produk;?></td>
+                                                    <td><?php echo $qty;?></td>
+                                                    <td><?php echo FormatUang($harga);?></td>
+                                                    <td><?php echo $nama_supplier;?></td>
+                                                    <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "admin"){?>
+                                                    <td><?php echo "<a href='update_barang.php?id_produk=$id_produk' class='action'>UPDATE</a> | 
+                                                                    <a href='delete_barang.php?id_produk=$id_produk' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
+                                                    <?php } ?>
+                                                </tr>
 
-                                        <?php	   
-                                                }
-                                            } 
-                                         ?>
-                                    </tbody>
-                                </table>
+                                            <?php	   
+                                                    }
+                                                } 
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "admin"){?>
-                        <a href="add_barang.php" class="act-btn">
-                            +
-                        </a>
-                    <?php } ?>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">

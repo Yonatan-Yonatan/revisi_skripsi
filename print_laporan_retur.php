@@ -13,7 +13,6 @@ if(isset($_POST['print'])){
     $sampai = $_POST['sampai'];
 ?>
 
-
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
@@ -23,7 +22,6 @@ if(isset($_POST['print'])){
     <link href="css/styleprint.css" rel="stylesheet" />
 </head>
 
-
 <body>
 <br><br><br>
 <header>
@@ -32,7 +30,7 @@ if(isset($_POST['print'])){
             <img id="logo" src="images/logo31.png" width="160" height="160" />
         </div>
         <div class="container-fluid col-sm-8">
-            <h1><strong>Laporan Transaksi Barang Masuk</strong></h1>
+            <h1 style="margin-left:10%"><strong>Laporan Retur Barang</strong></h1>
             <h3>Periode : <?php echo date('d F Y', strtotime($dari));?> - <?php echo date('d F Y', strtotime($sampai));?></h3>
         </div>
     </div>
@@ -41,7 +39,7 @@ if(isset($_POST['print'])){
 <div class="container-fluid px-4">
     <br>  
     <hr class="garis1"/>
-    <br> 
+    <br>
     <div class="table-responsive">
     <table class="table">
         <thead>
@@ -49,29 +47,32 @@ if(isset($_POST['print'])){
                 <th>Tanggal</th>
                 <th>Nama Produk</th>
                 <th>Supplier</th>   
-                <th>Quantity</th>              
+                <th>Quantity</th>  
+                <th>Keterangan</th>                 
             </tr>
         </thead>
         <tbody>
             <?php
-            $data = mysqli_query($koneksi, "select * from barang_masuk m, produk p, supplier s where (tanggal BETWEEN '$dari' and '$sampai') and m.id_produk = p.id_produk and m.id_supplier = s.id_supplier");
-            while($row = mysqli_fetch_array($data)){
-                $tanggal = $row['tanggal'];
-                $nama_produk = $row['nama_produk'];
-                $nama_supplier = $row['nama_supplier'];
-                $stok= $row['stok'];
-         ?>	                         
-        <tr>   
-            <td><?php echo date('d F Y', strtotime($tanggal));?></td>
-            <td><?php echo $nama_produk;?></td>
-            <td><?php echo $nama_supplier;?></td>
-            <td><?php echo $stok;?></td>
+                $data = mysqli_query($koneksi, "select * from retur_barang r, produk p, supplier s where (tanggal BETWEEN '$dari' and '$sampai') and r.id_produk = p.id_produk and r.id_supplier = s.id_supplier");
+                while($row = mysqli_fetch_array($data)){
+                    $tanggal = $row['tanggal'];
+                    $nama_produk = $row['nama_produk'];
+                    $nama_supplier = $row['nama_supplier'];
+                    $quantity = $row['quantity'];
+                    $deskripsi = $row['deskripsi'];
+            ?>	                         
+          <tr>   
+                    <td><?php echo date('d M Y', strtotime($tanggal));?></td>
+                    <td><?php echo $nama_produk;?></td>
+                    <td><?php echo $nama_supplier;?></td>
+                    <td><?php echo $quantity;?></td>
+                    <td><?php echo $deskripsi;?></td>
         </tr>
-        <?php
+            <?php
+                }
             }
-        }
             
-        ?>
+            ?>
         </tbody>
     </table>
     </div>

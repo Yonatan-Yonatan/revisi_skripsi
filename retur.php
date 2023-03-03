@@ -46,56 +46,58 @@ session_start();
                         <h1 class="mt-4" style="padding-bottom:15px";>Data Barang Retur</h1>
                         <div class="card mb-4">
                             <div class="card-body">
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <th>Tanggal</th>
-                                            <th>Nama Produk</th>
-                                            <th>Quantity</th>
-                                            <th>Supplier</th>
-                                            <th>Keterangan</th> 
-                                            <th>PIC</th>  
-                                            <?php if($_SESSION['level'] == "owner"){?>
-                                            <th>Action</th>          
-                                            <?php } ?>       
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php 
-                                            $sSQL="";
-                                            $sSQL="select * from retur_barang r, produk p, supplier s, user u where p.id_produk = r.id_produk and s.id_supplier = r.id_supplier and r.id = u.id order by r.id_retur DESC";
-                                            $result=mysqli_query($koneksi, $sSQL);
-                                            if (mysqli_num_rows($result) > 0) 
-                                            {
-                                                while ($row=mysqli_fetch_assoc($result))
-                                                {
-                                                    $id_retur = $row['id_retur'];
-                                                    $tanggal = $row['tanggal'];
-                                                    $id_produk = $row['id_produk'];
-                                                    $nama_produk = $row['nama_produk'];
-                                                    $id_supplier = $row['nama_supplier'];
-                                                    $quantity = $row['quantity'];
-                                                    $deskripsi = $row['deskripsi'];
-                                                    $fullname = $row['fullname'];
-                                        ?>		
-                                                            
+                            <div class="table-responsive">    
+                                    <table id="datatablesSimple">
+                                        <thead>
                                             <tr>
-                                                <td><?php echo date('d M Y', strtotime($tanggal));?></td>
-                                                <td><?php echo $nama_produk;?></td>
-                                                <td><?php echo $quantity;?></td>
-                                                <td><?php echo $id_supplier;?></td>
-                                                <td><?php echo $deskripsi;?></td>
-                                                <td><?php echo $fullname;?></td>
+                                                <th>Tanggal</th>
+                                                <th>Nama Produk</th>
+                                                <th>Quantity</th>
+                                                <th>Supplier</th>
+                                                <th>Keterangan</th> 
+                                                <th>PIC</th>  
                                                 <?php if($_SESSION['level'] == "owner"){?>
-                                                <td><?php echo "<a href='delete_retur.php?id_retur=$id_retur' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
-                                                <?php }  ?>
+                                                <th>Action</th>          
+                                                <?php } ?>       
                                             </tr>
-                                        <?php	   
-                                                }
-                                            } 
-                                         ?>
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            <?php 
+                                                $sSQL="";
+                                                $sSQL="select * from retur_barang r, produk p, supplier s, user u where p.id_produk = r.id_produk and s.id_supplier = r.id_supplier and r.id = u.id order by r.id_retur DESC";
+                                                $result=mysqli_query($koneksi, $sSQL);
+                                                if (mysqli_num_rows($result) > 0) 
+                                                {
+                                                    while ($row=mysqli_fetch_assoc($result))
+                                                    {
+                                                        $id_retur = $row['id_retur'];
+                                                        $tanggal = $row['tanggal'];
+                                                        $id_produk = $row['id_produk'];
+                                                        $nama_produk = $row['nama_produk'];
+                                                        $id_supplier = $row['nama_supplier'];
+                                                        $quantity = $row['quantity'];
+                                                        $deskripsi = $row['deskripsi'];
+                                                        $fullname = $row['fullname'];
+                                            ?>		
+                                                                
+                                                <tr>
+                                                    <td><?php echo date('d M Y', strtotime($tanggal));?></td>
+                                                    <td><?php echo $nama_produk;?></td>
+                                                    <td><?php echo $quantity;?></td>
+                                                    <td><?php echo $id_supplier;?></td>
+                                                    <td><?php echo $deskripsi;?></td>
+                                                    <td><?php echo $fullname;?></td>
+                                                    <?php if($_SESSION['level'] == "owner"){?>
+                                                    <td><?php echo "<a href='delete_retur.php?id_retur=$id_retur' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
+                                                    <?php }  ?>
+                                                </tr>
+                                            <?php	   
+                                                    }
+                                                } 
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -49,54 +49,56 @@ session_start();
                         
                         <div class="card mb-4">
                             <div class="card-body">
-                                <table class="table">
-                                    <thead>
-                                        <tr>   
-                                            <th>Tanggal</th>
-                                            <th>Nama Produk</th>
-                                            <th>Supplier</th>   
-                                            <th>Quantity</th>          
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php 
-                                            $data="";
-                                            
-                                            if(isset($_GET['dari']) && isset($_GET['sampai'])){
-                                                // tampilkan data yang sesuai dengan range tanggal yang dicari 
-                                                $data = mysqli_query($koneksi, "select * from barang_masuk m, produk p, supplier s where (tanggal BETWEEN '".$_GET['dari']."' and '".$_GET['sampai']."') and m.id_produk = p.id_produk and m.id_supplier = s.id_supplier");
-                                                while($row = mysqli_fetch_array($data)){
-                                                    $tanggal = $row['tanggal'];
-                                                    $nama_produk = $row['nama_produk'];
-                                                    $nama_supplier = $row['nama_supplier'];
-                                                    $stok= $row['stok'];
-                                        ?>	
-                                                                        
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
                                             <tr>   
-                                                <td><?php echo date('d M Y', strtotime($tanggal));?></td>
-                                                <td><?php echo $nama_produk;?></td>
-                                                <td><?php echo $nama_supplier;?></td>
-                                                <td><?php echo $stok;?></td>
+                                                <th>Tanggal</th>
+                                                <th>Nama Produk</th>
+                                                <th>Supplier</th>   
+                                                <th>Quantity</th>          
                                             </tr>
-                                        <?php	   
-                                                }  
-                                        ?>
-                                    </tbody>
-                                    <tfoot>
-                                        <form method="POST" action="print_laporan_masuk.php" target="_BLANK">
-                                            <div class="col-sm-4" style="padding-bottom:15px">
-                                                <input type="hidden" name="dari" class="filter-form-control" value="<?php echo $_GET['dari'];?>">
-                                                <input type="hidden" name="sampai" class="filter-form-control" value="<?php echo $_GET['sampai'];?>">
-                                            </div>
-                                            <input type="submit" name="print" value="print" class="btn btn-sm btn-primary" />&nbsp
-                                        </form>
-                                    </tfoot>
-                                        <?php   
-                                            }else{
-                                                //jika tidak ada tanggal dari dan tanggal ke maka tampilkan seluruh data		
-                                            }
-                                         ?>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            <?php 
+                                                $data="";
+                                                
+                                                if(isset($_GET['dari']) && isset($_GET['sampai'])){
+                                                    // tampilkan data yang sesuai dengan range tanggal yang dicari 
+                                                    $data = mysqli_query($koneksi, "select * from barang_masuk m, produk p, supplier s where (tanggal BETWEEN '".$_GET['dari']."' and '".$_GET['sampai']."') and m.id_produk = p.id_produk and m.id_supplier = s.id_supplier");
+                                                    while($row = mysqli_fetch_array($data)){
+                                                        $tanggal = $row['tanggal'];
+                                                        $nama_produk = $row['nama_produk'];
+                                                        $nama_supplier = $row['nama_supplier'];
+                                                        $stok= $row['stok'];
+                                            ?>	
+                                                                            
+                                                <tr>   
+                                                    <td><?php echo date('d M Y', strtotime($tanggal));?></td>
+                                                    <td><?php echo $nama_produk;?></td>
+                                                    <td><?php echo $nama_supplier;?></td>
+                                                    <td><?php echo $stok;?></td>
+                                                </tr>
+                                            <?php	   
+                                                    }  
+                                            ?>
+                                        </tbody>
+                                        <tfoot>
+                                            <form method="POST" action="print_laporan_masuk.php" target="_BLANK">
+                                                <div class="col-sm-4" style="padding-bottom:15px">
+                                                    <input type="hidden" name="dari" class="filter-form-control" value="<?php echo $_GET['dari'];?>">
+                                                    <input type="hidden" name="sampai" class="filter-form-control" value="<?php echo $_GET['sampai'];?>">
+                                                </div>
+                                                <input type="submit" name="print" value="print" class="btn btn-sm btn-primary" />&nbsp
+                                            </form>
+                                        </tfoot>
+                                            <?php   
+                                                }else{
+                                                    //jika tidak ada tanggal dari dan tanggal ke maka tampilkan seluruh data		
+                                                }
+                                            ?>
+                                    </table>
+                                </div>
                             </div> 
                         </div>       
                     </div>

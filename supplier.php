@@ -48,43 +48,45 @@ session_start();
                         <h1 class="mt-4" style="padding-bottom:15px";>Supplier</h1>
                         <div class="card mb-4">
                             <div class="card-body">
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <th>Nama</th>
-                                            <th>Alamat</th>
-                                            <th>No. Telepon</th>
-                                            <th>Action</th>         
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php 
-                                            $sSQL="";
-                                            $sSQL="select * from supplier order  by id_supplier";
-                                            $result=mysqli_query($koneksi, $sSQL);
-                                            if (mysqli_num_rows($result) > 0) 
-                                            {
-                                                while ($row=mysqli_fetch_assoc($result))
-                                                {
-                                                    $ID = $row['id_supplier'];
-                                                    $nama = $row['nama_supplier'];
-                                                    $alamat = $row['alamat'];
-                                                    $no_telp= $row['no_telp'];
-                                        ?>		
-                                                            
+                                <div class="table-responsive">
+                                    <table id="datatablesSimple">
+                                        <thead>
                                             <tr>
-                                                <td><?php echo $nama;?></td>
-                                                <td><?php echo $alamat;?></td>
-                                                <td><?php echo $no_telp;?></td>
-                                                <td><?php echo "<a href='update_supplier.php?id_supplier=$ID' class='action'>UPDATE</a> | 
-                                                                <a href='delete_supplier.php?id_supplier=$ID' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
+                                                <th>Nama</th>
+                                                <th>Alamat</th>
+                                                <th>No. Telepon</th>
+                                                <th>Action</th>         
                                             </tr>
-                                        <?php	   
-                                                }
-                                            } 
-                                         ?>
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            <?php 
+                                                $sSQL="";
+                                                $sSQL="select * from supplier order  by id_supplier";
+                                                $result=mysqli_query($koneksi, $sSQL);
+                                                if (mysqli_num_rows($result) > 0) 
+                                                {
+                                                    while ($row=mysqli_fetch_assoc($result))
+                                                    {
+                                                        $ID = $row['id_supplier'];
+                                                        $nama = $row['nama_supplier'];
+                                                        $alamat = $row['alamat'];
+                                                        $no_telp= $row['no_telp'];
+                                            ?>		
+                                                                
+                                                <tr>
+                                                    <td><?php echo $nama;?></td>
+                                                    <td><?php echo $alamat;?></td>
+                                                    <td><?php echo $no_telp;?></td>
+                                                    <td><?php echo "<a href='update_supplier.php?id_supplier=$ID' class='action'>UPDATE</a> | 
+                                                                    <a href='delete_supplier.php?id_supplier=$ID' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
+                                                </tr>
+                                            <?php	   
+                                                    }
+                                                } 
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

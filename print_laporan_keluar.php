@@ -40,6 +40,7 @@ if(isset($_POST['print'])){
     <br>  
     <hr class="garis1"/>
     <br>
+    <div class="table-responsive">
     <table class="table">
         <thead>
             <tr>   
@@ -90,6 +91,7 @@ if(isset($_POST['print'])){
             ?>
         </tbody>
     </table>
+            </div>
 </div>
 <br><br><br><br><br>
 <div class="row">

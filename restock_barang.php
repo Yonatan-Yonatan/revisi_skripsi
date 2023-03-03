@@ -46,53 +46,55 @@ session_start();
                         <h1 class="mt-4" style="padding-bottom:15px";>Data Restock Barang</h1>
                         <div class="card mb-4">
                             <div class="card-body">
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <th>Tanggal</th>
-                                            <th>Nama Produk</th>
-                                            <th>Supplier</th>   
-                                            <th>Quantity</th> 
-                                            <th>PIC</th> 
-                                            <?php if($_SESSION['level'] == "owner"){?>
-                                            <th>Action</th>          
-                                            <?php } ?>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php 
-                                            $sSQL="";
-                                            $sSQL="select * from barang_masuk m, produk p, supplier s, user u where p.id_produk = m.id_produk and s.id_supplier = m.id_supplier and m.id = u.id order by m.id_masuk DESC";
-                                            $result=mysqli_query($koneksi, $sSQL);
-                                            if (mysqli_num_rows($result) > 0) 
-                                            {
-                                                while ($row=mysqli_fetch_assoc($result))
-                                                {
-                                                    $id_masuk = $row['id_masuk'];
-                                                    $id_produk = $row['id_produk'];
-                                                    $tanggal = $row['tanggal'];
-                                                    $nama_produk = $row['nama_produk'];
-                                                    $nama_supplier = $row['nama_supplier'];
-                                                    $stok= $row['stok'];
-                                                    $fullname = $row['fullname'];
-                                        ?>		
-                                                            
+                                <div class="table-responsive">
+                                    <table id="datatablesSimple">
+                                        <thead>
                                             <tr>
-                                                <td><?php echo date('d M Y', strtotime($tanggal));?></td>
-                                                <td><?php echo $nama_produk;?></td>
-                                                <td><?php echo $nama_supplier;?></td>
-                                                <td><?php echo $stok;?></td>
-                                                <td><?php echo $fullname;?></td>
+                                                <th>Tanggal</th>
+                                                <th>Nama Produk</th>
+                                                <th>Supplier</th>   
+                                                <th>Quantity</th> 
+                                                <th>PIC</th> 
                                                 <?php if($_SESSION['level'] == "owner"){?>
-                                                <td><?php echo "<a href='delete_restok.php?id_masuk=$id_masuk' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
+                                                <th>Action</th>          
                                                 <?php } ?>
                                             </tr>
-                                        <?php	   
-                                                }
-                                            } 
-                                         ?>
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            <?php 
+                                                $sSQL="";
+                                                $sSQL="select * from barang_masuk m, produk p, supplier s, user u where p.id_produk = m.id_produk and s.id_supplier = m.id_supplier and m.id = u.id order by m.id_masuk DESC";
+                                                $result=mysqli_query($koneksi, $sSQL);
+                                                if (mysqli_num_rows($result) > 0) 
+                                                {
+                                                    while ($row=mysqli_fetch_assoc($result))
+                                                    {
+                                                        $id_masuk = $row['id_masuk'];
+                                                        $id_produk = $row['id_produk'];
+                                                        $tanggal = $row['tanggal'];
+                                                        $nama_produk = $row['nama_produk'];
+                                                        $nama_supplier = $row['nama_supplier'];
+                                                        $stok= $row['stok'];
+                                                        $fullname = $row['fullname'];
+                                            ?>		
+                                                                
+                                                <tr>
+                                                    <td><?php echo date('d M Y', strtotime($tanggal));?></td>
+                                                    <td><?php echo $nama_produk;?></td>
+                                                    <td><?php echo $nama_supplier;?></td>
+                                                    <td><?php echo $stok;?></td>
+                                                    <td><?php echo $fullname;?></td>
+                                                    <?php if($_SESSION['level'] == "owner"){?>
+                                                    <td><?php echo "<a href='delete_restok.php?id_masuk=$id_masuk' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
+                                                    <?php } ?>
+                                                </tr>
+                                            <?php	   
+                                                    }
+                                                } 
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
