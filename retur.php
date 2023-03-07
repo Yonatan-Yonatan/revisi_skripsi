@@ -7,6 +7,14 @@ session_start();
  	}
     else{
     }
+    if($_SESSION['level'] == "kasir"){
+        echo '
+            <script>
+                alert("Maaf anda tidak memiliki akses");
+                javascript:window.history.go(-1);
+            </script>
+        ';
+    } 
 ?>
 
 <!DOCTYPE html>
@@ -88,7 +96,8 @@ session_start();
                                                     <td><?php echo $deskripsi;?></td>
                                                     <td><?php echo $fullname;?></td>
                                                     <?php if($_SESSION['level'] == "owner"){?>
-                                                    <td><?php echo "<a href='delete_retur.php?id_retur=$id_retur' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
+                                                    <td><?php echo "<a href='update_retur.php?id_retur=$id_retur' class='action'>Update</a> |
+                                                                    <a href='delete_retur.php?id_retur=$id_retur' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
                                                     <?php }  ?>
                                                 </tr>
                                             <?php	   

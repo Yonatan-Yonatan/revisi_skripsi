@@ -5,7 +5,14 @@ session_start();
     {
 	    header("location: logout.php");
  	}
-   
+if($_SESSION['level'] == "kasir"){
+    echo '
+        <script>
+            alert("Maaf anda tidak memiliki akses");
+            javascript:window.history.go(-1);
+        </script>
+    ';
+}   
 ?>
 
 
@@ -101,11 +108,10 @@ session_start();
             });
 
             function supplier(){
-                var harga1 = document.getElementById('id_produk');
-                var harga2 = harga1.options[harga1.selectedIndex].value;
-                const arrx = harga2.split(":");
+                var supplier1 = document.getElementById('id_produk');
+                var supplier2 = supplier1.options[supplier1.selectedIndex].value;
+                const arrx = supplier2.split(":");
                 document.getElementById('id_supplier').value=arrx[1];
-                
             }
 
         </script>

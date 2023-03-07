@@ -32,18 +32,20 @@ if($_SESSION['level'] == "kasir" || $_SESSION['level'] == "admin"){
 
     <?php
         
-        $id=$_GET['id'];
-    
-        $sSQL=" select * from user where id='$id' limit 1";
+        $id_retur=$_GET['id_retur'];
+
+        $sSQL=" select * from retur_barang r, supplier s, produk p where r.id_retur = '$id_retur' and r.id_supplier=s.id_supplier  and r.id_produk=p.id_produk limit 1";
         $result=mysqli_query($koneksi, $sSQL);
         if (mysqli_num_rows($result) > 0) 
         {
             while ($row=mysqli_fetch_assoc($result))
             {
-                $username = $row['username'];
-                $fullname = $row['fullname'];
-                $password = $row['password'];
-                $level = $row['level']; 
+                $nama_produk = $row['nama_produk'];
+                $id_produk = $row['id_produk'];
+                $id_supplier = $row['id_supplier'];
+                $nama_supplier = $row['nama_supplier'];
+                $quantity= $row['quantity'];
+                $deskripsi= $row['deskripsi'];
             }
         }	 
     ?>  
@@ -55,35 +57,34 @@ if($_SESSION['level'] == "kasir" || $_SESSION['level'] == "admin"){
             </div>
             <div id="layoutSidenav_content">
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4" style="padding-bottom:15px";>Change Password</h1>
-                    <form action="submit_update_password.php" class="form" method="post"> 
-                    
-                    <input id="id" class="form-control" type="hidden" name="id" value="<?php echo $id;?>" readonly/>
-                    <label-form for="username">&nbsp;
-                        User Name
+                    <h1 class="mt-4" style="padding-bottom:15px";>Edit Retur Barang</h1>
+                    <form action="submit_update_retur.php" class="form" method="post"> 
+                    <input id="id_retur" class="form-control" type="hidden" name="id_retur" value="<?php echo $id_retur;?>" readonly/>
+                    <input id="id_produk" class="form-control" type="hidden" name="id_produk" value="<?php echo $id_produk;?>" readonly/>
+                    <label-form for="nama_produk">&nbsp;
+                        Nama Produk
                     </label-form>
-                    <input id="username" class="form-control" type="text" name="username" value="<?php echo $username;?>" readonly/>
-                    <label-form for="fullname">&nbsp;
-                        Full Name
+                    <input id="nama_produk" class="form-control" type="text" name="nama_produk" value="<?php echo $nama_produk;?>" readonly/>
+                    <input id="id_supplier" class="form-control" type="hidden" name="id_supplier" value="<?php echo $id_supplier;?>" readonly/>
+                    <label-form for="supplier">&nbsp;
+                        Supplier
                     </label-form>
-                    <input id="fullname" class="form-control" type="text" name="fullname" value="<?php echo $fullname;?>" readonly/>
-                    <label-form for="level">&nbsp;
-                        Jenis Akun
+                    <input id="nama_supplier" class="form-control" type="text" name="nama_supplier" value="<?php echo $nama_supplier;?>" readonly/>
+                    <input id="stoklama" class="form-control" type="hidden" name="stoklama" value="<?php echo $quantity;?>" readonly required/>
+                    <label-form for="quantity">&nbsp;
+                        Quantity
                     </label-form>
-                    <input id="level" class="form-control" type="text" name="level" value="<?php echo $level;?>" readonly/>
-                    <label-form for="password">&nbsp;
-                        Password
+                    <input id="quantity" class="form-control" type="number" name="quantity" value="<?php echo $quantity;?>" required/>
+                    <label-form for="ket">&nbsp;
+                        Ket:
                     </label-form>
-                    <input id="password" class="form-control" type="password" name="password" required/>
-                    <label for="Show Password" style="padding-top: 15px">
-                        <input type="checkbox" onclick="showPassword()"/> Show Password
-                    </label>
-                       
+                    <input id="deskripsi" class="form-control" type="text" name="deskripsi" value="<?php echo $deskripsi;?>" required/>
+
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label"></label>
                             <div class="col-sm-10">
                                 <input type="submit" name="simpan" value="Simpan" class="btn btn-sm btn-primary" />&nbsp;
-	                            <a href="user.php" class="btn btn-sm btn-danger">Batal </a>
+	                            <a href="retur.php" class="btn btn-sm btn-danger">Batal </a>
                             </div>
                         </div>
                     </form>
@@ -105,19 +106,5 @@ if($_SESSION['level'] == "kasir" || $_SESSION['level'] == "admin"){
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
 
-        <script>
-            function showPassword()
-            {
-                var x = document.getElementById("password");
-                if (x.type === "password") 
-                {
-                    x.type = "text";
-                } 
-                else 
-                {
-                    x.type = "password";
-                }
-            }
-        </script>
     </body>
 </html>

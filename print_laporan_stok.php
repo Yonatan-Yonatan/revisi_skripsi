@@ -7,6 +7,14 @@ session_start();
  	}
     else{
     }
+if($_SESSION['level'] == "kasir"){
+    echo '
+        <script>
+            alert("Maaf anda tidak memiliki akses");
+            javascript:window.history.go(-1);
+        </script>
+    ';
+}
 ?>
 
 <!DOCTYPE html>

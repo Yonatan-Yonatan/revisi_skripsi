@@ -5,6 +5,14 @@ session_start();
     {
 	    header("location: logout.php");
  	}
+if($_SESSION['level'] == "kasir" || $_SESSION['level'] == "admin"){
+    echo '
+        <script>
+            alert("Maaf anda tidak memiliki akses");
+            javascript:window.history.go(-1);
+        </script>
+    ';
+} 
 ?>
 
 
@@ -28,15 +36,17 @@ session_start();
 
         
         
-        $sSQL=" select * from barang_masuk m, produk p where id_masuk = '$id_masuk' and m.id_produk=p.id_produk limit 1";
+        $sSQL=" select * from barang_masuk m, supplier s, produk p where m.id_masuk = '$id_masuk' and m.id_produk=p.id_produk and m.id_supplier=s.id_supplier limit 1";
         $result=mysqli_query($koneksi, $sSQL);
         if (mysqli_num_rows($result) > 0) 
         {
             while ($row=mysqli_fetch_assoc($result))
             {
                 $nama_produk = $row['nama_produk'];
+                $id_produk = $row['id_produk'];
+                $id_supplier = $row['id_supplier'];
+                $nama_supplier = $row['nama_supplier'];
                 $stok= $row['stok'];
-                
             }
         }	 
     ?>  
@@ -48,21 +58,24 @@ session_start();
             </div>
             <div id="layoutSidenav_content">
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4" style="padding-bottom:15px";>Edit Stok Restock</h1>
-                    <form action="submit_update_user.php" class="form" method="post"> 
-                    <label-form for="id_masuk">&nbsp;
-                        ID Restock Barang
-                    </label-form>
-                    <input id="id_masuk" class="form-control" type="text" name="id_masuk" value="<?php echo $id_masuk;?>" readonly/>
+                    <h1 class="mt-4" style="padding-bottom:15px";>Edit Barang Masuk</h1>
+                    <form action="submit_update_restock.php" class="form" method="post"> 
+                    <input id="id_masuk" class="form-control" type="hidden" name="id_masuk" value="<?php echo $id_masuk;?>" readonly/>
+                    <input id="id_produk" class="form-control" type="hidden" name="id_produk" value="<?php echo $id_produk;?>" readonly/>
                     <label-form for="nama_produk">&nbsp;
                         Nama Produk
                     </label-form>
                     <input id="nama_produk" class="form-control" type="text" name="nama_produk" value="<?php echo $nama_produk;?>" readonly/>
+                    <input id="id_supplier" class="form-control" type="hidden" name="id_supplier" value="<?php echo $id_supplier;?>" readonly/>
+                    <label-form for="nama_supplier">&nbsp;
+                        Nama Supplier
+                    </label-form>
+                    <input id="nama_supplier" class="form-control" type="text" name="nama_supplier" value="<?php echo $nama_supplier;?>" readonly/>
+                    <input id="stoklama" class="form-control" type="hidden" name="stoklama" value="<?php echo $stok;?>" readonly required/>
                     <label-form for="stok">&nbsp;
                         Stok
                     </label-form>
                     <input id="stok" class="form-control" type="number" name="stok" value="<?php echo $stok;?>" required/>
-                    
                        
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label"></label>

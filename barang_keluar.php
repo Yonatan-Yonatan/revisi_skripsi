@@ -7,6 +7,14 @@ session_start();
  	}
     else{
     }
+if($_SESSION['level'] == "admin"){
+    echo '
+        <script>
+            alert("Maaf anda tidak memiliki akses");
+            javascript:window.history.go(-1);
+        </script>
+    ';
+} 
 ?>
 
 <!DOCTYPE html>
@@ -91,7 +99,8 @@ session_start();
                                                     <td><?php echo $deskripsi;?></td>
                                                     <td><?php echo $fullname;?></td>
                                                     <?php if($_SESSION['level'] == "owner"){?>
-                                                    <td><?php echo "<a href='delete_barang_keluar.php?id_keluar=$id_keluar' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
+                                                    <td><?php echo "<a href='update_barang_keluar.php?id_keluar=$id_keluar' class='action'>UPDATE</a> |
+                                                                    <a href='delete_barang_keluar.php?id_keluar=$id_keluar' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
                                                     <?php } else if($_SESSION['level'] == "user"){ echo "";} ?>
                                                 </tr>
                                             <?php	   

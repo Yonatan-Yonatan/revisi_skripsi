@@ -32,18 +32,20 @@ if($_SESSION['level'] == "kasir" || $_SESSION['level'] == "admin"){
 
     <?php
         
-        $id=$_GET['id'];
-    
-        $sSQL=" select * from user where id='$id' limit 1";
+        $id_keluar=$_GET['id_keluar'];
+
+        $sSQL=" select * from barang_keluar k, produk p where k.id_keluar = '$id_keluar' and k.id_produk=p.id_produk limit 1";
         $result=mysqli_query($koneksi, $sSQL);
         if (mysqli_num_rows($result) > 0) 
         {
             while ($row=mysqli_fetch_assoc($result))
             {
-                $username = $row['username'];
-                $fullname = $row['fullname'];
-                $password = $row['password'];
-                $level = $row['level']; 
+                $nama_produk = $row['nama_produk'];
+                $id_produk = $row['id_produk'];
+                $harga = $row['harga'];
+                $total_harga = $row['total_harga'];
+                $jumlah_barang= $row['jumlah_barang'];
+                $deskripsi= $row['deskripsi'];
             }
         }	 
     ?>  
@@ -55,35 +57,37 @@ if($_SESSION['level'] == "kasir" || $_SESSION['level'] == "admin"){
             </div>
             <div id="layoutSidenav_content">
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4" style="padding-bottom:15px";>Change Password</h1>
-                    <form action="submit_update_password.php" class="form" method="post"> 
-                    
-                    <input id="id" class="form-control" type="hidden" name="id" value="<?php echo $id;?>" readonly/>
-                    <label-form for="username">&nbsp;
-                        User Name
+                    <h1 class="mt-4" style="padding-bottom:15px";>Edit Barang Keluar</h1>
+                    <form action="submit_update_keluar.php" class="form" method="post"> 
+                    <input id="id_keluar" class="form-control" type="hidden" name="id_keluar" value="<?php echo $id_keluar;?>" readonly/>
+                    <input id="id_produk" class="form-control" type="hidden" name="id_produk" value="<?php echo $id_produk;?>" readonly/>
+                    <label-form for="nama_produk">&nbsp;
+                        Nama Produk
                     </label-form>
-                    <input id="username" class="form-control" type="text" name="username" value="<?php echo $username;?>" readonly/>
-                    <label-form for="fullname">&nbsp;
-                        Full Name
+                    <input id="nama_produk" class="form-control" type="text" name="nama_produk" value="<?php echo $nama_produk;?>" readonly/>
+                    <label-form for="harga">&nbsp;
+                        Harga
                     </label-form>
-                    <input id="fullname" class="form-control" type="text" name="fullname" value="<?php echo $fullname;?>" readonly/>
-                    <label-form for="level">&nbsp;
-                        Jenis Akun
+                    <input id="harga" class="form-control" type="number" name="harga" value="<?php echo $harga;?>" readonly/>
+                    <input id="stoklama" class="form-control" type="hidden" name="stoklama" value="<?php echo $jumlah_barang;?>" readonly required/>
+                    <label-form for="quantity">&nbsp;
+                        Quantity
                     </label-form>
-                    <input id="level" class="form-control" type="text" name="level" value="<?php echo $level;?>" readonly/>
-                    <label-form for="password">&nbsp;
-                        Password
+                    <input onChange="Total_Harga()" id="jumlah_barang" class="form-control" type="number" name="jumlah_barang" value="<?php echo $jumlah_barang;?>" required/>
+                    <label-form for="total harga">&nbsp;
+                        Total Harga
                     </label-form>
-                    <input id="password" class="form-control" type="password" name="password" required/>
-                    <label for="Show Password" style="padding-top: 15px">
-                        <input type="checkbox" onclick="showPassword()"/> Show Password
-                    </label>
-                       
+                    <input id="total_harga" class="form-control" type="number" name="total_harga" value="<?php echo $total_harga;?>" readonly/>
+                    <label-form for="ket">&nbsp;
+                        Ket:
+                    </label-form>
+                    <input id="deskripsi" class="form-control" type="text" name="deskripsi" value="<?php echo $deskripsi;?>"/>
+
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label"></label>
                             <div class="col-sm-10">
                                 <input type="submit" name="simpan" value="Simpan" class="btn btn-sm btn-primary" />&nbsp;
-	                            <a href="user.php" class="btn btn-sm btn-danger">Batal </a>
+	                            <a href="barang_keluar.php" class="btn btn-sm btn-danger">Batal </a>
                             </div>
                         </div>
                     </form>
@@ -106,17 +110,12 @@ if($_SESSION['level'] == "kasir" || $_SESSION['level'] == "admin"){
         <script src="js/datatables-simple-demo.js"></script>
 
         <script>
-            function showPassword()
-            {
-                var x = document.getElementById("password");
-                if (x.type === "password") 
-                {
-                    x.type = "text";
-                } 
-                else 
-                {
-                    x.type = "password";
-                }
+            function Total_Harga(){
+                var stok = document.getElementById("jumlah_barang");
+                var hargabarang = document.getElementById("harga");
+                var hargatotal = document.getElementById("total_harga");
+                const hitungtotalharga = parseInt(stok.value) * parseInt(hargabarang.value);
+                hargatotal.value=""+hitungtotalharga;
             }
         </script>
     </body>
