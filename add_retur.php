@@ -50,23 +50,23 @@ if($_SESSION['level'] == "kasir"){
                             <?php
                                 $ambildata = mysqli_query($koneksi, "select * from produk p, supplier s where p.id_supplier = s.id_supplier");
                                 while($fetcharray = mysqli_fetch_array($ambildata)){
-                                    $id_masuk = $fetcharray['id_masuk'];
                                     $namaproduk = $fetcharray['nama_produk'];
                                     $idproduk = $fetcharray['id_produk'];
                                     $idsupplier = $fetcharray['id_supplier'];
                                     $supplier=$fetcharray['nama_supplier'];
                             ?>
                                 <?php foreach($ambildata as $isi) : ?>
-					            <option value="<?= $isi ["id_produk"].':'.$isi ["id_supplier"]?>"><?=$isi["nama_produk"];?></option>
+					            <option value="<?= $isi ["id_produk"].':'.$isi ["id_supplier"].':'.$isi ["nama_supplier"]?>"><?=$isi["nama_produk"];?></option>
 				                <?php endforeach?>
                             <?php
                                 }
                             ?>
                     </select>
                     <label-form for="supplier">&nbsp;
-                        ID Supplier
+                        Supplier
                     </label-form>
-                    <input id="id_supplier" class="form-control" type="text" name="id_supplier"  readonly/>
+                    <input id="id_supplier" class="form-control" type="hidden" name="id_supplier" readonly/>
+                    <input id="nama_supplier" class="form-control" type="text" name="nama_supplier"  readonly/>
                     <label-form for="jumlah_barang">&nbsp;
                         Quantity
                     </label-form>
@@ -112,6 +112,7 @@ if($_SESSION['level'] == "kasir"){
                 var supplier2 = supplier1.options[supplier1.selectedIndex].value;
                 const arrx = supplier2.split(":");
                 document.getElementById('id_supplier').value=arrx[1];
+                document.getElementById('nama_supplier').value=arrx[2];
             }
 
         </script>

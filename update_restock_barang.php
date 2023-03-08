@@ -68,12 +68,12 @@ if($_SESSION['level'] == "kasir" || $_SESSION['level'] == "admin"){
                     <input id="nama_produk" class="form-control" type="text" name="nama_produk" value="<?php echo $nama_produk;?>" readonly/>
                     <input id="id_supplier" class="form-control" type="hidden" name="id_supplier" value="<?php echo $id_supplier;?>" readonly/>
                     <label-form for="nama_supplier">&nbsp;
-                        Nama Supplier
+                        Supplier
                     </label-form>
                     <input id="nama_supplier" class="form-control" type="text" name="nama_supplier" value="<?php echo $nama_supplier;?>" readonly/>
                     <input id="stoklama" class="form-control" type="hidden" name="stoklama" value="<?php echo $stok;?>" readonly required/>
                     <label-form for="stok">&nbsp;
-                        Stok
+                        Quantity
                     </label-form>
                     <input id="stok" class="form-control" type="number" name="stok" value="<?php echo $stok;?>" required/>
                        

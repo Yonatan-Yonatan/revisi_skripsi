@@ -57,7 +57,7 @@ if($_SESSION['level'] == "kasir"){
                                     $supplier=$fetcharray['nama_supplier'];
                             ?>
                                 <?php foreach($ambildata as $isi) : ?>
-					            <option value="<?= $isi ["id_produk"].':'.$isi ["id_supplier"]?>"><?=$isi["nama_produk"];?></option>
+					            <option value="<?= $isi ["id_produk"].':'.$isi ["id_supplier"].':'.$isi ["nama_supplier"]?>"><?=$isi["nama_produk"];?></option>
 				                <?php endforeach?>
                             <?php
                                 }
@@ -66,7 +66,8 @@ if($_SESSION['level'] == "kasir"){
                     <label-form for="nama_supplier">&nbsp;
                         Supplier
                     </label-form>
-                    <input id="id_supplier" class="form-control" type="text" name="id_supplier" value="" readonly/>
+                    <input id="id_supplier" class="form-control" type="hidden" name="id_supplier" value="" readonly/>
+                    <input id="nama_supplier" class="form-control" type="text" name="nama_supplier"  readonly/>
                     <label-form for="quantity">&nbsp;
                         Quantity
                     </label-form>
@@ -109,6 +110,7 @@ if($_SESSION['level'] == "kasir"){
                 var supplier2 = supplier1.options[supplier1.selectedIndex].value;
                 const arrx = supplier2.split(":");
                 document.getElementById('id_supplier').value=arrx[1];
+                document.getElementById('nama_supplier').value=arrx[2];
             }
         </script>
     

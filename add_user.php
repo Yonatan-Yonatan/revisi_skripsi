@@ -29,7 +29,7 @@ session_start();
             </div>
             <div id="layoutSidenav_content">
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4" style="padding-bottom:15px";>New User</h1>
+                    <h1 class="mt-4" style="padding-bottom:15px";>Input User</h1>
                     <form action="submit_user.php" class="form" method="post"> 
                     <label-form for="username">&nbsp;
                         User Name
