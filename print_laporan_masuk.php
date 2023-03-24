@@ -96,9 +96,9 @@ if(isset($_POST['print'])){
     </div>
 </div>
 </body>
-
 <script>
     window.print();
 </script>
+
 
 </html>

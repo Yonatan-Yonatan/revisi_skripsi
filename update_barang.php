@@ -118,20 +118,5 @@ if($_SESSION['level'] == "kasir"){
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
-
-        <script>
-            function showPassword()
-            {
-                var x = document.getElementById("password");
-                if (x.type === "password") 
-                {
-                    x.type = "text";
-                } 
-                else 
-                {
-                    x.type = "password";
-                }
-            }
-        </script>
     </body>
 </html>

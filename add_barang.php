@@ -40,7 +40,7 @@ if($_SESSION['level'] == "kasir"){
             </div>
             <div id="layoutSidenav_content">
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4" style="padding-bottom:15px";>Input Data Barang Masuk</h1>
+                    <h1 class="mt-4" style="padding-bottom:15px";>Input Data Barang</h1>
                     <form action="submit_barang.php" class="form" method="post"> 
                     <label-form for="id_produk">&nbsp;
                         ID Produk

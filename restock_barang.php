@@ -52,7 +52,7 @@ if($_SESSION['level'] == "kasir"){
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4" style="padding-bottom:15px";>Data Restock Barang</h1>
+                        <h1 class="mt-4" style="padding-bottom:15px";>Data Barang Masuk</h1>
                         <div class="card mb-4">
                             <div class="card-body">
                                 <div class="table-responsive">

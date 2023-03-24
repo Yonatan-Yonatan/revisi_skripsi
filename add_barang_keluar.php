@@ -40,7 +40,7 @@ if($_SESSION['level'] == "admin"){
             </div>
             <div id="layoutSidenav_content">
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4" style="padding-bottom:15px";>Input Data Barang Keluar</h1>
+                    <h1 class="mt-4" style="padding-bottom:15px";>Input Barang Keluar</h1>
                     <form action="submit_barang_keluar.php" class="form" name="form1" method="post"> 
                     <label-form for="nama_produk">&nbsp;
                         Nama Produk

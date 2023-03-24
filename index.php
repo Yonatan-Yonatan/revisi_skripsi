@@ -88,7 +88,7 @@ session_start();
                                                 <th>Stok</th>  
                                                 <th>Harga</th>        
                                                 <th>Supplier</th>  
-                                                <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "admin"){?>
+                                                <?php if($_SESSION['level'] == "owner"){?>
                                                 <th>Action</th>          
                                                 <?php } ?>
                                             </tr>
@@ -116,7 +116,7 @@ session_start();
                                                     <td><?php echo $qty;?></td>
                                                     <td><?php echo FormatUang($harga);?></td>
                                                     <td><?php echo $nama_supplier;?></td>
-                                                    <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "admin"){?>
+                                                    <?php if($_SESSION['level'] == "owner"){?>
                                                     <td><?php echo "<a href='update_barang.php?id_produk=$id_produk' class='action'>UPDATE</a> | 
                                                                     <a href='delete_barang.php?id_produk=$id_produk' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
                                                     <?php } ?>

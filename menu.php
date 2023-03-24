@@ -19,12 +19,12 @@
             <div class="nav">
                 <a class="nav-link" href="index.php">
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
-                    Stok Barang
+                    Data Barang
                 </a>
                 <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "admin"){?>
                 <a class="nav-link" href="restock_barang.php">
                     <div class="sb-nav-link-icon"><i class="fas fa-box-open"></i></div>
-                    Restock Barang
+                    Barang Masuk
                 </a>
                 <?php } ?>
                 <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "kasir"){?>
