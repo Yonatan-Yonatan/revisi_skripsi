@@ -47,6 +47,7 @@ if($_SESSION['level'] == "kasir"){
                 $nama_produk = $row['nama_produk'];
                 $jenis_produk = $row['jenis_barang'];
                 $harga= $row['harga'];
+                $idsupplier=$row['id_supplier'];
                 $nama_supplier=$row['nama_supplier'];
             }
         }	 
@@ -79,7 +80,7 @@ if($_SESSION['level'] == "kasir"){
                         Supplier
                     </label-form>
                     <select id="id_supplier" name="id_supplier" class="form-control" required>
-                    <option value="<?php echo $level;?>"><?php echo $nama_supplier;?></option>
+                    <option value="<?php echo $idsupplier;?>"><?php echo $nama_supplier;?></option>
                             <?php
                                 $ambildata = mysqli_query($koneksi, "select * from supplier");
                                 while($fetcharray = mysqli_fetch_array($ambildata)){
