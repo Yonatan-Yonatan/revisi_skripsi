@@ -67,7 +67,7 @@ session_start();
                                         $qty = $fetch['qty'];
                                     
                                 ?>
-                                    <div class="alert alert-danger alert-dismissible">
+                                    <div class="alert alert-warning alert-dismissible">
                                         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                                         <strong>Perhatian!</strong> Stok <?=$nama_produk;?> Hanya Tersisa <?=$qty;?>. Harap Direstock!
                                     </div>
