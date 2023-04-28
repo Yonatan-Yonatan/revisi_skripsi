@@ -13,12 +13,19 @@ session_start();
         
     
      if (mysqli_query($koneksi,  $sSQL)) {
-            header("location:index.php");
-            exit();
+            echo '
+        <script>
+            alert("Data Barang BERHASIL Di Hapus");
+            window.location.href="index.php";
+        </script>
+        ';
+        exit();
      }	
      else
-           echo "Error: " . $sSQL . "<br>" . mysqli_error($conn);	  		  
-    
-
-
+     echo '
+     <script>
+         alert("Data Barang GAGAL Di Hapus");
+         window.location.href="index.php";
+     </script>
+     '; 		    		  
 ?>

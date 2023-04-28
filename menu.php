@@ -46,6 +46,9 @@
                 </a>
                 <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
+                    <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "admin"){?>
+                            <a class="nav-link" href="laporan_data_barang.php">Laporan Stok Barang</a>
+                        <?php } ?>
                         <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "admin"){?>
                             <a class="nav-link" href="laporan_data_masuk.php">Laporan Transaksi Masuk</a>
                         <?php } ?>

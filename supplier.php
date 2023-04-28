@@ -79,12 +79,13 @@ if($_SESSION['level'] == "kasir"){
                                                         $nama = $row['nama_supplier'];
                                                         $alamat = $row['alamat'];
                                                         $no_telp= $row['no_telp'];
+                                                        $link = "https://wa.me/" . str_replace(" ", "", $no_telp);
                                             ?>		
                                                                 
                                                 <tr>
                                                     <td><?php echo $nama;?></td>
                                                     <td><?php echo $alamat;?></td>
-                                                    <td><?php echo $no_telp;?></td>
+                                                    <td><?php echo"<a href='$link' target='_blank'> $no_telp</a>"?></td>
                                                     <td><?php echo "<a href='update_supplier.php?id_supplier=$ID' class='action'>UPDATE</a> | 
                                                                     <a href='delete_supplier.php?id_supplier=$ID' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
                                                 </tr>

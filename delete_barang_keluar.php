@@ -29,11 +29,21 @@ session_start();
         
     
      if ($update &&  $sSQL) {
-            header("location:barang_keluar.php");
-            exit();
+        echo '
+        <script>
+            alert("Data Barang Keluar BERHASIL Di Hapus");
+            window.location.href="barang_keluar.php";
+        </script>
+        ';
+        exit();
      }	
      else
-           echo "Error: " . $sSQL . "<br>" . mysqli_error($conn);	  		  
+     echo '
+     <script>
+         alert("Data Barang Keluar GAGAL Di Hapus");
+         window.location.href="barang_keluar.php";
+     </script>
+     '; 		  
     
 
 

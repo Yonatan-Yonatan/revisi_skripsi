@@ -74,11 +74,6 @@ session_start();
                                 <?php
                                     }
                                 ?>
-
-                                <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "admin"){?>
-                                    <a href="add_barang.php"><button type="button" class="btn btn-outline-primary">Add Barang</button></a>
-                                    <a href="print_laporan_stok.php" target="_BLANK"><button type="button" class="btn btn-outline-success">Print</button></a><br><br>
-                                <?php } ?>
                                 <div class="table-responsive">
                                     <table id="datatablesSimple">
                                         <thead>
@@ -132,6 +127,12 @@ session_start();
                             </div>
                         </div>
                     </div>
+                    <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "admin"){?>
+                        <a href="add_barang.php" class="act-btn">
+                            +
+                        </a>
+                    <?php } ?>
+
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">

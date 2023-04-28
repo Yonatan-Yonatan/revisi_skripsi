@@ -16,10 +16,20 @@ if(isset($_POST['simpan'])){
 
     $query = mysqli_query($koneksi, "INSERT INTO produk (nama_produk, jenis_barang, harga, id_supplier) VALUES ('$nama_produk', '$jenis_barang', '$harga','$id_supplier')");
     if ($query){
-        header("location:index.php");
+        echo '
+        <script>
+            alert("Data Barang BERHASIL Dimasukkan");
+            window.location.href="index.php";
+        </script>
+        ';
         exit();
     }else{
-        echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Data gagal disimpan, silahkan coba lagi.</div>';
+         echo '
+        <script>
+            alert("Data Barang GAGAL Dimasukkan");
+            window.location.href="index.php";
+        </script>
+        ';
     }
 }
 

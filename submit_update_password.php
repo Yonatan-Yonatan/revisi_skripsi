@@ -13,12 +13,20 @@
 	
  	if (mysqli_query($koneksi,  $sSQL)) 
 	{
-		header("location:user.php");
+		echo '
+		<script>
+			alert("Password BERHASIL Di Ubah");
+			window.location.href="user.php";
+		</script>
+		';
 		exit();
- 	}	
- 	else
-	{
-       echo "Error: " . $sSQL . "<br>" . mysqli_error($koneksi);	  		  
-	}	   
+	}else{
+		echo '
+		<script>
+			alert("Password GAGAL Di Ubah");
+			window.location.href="user.php";
+		</script>
+		';
+	}     
 	mysqli_close($koneksi); 
 ?>

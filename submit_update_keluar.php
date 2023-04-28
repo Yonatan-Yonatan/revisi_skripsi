@@ -33,10 +33,20 @@ if(isset($_POST['simpan'])){
         $query = mysqli_query($koneksi, "update barang_keluar set id_produk='$id_produk', jumlah_barang='$jumlah_barang',total_harga='$total_harga',deskripsi='$deskripsi' where id_keluar='$id_keluar'");
         $update_stok = mysqli_query($koneksi, "update produk set qty='$kurang_stok' where id_produk='$id_produk'");
         if ($query && $update_stok){
-            header("location:barang_keluar.php");
+            echo '
+            <script>
+                alert("Data Barang Keluar BERHASIL Di Ubah");
+                window.location.href="barang_keluar.php";
+            </script>
+            ';
             exit();
         }else{
-            echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Data gagal disimpan, silahkan coba lagi.</div>';
+            echo '
+            <script>
+                alert("Data Barang Keluar GAGAL Di Ubah");
+                window.location.href="barang_keluar.php";
+            </script>
+            ';
         }
     } else {
         

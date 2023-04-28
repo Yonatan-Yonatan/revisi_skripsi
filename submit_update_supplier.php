@@ -12,12 +12,20 @@
 	
  	if (mysqli_query($koneksi,  $sSQL)) 
 	{
-		header("location:supplier.php");
-		exit();
- 	}	
- 	else
-	{
-       echo "Error: " . $sSQL . "<br>" . mysqli_error($koneksi);	  		  
-	}	   
+		echo '
+            <script>
+                alert("Data Supplier BERHASIL Di Ubah");
+                window.location.href="supplier.php";
+            </script>
+            ';
+            exit();
+        }else{
+            echo '
+            <script>
+                alert("Data Supplier GAGAL Di Ubah");
+                window.location.href="supplier.php";
+            </script>
+            ';
+        }   
 	mysqli_close($koneksi); 
 ?>

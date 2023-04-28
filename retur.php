@@ -96,7 +96,7 @@ session_start();
                                                     <td><?php echo $deskripsi;?></td>
                                                     <td><?php echo $fullname;?></td>
                                                     <?php if($_SESSION['level'] == "owner"){?>
-                                                    <td><?php echo "<a href='update_retur.php?id_retur=$id_retur' class='action'>Update</a> |
+                                                    <td><?php echo "<a href='update_retur.php?id_retur=$id_retur' class='action'>UPDATE</a> |
                                                                     <a href='delete_retur.php?id_retur=$id_retur' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
                                                     <?php }  ?>
                                                 </tr>

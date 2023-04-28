@@ -29,11 +29,21 @@ session_start();
         
     
      if ($update &&  $sSQL) {
-            header("location:retur.php");
-            exit();
+        echo '
+        <script>
+            alert("Data Retur Barang BERHASIL Di Hapus");
+            window.location.href="retur.php";
+        </script>
+        ';
+        exit();
      }	
      else
-           echo "Error: " . $sSQL . "<br>" . mysqli_error($conn);	  		  
+     echo '
+     <script>
+         alert("Data Retur Barang GAGAL Di Hapus");
+         window.location.href="retur.php";
+     </script>
+     ';  		  
     
 
 

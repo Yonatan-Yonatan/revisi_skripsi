@@ -13,12 +13,20 @@
 	
  	if (mysqli_query($koneksi,  $sSQL)) 
 	{
-		header("location:index.php");
-		exit();
- 	}	
- 	else
-	{
-       echo "Error: " . $sSQL . "<br>" . mysqli_error($koneksi);	  		  
-	}	   
+		echo '
+        <script>
+            alert("Data Barang BERHASIL Di Ubah");
+            window.location.href="index.php";
+        </script>
+        ';
+        exit();
+    }else{
+         echo '
+        <script>
+            alert("Data Barang GAGAL Dimasukkan");
+            window.location.href="index.php";
+        </script>
+        ';
+    }
 	mysqli_close($koneksi); 
 ?>

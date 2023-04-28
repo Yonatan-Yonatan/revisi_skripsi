@@ -13,12 +13,20 @@ session_start();
         
     
      if (mysqli_query($koneksi,  $sSQL)) {
-            header("location:supplier.php");
+            echo '
+            <script>
+                alert("Data Supplier BERHASIL Di Hapus");
+                window.location.href="supplier.php";
+            </script>
+            ';
             exit();
-     }	
-     else
-           echo "Error: " . $sSQL . "<br>" . mysqli_error($conn);	  		  
-    
-
-
+         }	
+         else
+         echo '
+         <script>
+             alert("Data Supplier GAGAL Di Hapus");
+             window.location.href="supplier.php";
+         </script>
+         ';  		  
+    		  
 ?>

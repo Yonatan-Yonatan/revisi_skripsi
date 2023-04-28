@@ -15,6 +15,10 @@ if($_SESSION['level'] == "kasir"){
         </script>
     ';
 }
+
+if(isset($_POST['print'])){
+    $filter = $_POST['filter'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -57,8 +61,10 @@ if($_SESSION['level'] == "kasir"){
         </thead>
         <tbody>
             <?php
-                $data = mysqli_query($koneksi, "select * from produk p, supplier s where p.id_supplier = s.id_supplier  order  by id_produk");
+             if ($filter == "semua"){ 
+                $data = mysqli_query($koneksi, "select * from produk p, supplier s where p.id_supplier = s.id_supplier");
                 while($row = mysqli_fetch_array($data)){
+                    $id_produk = $row['id_produk'];
                     $nama_produk = $row['nama_produk'];
                     $jenis_produk = $row['jenis_barang'];
                     $qty= $row['qty'];
@@ -74,7 +80,64 @@ if($_SESSION['level'] == "kasir"){
         </tr>
             <?php
                 }
-            
+             } else if ($filter == "habis"){ 
+                $data = mysqli_query($koneksi, "select * from produk p, supplier s where p.id_supplier = s.id_supplier and qty = 0");
+                while($row = mysqli_fetch_array($data)){
+                    $id_produk = $row['id_produk'];
+                    $nama_produk = $row['nama_produk'];
+                    $jenis_produk = $row['jenis_barang'];
+                    $qty= $row['qty'];
+                    $harga= $row['harga'];
+                    $nama_supplier=$row['nama_supplier'];
+            ?>		                                                
+            <tr>
+                <td><?php echo $nama_produk;?></td>
+                <td><?php echo $jenis_produk;?></td>
+                <td><?php echo $qty;?></td>
+                <td><?php echo FormatUang($harga);?></td>
+                <td><?php echo $nama_supplier;?></td>
+        </tr>
+            <?php
+                } 
+            } else if ($filter == "hampirhabis"){ 
+                    $data = mysqli_query($koneksi, "select * from produk p, supplier s where p.id_supplier = s.id_supplier and (qty < 10 and qty > 0)");
+                    while($row = mysqli_fetch_array($data)){
+                        $id_produk = $row['id_produk'];
+                        $nama_produk = $row['nama_produk'];
+                        $jenis_produk = $row['jenis_barang'];
+                        $qty= $row['qty'];
+                        $harga= $row['harga'];
+                        $nama_supplier=$row['nama_supplier'];
+                ?>		                                                
+                <tr>
+                    <td><?php echo $nama_produk;?></td>
+                    <td><?php echo $jenis_produk;?></td>
+                    <td><?php echo $qty;?></td>
+                    <td><?php echo FormatUang($harga);?></td>
+                    <td><?php echo $nama_supplier;?></td>
+            </tr>
+                <?php
+                    }
+                 } else if ($filter == "kurangdari10"){ 
+                    $data = mysqli_query($koneksi, "select * from produk p, supplier s where p.id_supplier = s.id_supplier and qty < 10 ");
+                    while($row = mysqli_fetch_array($data)){
+                        $id_produk = $row['id_produk'];
+                        $nama_produk = $row['nama_produk'];
+                        $jenis_produk = $row['jenis_barang'];
+                        $qty= $row['qty'];
+                        $harga= $row['harga'];
+                        $nama_supplier=$row['nama_supplier'];
+                ?>		                                                
+                <tr>
+                    <td><?php echo $nama_produk;?></td>
+                    <td><?php echo $jenis_produk;?></td>
+                    <td><?php echo $qty;?></td>
+                    <td><?php echo FormatUang($harga);?></td>
+                    <td><?php echo $nama_supplier;?></td>
+            </tr>
+                <?php
+                    }
+                 }
             ?>
         </tbody>
     </table>

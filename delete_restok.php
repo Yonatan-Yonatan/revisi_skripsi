@@ -30,12 +30,21 @@ session_start();
         
     
      if ($update &&  $sSQL) {
-            header("location:restock_barang.php");
-            exit();
-     }	
-     else{
-           echo "Error: " . $sSQL . "<br>" . mysqli_error($conn);	  		  
-        }
+        echo '
+        <script>
+            alert("Data Barang Masuk BERHASIL Di Hapus");
+            window.location.href="restock_barang.php";
+        </script>
+        ';
+        exit();
+     }else{
+        echo '
+        <script>
+            alert("Data Barang Masuk GAGAL Di Hapus");
+            window.location.href="restock_barang.php";
+        </script>
+        '; 
+    }	
     } else {
             echo '
             <script>

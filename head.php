@@ -41,7 +41,7 @@
             function Logout() {
                 let text;
                 if (confirm("Apakah Anda Ingin Keluar?!") == true) {
-                    alert('Anda telah berhasil keluar.'); window.location = 'logout.php'
+                    alert('Anda telah berhasil keluar.'); window.location = 'logout.php';
                 } else {
                     
                 }

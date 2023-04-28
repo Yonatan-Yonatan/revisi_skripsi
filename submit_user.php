@@ -15,11 +15,21 @@ if(isset($_POST['simpan'])){
 
     $query = mysqli_query($koneksi, "INSERT INTO user (username, password, fullname, level) VALUES ('$username', '$password', '$fullname', '$level')");
     if ($query){
-        header("location:user.php");
-        exit();
-    }else{
-        echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Data gagal disimpan, silahkan coba lagi.</div>';
-    }
+        echo '
+            <script>
+                alert("Data User BERHASIL Dimasukkan");
+                window.location.href="user.php";
+            </script>
+            ';
+            exit();
+        }else{
+            echo '
+            <script>
+                alert("Data User GAGAL Dimasukkan");
+                window.location.href="user.php";
+            </script>
+            ';
+        }      
 }
 
 ?>

@@ -27,10 +27,20 @@ if(isset($_POST['simpan'])){
         $query = mysqli_query($koneksi, "INSERT INTO barang_keluar (id_produk, jumlah_barang, total_harga, deskripsi,id) VALUES ('$id_produk[0]', '$jumlah_barang', '$total_harga', '$deskripsi','$id')");
         $update_stok = mysqli_query($koneksi, "update produk set qty='$kurang_stok' where id_produk='$id_produk[0]'");
         if ($query && $update_stok){
-            header("location:barang_keluar.php");
-            exit();
+            echo '
+            <script>
+                alert("Data Barang Keluar BERHASIL Dimasukkan");
+                window.location.href="barang_keluar.php";
+            </script>
+        ';
+        exit();
         }else{
-            echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Data gagal disimpan, silahkan coba lagi.</div>';
+            echo '
+            <script>
+                alert("Data Barang Keluar GAGAL Dimasukkan");
+                window.location.href="barang_keluar.php";
+            </script>
+            ';
         }
     } else {
         echo '

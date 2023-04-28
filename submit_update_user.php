@@ -12,12 +12,20 @@
 	
  	if (mysqli_query($koneksi,  $sSQL)) 
 	{
-		header("location:user.php");
-		exit();
- 	}	
- 	else
-	{
-       echo "Error: " . $sSQL . "<br>" . mysqli_error($koneksi);	  		  
-	}	   
+		echo '
+            <script>
+                alert("Data User BERHASIL Di Ubah");
+                window.location.href="user.php";
+            </script>
+            ';
+            exit();
+        }else{
+            echo '
+            <script>
+                alert("Data User GAGAL Di Ubah");
+                window.location.href="user.php";
+            </script>
+            ';
+        }      
 	mysqli_close($koneksi); 
 ?>

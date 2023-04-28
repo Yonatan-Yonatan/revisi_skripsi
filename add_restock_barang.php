@@ -72,6 +72,7 @@ if($_SESSION['level'] == "kasir"){
                         Quantity
                     </label-form>
                     <input id="stok" class="form-control" type="number" name="stok" autocomplete="on" required/>
+
                        
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label"></label>

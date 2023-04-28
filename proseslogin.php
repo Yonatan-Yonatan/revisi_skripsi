@@ -21,13 +21,28 @@ if (mysqli_num_rows($q) > 0) {
     $_SESSION['isLoggedin']= '1';
     
     if ($_SESSION['level'] == 'owner'){
-        header('location:index.php');
+        echo '
+        <script>
+            alert("Selamat Datang");
+            window.location.href="index.php";
+        </script>
+        ';
     } else if ($_SESSION['level'] == 'admin'){
-        header('location:index.php');
+        echo '
+        <script>
+            alert("Selamat Datang");
+            window.location.href="index.php";
+        </script>
+        ';
     } else if ($_SESSION['level'] == 'kasir'){
-        header('location:index.php');
+        echo '
+        <script>
+            alert("Selamat Datang");
+            window.location.href="index.php";
+        </script>
+        ';
     }	
 } else {
-	header('location:login.php?error=Anda Belum Terdaftar!');
+	header('location:login.php?error=User Name / Password Salah!!');
 }
 ?>

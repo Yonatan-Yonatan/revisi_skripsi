@@ -13,12 +13,19 @@ session_start();
         
     
      if (mysqli_query($koneksi,  $sSQL)) {
-            header("location:user.php");
+            echo '
+            <script>
+                alert("Data User BERHASIL Di Hapus");
+                window.location.href="user.php";
+            </script>
+            ';
             exit();
-     }	
-     else
-           echo "Error: " . $sSQL . "<br>" . mysqli_error($conn);	  		  
-    
-
-
+         }	
+         else
+         echo '
+         <script>
+             alert("Data User GAGAL Di Hapus");
+             window.location.href="user.php";
+         </script>
+         ';  		  
 ?>
