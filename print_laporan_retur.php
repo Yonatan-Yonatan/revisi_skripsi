@@ -57,7 +57,8 @@ if(isset($_POST['print'])){
                 <th>Nama Produk</th>
                 <th>Supplier</th>   
                 <th>Quantity</th>  
-                <th>Keterangan</th>                 
+                <th>Keterangan</th>        
+                <th>Status</th>             
             </tr>
         </thead>
         <tbody>
@@ -69,6 +70,7 @@ if(isset($_POST['print'])){
                     $nama_supplier = $row['nama_supplier'];
                     $quantity = $row['quantity'];
                     $deskripsi = $row['deskripsi'];
+                    $status = $row['status'];
             ?>	                         
           <tr>   
                     <td><?php echo date('d M Y', strtotime($tanggal));?></td>
@@ -76,6 +78,7 @@ if(isset($_POST['print'])){
                     <td><?php echo $nama_supplier;?></td>
                     <td><?php echo $quantity;?></td>
                     <td><?php echo $deskripsi;?></td>
+                    <td><?php echo $status;?></td>
         </tr>
             <?php
                 }

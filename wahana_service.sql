@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 12, 2023 at 04:35 AM
+-- Generation Time: May 02, 2023 at 03:47 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -43,7 +43,7 @@ CREATE TABLE `barang_keluar` (
 
 INSERT INTO `barang_keluar` (`id_keluar`, `id_produk`, `tanggal`, `jumlah_barang`, `total_harga`, `deskripsi`, `id`) VALUES
 (1, 9, '2023-02-23', 1, 55000, 'Terjual', 3),
-(2, 1, '2023-02-24', 1, 450000, 'Terjual', 1);
+(2, 1, '2023-02-24', 1, 450000, 'Terjual', 2);
 
 -- --------------------------------------------------------
 
@@ -100,9 +100,9 @@ INSERT INTO `produk` (`id_produk`, `id_supplier`, `nama_produk`, `jenis_barang`,
 (3, 2, 'ARM S/A SUSP LWR RH', 'Shockbreaker & Kaki Mobil', 1, 1450000),
 (4, 2, 'Absorber Assy FR LH', 'Shockbreaker & Kaki Mobil', 1, 950000),
 (5, 2, 'Absorber Assy FR RH', 'Shockbreaker & Kaki Mobil', 1, 950000),
-(6, 1, 'Wiper Blade DCS-G016', 'Wiper Blade', 29, 50000),
+(6, 1, 'Wiper Blade DCS-G016', 'Wiper Blade', 30, 50000),
 (7, 1, 'STP.SYN Gear Oil 80W-90.946ML', 'Oli Mesin', 63, 75000),
-(8, 1, 'STP.SYN Gear Oil SAE140GL-5', 'Oli Mesin', 63, 75000),
+(8, 1, 'STP.SYN Gear Oil SAE140GL-5', 'Oli Mesin', 62, 75000),
 (9, 1, 'Rotary Lith EP-3 WB COPBM Red', 'Oli Mesin', 23, 55000);
 
 -- --------------------------------------------------------
@@ -118,6 +118,7 @@ CREATE TABLE `retur_barang` (
   `tanggal` date NOT NULL DEFAULT current_timestamp(),
   `quantity` int(11) NOT NULL,
   `deskripsi` varchar(150) CHARACTER SET latin1 NOT NULL,
+  `status` enum('Diajukan','Diambil','Selesai') CHARACTER SET latin1 NOT NULL,
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -125,8 +126,8 @@ CREATE TABLE `retur_barang` (
 -- Dumping data for table `retur_barang`
 --
 
-INSERT INTO `retur_barang` (`id_retur`, `id_produk`, `id_supplier`, `tanggal`, `quantity`, `deskripsi`, `id`) VALUES
-(1, 6, 1, '2023-02-23', 1, 'Patah', 1);
+INSERT INTO `retur_barang` (`id_retur`, `id_produk`, `id_supplier`, `tanggal`, `quantity`, `deskripsi`, `status`, `id`) VALUES
+(1, 6, 1, '2023-02-23', 1, 'Patah', 'Selesai', 1);
 
 -- --------------------------------------------------------
 
@@ -147,7 +148,7 @@ CREATE TABLE `supplier` (
 
 INSERT INTO `supplier` (`id_supplier`, `nama_supplier`, `alamat`, `no_telp`) VALUES
 (1, 'CV Putera Jaya Sentosa', 'Jl. Tanjung Pura Darat Sekip No 77, Kota Pontianak, Kalimantan Barat, 78243', '0561734103'),
-(2, 'PT Tasti Anugerah Mandiri', 'Jl. Gaya Motor Selatan No. 5, Sungai Bambu, Tanjuk Priok, Jakarta Utara', '0216521866');
+(2, 'PT Tasti Anugerah Mandiri', 'Jl. Gaya Motor Selatan No. 5, Sungai Bambu, Tanjuk Priok, Jakarta Utara', '6285251842284');
 
 -- --------------------------------------------------------
 

@@ -65,7 +65,8 @@ if($_SESSION['level'] == "kasir"){
                                                 <th>Nama Produk</th>
                                                 <th>Supplier</th>   
                                                 <th>Quantity</th>  
-                                                <th>Keterangan</th>         
+                                                <th>Keterangan</th>  
+                                                <th>Status</th>         
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -81,6 +82,7 @@ if($_SESSION['level'] == "kasir"){
                                                         $nama_supplier = $row['nama_supplier'];
                                                         $quantity = $row['quantity'];
                                                         $deskripsi = $row['deskripsi'];
+                                                        $status = $row['status'];
                                             ?>	
                                                                             
                                                 <tr>   
@@ -89,6 +91,7 @@ if($_SESSION['level'] == "kasir"){
                                                     <td><?php echo $nama_supplier;?></td>
                                                     <td><?php echo $quantity;?></td>
                                                     <td><?php echo $deskripsi;?></td>
+                                                    <td><?php echo $status;?></td>
                                                 </tr>
                                             <?php	   
                                                     }  

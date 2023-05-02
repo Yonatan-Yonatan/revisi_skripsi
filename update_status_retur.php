@@ -45,7 +45,6 @@ if($_SESSION['level'] == "kasir" || $_SESSION['level'] == "admin"){
                 $id_supplier = $row['id_supplier'];
                 $nama_supplier = $row['nama_supplier'];
                 $quantity= $row['quantity'];
-                $deskripsi= $row['deskripsi'];
                 $status = $row['status'];
             }
         }	 
@@ -58,8 +57,8 @@ if($_SESSION['level'] == "kasir" || $_SESSION['level'] == "admin"){
             </div>
             <div id="layoutSidenav_content">
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4" style="padding-bottom:15px";>Edit Retur Barang</h1>
-                    <form action="submit_update_retur.php" class="form" method="post"> 
+                    <h1 class="mt-4" style="padding-bottom:15px";>Status Retur</h1>
+                    <form action="submit_status_retur.php" class="form" method="post"> 
                     <input id="id_retur" class="form-control" type="hidden" name="id_retur" value="<?php echo $id_retur;?>" readonly/>
                     <input id="id_produk" class="form-control" type="hidden" name="id_produk" value="<?php echo $id_produk;?>" readonly/>
                     <label-form for="nama_produk">&nbsp;
@@ -75,12 +74,8 @@ if($_SESSION['level'] == "kasir" || $_SESSION['level'] == "admin"){
                     <label-form for="quantity">&nbsp;
                         Quantity
                     </label-form>
-                    <input id="quantity" class="form-control" type="number" name="quantity" value="<?php echo $quantity;?>" required/>
-                    <label-form for="ket">&nbsp;
-                        Ket:
-                    </label-form>
-                    <input id="deskripsi" class="form-control" type="text" name="deskripsi" value="<?php echo $deskripsi;?>" required/>
-                    <!-- <label-form for="status">&nbsp;
+                    <input id="quantity" class="form-control" type="number" name="quantity" value="<?php echo $quantity;?>" readonly/>
+                    <label-form for="status">&nbsp;
                         Status
                     </label-form>
                     <select id="status" name="status" class="form-control" required>
@@ -98,7 +93,7 @@ if($_SESSION['level'] == "kasir" || $_SESSION['level'] == "admin"){
                         <?php
                         }
                         ?>
-                    </select> -->
+                    </select>
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label"></label>
                             <div class="col-sm-10">

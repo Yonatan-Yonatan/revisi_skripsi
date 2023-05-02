@@ -63,6 +63,7 @@ session_start();
                                                 <th>Quantity</th>
                                                 <th>Supplier</th>
                                                 <th>Keterangan</th> 
+                                                <th>Status</th> 
                                                 <th>PIC</th>  
                                                 <?php if($_SESSION['level'] == "owner"){?>
                                                 <th>Action</th>          
@@ -86,6 +87,7 @@ session_start();
                                                         $quantity = $row['quantity'];
                                                         $deskripsi = $row['deskripsi'];
                                                         $fullname = $row['fullname'];
+                                                        $status = $row['status'];
                                             ?>		
                                                                 
                                                 <tr>
@@ -94,9 +96,15 @@ session_start();
                                                     <td><?php echo $quantity;?></td>
                                                     <td><?php echo $id_supplier;?></td>
                                                     <td><?php echo $deskripsi;?></td>
+                                                    <?php if ($status =="Diajukan" || $status =="Diambil"){?>
+                                                    <td><?php echo"<a href='update_status_retur.php?id_retur=$id_retur' class='action'> $status</a>"?></td>
+                                                    <?php } else {?>
+                                                    <td><?php echo $status;?></td>
+                                                    <?php }?>
                                                     <td><?php echo $fullname;?></td>
                                                     <?php if($_SESSION['level'] == "owner"){?>
-                                                    <td><?php echo "<a href='update_retur.php?id_retur=$id_retur' class='action'>UPDATE</a> |
+                                                    <td><?php if ($status =="Diajukan" || $status =="Diambil"){ 
+                                                    echo "<a href='update_retur.php?id_retur=$id_retur' class='action'>UPDATE</a> |";} echo "
                                                                     <a href='delete_retur.php?id_retur=$id_retur' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
                                                     <?php }  ?>
                                                 </tr>

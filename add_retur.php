@@ -75,6 +75,7 @@ if($_SESSION['level'] == "kasir"){
                         Ket:
                     </label-form>
                     <input id="deskripsi" class="form-control" type="text" name="deskripsi" autocomplete="on" required/>
+    
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label"></label>
                             <div class="col-sm-10">
