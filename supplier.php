@@ -33,7 +33,7 @@ if($_SESSION['level'] == "kasir"){
     <script>
 	function konfirmasi()
 	{
-	 	if (!confirm('Yakin hapus data ini ?'))
+	 	if (!confirm('Yakin hapus data ini ? Menghapus data ini JUGA AKAN MENGHAPUS DATA BARANG, BARANG MASUK DAN RETUR YANG BERASAL DARI SUPPLIER INI ?'))
 		{
 			return false;
         }

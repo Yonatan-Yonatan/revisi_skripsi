@@ -25,7 +25,7 @@ session_start();
     <script>
 	function konfirmasi()
 	{
-	 	if (!confirm('Yakin hapus data ini ?'))
+	 	if (!confirm('Yakin hapus data ini ? Menghapus data ini JUGA AKAN MENGHAPUS DATA BARANG MASUK, BARANG KELUAR DAN RETUR DARI PRODUK INI ?'))
 		{
 			return false;
         }
