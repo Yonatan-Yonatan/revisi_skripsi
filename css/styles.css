@@ -297,7 +297,12 @@ a {
   text-decoration: none;
 }
 
+.action {
+  color: #3498db;
+}
+
 .action:hover {
+ color: blue;
  text-decoration: underline;
 }
 
