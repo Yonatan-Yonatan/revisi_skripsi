@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 22, 2023 at 02:49 AM
+-- Generation Time: May 22, 2023 at 10:58 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -43,7 +43,7 @@ CREATE TABLE `barang_keluar` (
 
 INSERT INTO `barang_keluar` (`id_keluar`, `id_produk`, `tanggal`, `jumlah_barang`, `total_harga`, `deskripsi`, `id`) VALUES
 (1, 9, '2023-02-23', 1, 55000, 'Terjual', 3),
-(2, 1, '2023-02-24', 1, 450000, 'Terjual', 2);
+(2, 1, '2023-02-24', 1, 450000, 'Terjual', 1);
 
 -- --------------------------------------------------------
 
@@ -65,15 +65,15 @@ CREATE TABLE `barang_masuk` (
 --
 
 INSERT INTO `barang_masuk` (`id_masuk`, `id_produk`, `id_supplier`, `tanggal`, `stok`, `id`) VALUES
-(1, 1, 2, '2022-12-26', 1, 2),
-(2, 2, 2, '2022-12-26', 1, 2),
-(3, 3, 2, '2022-12-26', 1, 2),
-(4, 4, 2, '2022-12-26', 1, 2),
-(5, 5, 2, '2022-12-26', 1, 2),
-(6, 9, 1, '2023-02-14', 24, 1),
-(7, 8, 1, '2023-02-14', 63, 1),
-(8, 7, 1, '2023-02-14', 63, 1),
-(9, 6, 1, '2023-02-14', 30, 1);
+(1, 1, 2, '2023-02-14', 1, 1),
+(2, 2, 2, '2022-12-26', 1, 1),
+(3, 3, 2, '2022-12-26', 1, 1),
+(4, 4, 2, '2022-12-26', 1, 1),
+(5, 5, 2, '2022-12-26', 1, 1),
+(6, 9, 1, '2023-02-14', 24, 2),
+(7, 8, 1, '2023-02-14', 63, 2),
+(8, 7, 1, '2023-02-14', 63, 2),
+(9, 6, 1, '2023-02-14', 30, 2);
 
 -- --------------------------------------------------------
 
@@ -127,7 +127,7 @@ CREATE TABLE `retur_barang` (
 --
 
 INSERT INTO `retur_barang` (`id_retur`, `id_produk`, `id_supplier`, `tanggal`, `quantity`, `deskripsi`, `status`, `id`) VALUES
-(1, 6, 1, '2023-02-23', 1, 'Patah', 'Selesai', 1);
+(1, 6, 1, '2023-02-23', 1, 'Patah', 'Selesai', 2);
 
 -- --------------------------------------------------------
 
@@ -169,8 +169,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `fullname`, `level`) VALUES
-(1, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'Admin', 'admin'),
-(2, 'owner', '579233b2c479241523cba5e3af55d0f50f2d6414', 'Owner', 'owner'),
+(1, 'owner', '579233b2c479241523cba5e3af55d0f50f2d6414', 'Owner', 'owner'),
+(2, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'Admin', 'admin'),
 (3, 'kasir', '8691e4fc53b99da544ce86e22acba62d13352eff', 'Cashier', 'kasir');
 
 --

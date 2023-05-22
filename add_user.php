@@ -5,8 +5,16 @@ session_start();
     {
 	    header("location: logout.php");
  	}
-?>
 
+if($_SESSION['level'] != "owner"){
+    echo '
+        <script>
+            alert("Maaf anda tidak memiliki akses");
+            javascript:window.history.go(-1);
+        </script>
+    ';
+} 
+?>
 
 <!DOCTYPE html>
 <html lang="en">

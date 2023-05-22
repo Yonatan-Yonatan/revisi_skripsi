@@ -85,9 +85,11 @@ if($_SESSION['level'] == "kasir" || $_SESSION['level'] == "admin"){
                                                     <td><?php echo $UserName;?></td>
                                                     <td><?php echo $FullName;?></td>
                                                     <td><?php echo $level;?></td>
-                                                    <td><?php echo "<a href='update_user.php?id=$ID' class='action'>UPDATE</a> | 
-                                                                    <a href='update_password.php?id=$ID' class='action'>UPDATE PASSWORD</a> | 
-                                                                    <a href='delete_user.php?id=$ID' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
+                                                    <td><?php if ($UserName != "owner" && $FullName != "Owner"){ 
+                                                            echo "<a href='update_user.php?id=$ID' class='action'>UPDATE</a> | ";}
+                                                            echo "<a href='update_password.php?id=$ID' class='action'>UPDATE PASSWORD</a>";
+                                                            if ($UserName != "owner" && $FullName != "Owner"){ 
+                                                                    echo " | <a href='delete_user.php?id=$ID' class='action' onclick='return konfirmasi();'>DELETE</a>";} ?> </td>
                                                 </tr>
                                             <?php	   
                                                     }
