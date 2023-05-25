@@ -5,7 +5,7 @@ session_start();
     {
 	    header("location: logout.php");
  	}
-if($_SESSION['level'] == "kasir" || $_SESSION['level'] == "admin"){
+if($_SESSION['level'] == "kasir"){
     echo '
         <script>
             alert("Maaf anda tidak memiliki akses");
@@ -87,7 +87,7 @@ if($_SESSION['level'] == "kasir" || $_SESSION['level'] == "admin"){
                             <option value="Selesai">Selesai</option>
                         <?php
                         }
-                        if ( $status=="Diambil"){
+                        else if ( $status=="Diambil"){
                         ?>
                             <option value="Selesai">Selesai</option>
                         <?php

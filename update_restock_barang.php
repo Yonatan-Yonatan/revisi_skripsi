@@ -75,7 +75,7 @@ if($_SESSION['level'] == "kasir" || $_SESSION['level'] == "admin"){
                     <label-form for="stok">&nbsp;
                         Quantity
                     </label-form>
-                    <input id="stok" class="form-control" type="number" name="stok" value="<?php echo $stok;?>" required/>
+                    <input id="stok" class="form-control" type="number" min="1" name="stok" value="<?php echo $stok;?>" required/>
                        
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label"></label>

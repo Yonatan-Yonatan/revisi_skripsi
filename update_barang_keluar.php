@@ -73,7 +73,7 @@ if($_SESSION['level'] == "kasir" || $_SESSION['level'] == "admin"){
                     <label-form for="quantity">&nbsp;
                         Quantity
                     </label-form>
-                    <input onChange="Total_Harga()" id="jumlah_barang" class="form-control" type="number" name="jumlah_barang" value="<?php echo $jumlah_barang;?>" required/>
+                    <input onChange="Total_Harga()" id="jumlah_barang" class="form-control" type="number" min="1" name="jumlah_barang" value="<?php echo $jumlah_barang;?>" required/>
                     <label-form for="total harga">&nbsp;
                         Total Harga
                     </label-form>

@@ -63,7 +63,9 @@ if($_SESSION['level'] == "kasir"){
                                                 <th>Nama</th>
                                                 <th>Alamat</th>
                                                 <th>No. Telepon</th>
-                                                <th>Action</th>         
+                                                <?php if($_SESSION['level'] == "owner"){?>
+                                                <th>Action</th>      
+                                                <?php } ?>   
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -86,8 +88,9 @@ if($_SESSION['level'] == "kasir"){
                                                     <td><?php echo $nama;?></td>
                                                     <td><?php echo $alamat;?></td>
                                                     <td><?php echo"<a href='$link' target='_blank' class='action'> $no_telp</a>"?></td>
-                                                    <td><?php echo "<a href='update_supplier.php?id_supplier=$ID' class='action'>UPDATE</a> | 
-                                                                    <a href='delete_supplier.php?id_supplier=$ID' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
+                                                    <?php if($_SESSION['level'] == "owner"){?>
+                                                    <td><?php echo "<a href='update_supplier.php?id_supplier=$ID' class='action'>UPDATE</a>"; ?> </td>
+                                                    <?php } ?>
                                                 </tr>
                                             <?php	   
                                                     }

@@ -85,6 +85,11 @@ if($_SESSION['level'] == "kasir"){
                                                         $nama_supplier = $row['nama_supplier'];
                                                         $stok= $row['stok'];
                                                         $fullname = $row['fullname'];
+
+                                                        $tanggalmasuk = $tanggal;
+                                                        $tanggalsekarang = date('Y-m-d');
+                                                       // Konversi selisih waktu ke dalam jumlah hari
+                                                        $hari = round(abs(strtotime($tanggalsekarang) - strtotime($tanggalmasuk)) / (60 * 60 * 24));
                                             ?>		
                                                                 
                                                 <tr>
@@ -94,8 +99,9 @@ if($_SESSION['level'] == "kasir"){
                                                     <td><?php echo $stok;?></td>
                                                     <td><?php echo $fullname;?></td>
                                                     <?php if($_SESSION['level'] == "owner"){?>
-                                                    <td><?php echo "<a href='update_restock_barang.php?id_masuk=$id_masuk' class='action'>UPDATE</a> |
-                                                    <a href='delete_restok.php?id_masuk=$id_masuk' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
+                                                    <td><?php echo "<a href='update_restock_barang.php?id_masuk=$id_masuk' class='action'>UPDATE</a> ";
+                                                     if ($hari < 1){
+                                                    echo " | <a href='delete_restok.php?id_masuk=$id_masuk' class='action' onclick='return konfirmasi();'>DELETE</a>";} ?> </td>
                                                     <?php } ?>
                                                 </tr>
                                             <?php	   

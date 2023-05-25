@@ -18,27 +18,37 @@ if (mysqli_num_rows($q) > 0) {
 	$_SESSION['username'] = $username;
     $_SESSION['fullname'] = $row['fullname'];
     $_SESSION['level']    = $row['level'];
+    $_SESSION['status_akun'] = $row['status_akun'];
     $_SESSION['isLoggedin']= '1';
     
-    if ($_SESSION['level'] == 'owner'){
+    if ($_SESSION['status_akun'] == '0'){    
+        if ($_SESSION['level'] == 'owner'){
+            echo '
+            <script>
+                alert("Selamat Datang");
+                window.location.href="index.php";
+            </script>
+            ';
+        } else if ($_SESSION['level'] == 'admin'){
+            echo '
+            <script>
+                alert("Selamat Datang");
+                window.location.href="index.php";
+            </script>
+            ';
+        } else if ($_SESSION['level'] == 'kasir'){
+            echo '
+            <script>
+                alert("Selamat Datang");
+                window.location.href="index.php";
+            </script>
+            ';
+        }
+    } else {
         echo '
         <script>
-            alert("Selamat Datang");
-            window.location.href="index.php";
-        </script>
-        ';
-    } else if ($_SESSION['level'] == 'admin'){
-        echo '
-        <script>
-            alert("Selamat Datang");
-            window.location.href="index.php";
-        </script>
-        ';
-    } else if ($_SESSION['level'] == 'kasir'){
-        echo '
-        <script>
-            alert("Selamat Datang");
-            window.location.href="index.php";
+            alert("Maaf Akun Anda Sudah TIDAK AKTIF !!");
+            window.location.href="logout.php";
         </script>
         ';
     }	

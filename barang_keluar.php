@@ -88,6 +88,11 @@ if($_SESSION['level'] == "admin"){
                                                         $totalharga = $row['total_harga'];
                                                         $deskripsi = $row['deskripsi'];
                                                         $fullname = $row['fullname'];
+
+                                                        $tanggalkeluar = $tanggal;
+                                                        $tanggalsekarang = date('Y-m-d');
+                                                       // Konversi selisih waktu ke dalam jumlah hari
+                                                        $hari = round(abs(strtotime($tanggalsekarang) - strtotime($tanggalkeluar)) / (60 * 60 * 24));
                                             ?>		
                                                                 
                                                 <tr>
@@ -99,8 +104,9 @@ if($_SESSION['level'] == "admin"){
                                                     <td><?php echo $deskripsi;?></td>
                                                     <td><?php echo $fullname;?></td>
                                                     <?php if($_SESSION['level'] == "owner"){?>
-                                                    <td><?php echo "<a href='update_barang_keluar.php?id_keluar=$id_keluar' class='action'>UPDATE</a> |
-                                                                    <a href='delete_barang_keluar.php?id_keluar=$id_keluar' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
+                                                    <td><?php echo "<a href='update_barang_keluar.php?id_keluar=$id_keluar' class='action'>UPDATE</a>";
+                                                                if ($hari < 1){
+                                                                   echo " | <a href='delete_barang_keluar.php?id_keluar=$id_keluar' class='action' onclick='return konfirmasi();'>DELETE</a>"; }?> </td>
                                                     <?php } else if($_SESSION['level'] == "user"){ echo "";} ?>
                                                 </tr>
                                             <?php	   

@@ -103,6 +103,7 @@ session_start();
                                                         $qty= $row['qty'];
                                                         $harga= $row['harga'];
                                                         $nama_supplier=$row['nama_supplier'];
+                                                     
                                             ?>		
                                                                 
                                                 <tr>
@@ -112,8 +113,7 @@ session_start();
                                                     <td><?php echo FormatUang($harga);?></td>
                                                     <td><?php echo $nama_supplier;?></td>
                                                     <?php if($_SESSION['level'] == "owner"){?>
-                                                    <td><?php echo "<a href='update_barang.php?id_produk=$id_produk' class='action'>UPDATE</a> | 
-                                                                    <a href='delete_barang.php?id_produk=$id_produk' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
+                                                    <td><?php echo "<a href='update_barang.php?id_produk=$id_produk' class='action'>UPDATE</a>"; ?> </td>
                                                     <?php } ?>
                                                 </tr>
 

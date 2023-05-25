@@ -63,13 +63,14 @@ if($_SESSION['level'] == "kasir" || $_SESSION['level'] == "admin"){
                                                 <th>User Name</th>
                                                 <th>Full Name</th>
                                                 <th>Level</th>
+                                                <th>Status</th>
                                                 <th>Action</th>         
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php 
                                                 $sSQL="";
-                                                $sSQL="select * from user order by id";
+                                                $sSQL="select * from user order by (status_akun) ASC";
                                                 $result=mysqli_query($koneksi, $sSQL);
                                                 if (mysqli_num_rows($result) > 0) 
                                                 {
@@ -79,18 +80,98 @@ if($_SESSION['level'] == "kasir" || $_SESSION['level'] == "admin"){
                                                         $UserName = $row['username'];
                                                         $FullName = $row['fullname'];
                                                         $level= $row['level'];
+                                                        $status= $row['status_akun'];
+                                                        if ($status == "0") {
+                                                            $status_akun = "ACTIVE";        
+                                                        } else {
+                                                            $status_akun = "INACTIVE";
+                                                        }
                                             ?>		
                                                                 
-                                                <tr>
-                                                    <td><?php echo $UserName;?></td>
-                                                    <td><?php echo $FullName;?></td>
-                                                    <td><?php echo $level;?></td>
-                                                    <td><?php if ($UserName != "owner" && $FullName != "Owner"){ 
-                                                            echo "<a href='update_user.php?id=$ID' class='action'>UPDATE</a> | ";}
-                                                            echo "<a href='update_password.php?id=$ID' class='action'>UPDATE PASSWORD</a>";
-                                                            if ($UserName != "owner" && $FullName != "Owner"){ 
-                                                                    echo " | <a href='delete_user.php?id=$ID' class='action' onclick='return konfirmasi();'>DELETE</a>";} ?> </td>
-                                                </tr>
+                                            <tr>
+                                                <td><?php echo $UserName;?></td>
+                                                <td><?php echo $FullName;?></td>
+                                                <td><?php echo $level;?></td>
+                                                <td><?php if ($UserName != "owner" && $FullName != "Owner"){
+                                                             if ($status == "0"){ 
+                                                                echo "<a href='#active$ID' data-bs-toggle='modal' class='action'>$status_akun";
+                                                             }  else if ($status == "1"){ 
+                                                                echo "<a href='#nonactive$ID' data-bs-toggle='modal' class='action'>$status_akun";
+                                                             }
+                                                            } else {
+                                                                echo $status_akun;
+                                                            }?>
+                                                </td>
+                                                <td><?php if ($status == "0"){ 
+                                                            if ($UserName == "owner" && $FullName == "Owner"){ 
+                                                                echo "<a href='update_password.php?id=$ID' class='action'>UPDATE PASSWORD</a>";
+                                                            } else {
+                                                                echo "<a href='update_user.php?id=$ID' class='action'>UPDATE</a> | ";
+                                                                echo "<a href='update_password.php?id=$ID' class='action'>UPDATE PASSWORD</a>";
+                                                            }
+                                                            } ?> </td>
+                                            </tr>
+                                            <!-- The Modal Nonaktif Akin -->
+                                            <div class="modal" id="active<?=$ID;?>">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+
+                                                        <!-- Modal Header -->
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Nonaktifkan Akun</h4>
+                                                        </div>
+
+                                                        <!-- Modal body -->
+                                                
+                                                        <div class="modal-body">
+                                                            <form action="submit_status_akun.php" class="form" method="post"> 
+                                                                Anda Yakin Ingin Menonaktifkan Akun <?=$FullName?> ?
+                                                                <input id="id" class="form-control" type="hidden" name="id" value="<?php echo $ID;?>" readonly/>
+                                                                <input id="status" class="form-control" type="hidden" name="status" value="1" readonly/>
+
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 col-sm-2 control-label"></label>
+                                                                    <div class="modal-footer">
+                                                                        <input type="submit" name="simpan" value="Nonaktifkan" class="btn btn-sm btn-primary" />&nbsp;
+                                                                        <a href="#" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Batal </a>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- The Modal Aktifkan Akun-->
+                                            <div class="modal" id="nonactive<?=$ID;?>">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+
+                                                        <!-- Modal Header -->
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title">Aktifkan Akun</h4>
+                                                        </div>
+
+                                                        <!-- Modal body -->
+                                                
+                                                        <div class="modal-body">
+                                                            <form action="submit_status_akun.php" class="form" method="post"> 
+                                                                Anda Yakin Ingin Mengaktifkan Akun <?=$FullName?> ?
+                                                                <input id="id" class="form-control" type="hidden" name="id" value="<?php echo $ID;?>" readonly/>
+                                                                <input id="status" class="form-control" type="hidden" name="status" value="0" readonly/>
+
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 col-sm-2 control-label"></label>
+                                                                    <div class="modal-footer">
+                                                                        <input type="submit" name="simpan" value="Aktifkan" class="btn btn-sm btn-primary" />&nbsp;
+                                                                        <a href="#" class="btn btn-sm btn-danger" data-bs-dismiss="modal">Batal </a>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <?php	   
                                                     }
                                                 } 

@@ -48,7 +48,7 @@ if($_SESSION['level'] == "kasir"){
                     <select onChange="supplier()" id="id_produk" name="id_produk" class="form-control" required>
                         <option value="">-- Pilih --</option>
                             <?php
-                                $ambildata = mysqli_query($koneksi, "select * from produk p, supplier s where p.id_supplier = s.id_supplier");
+                                $ambildata = mysqli_query($koneksi, "select * from produk p, supplier s where p.id_supplier = s.id_supplier and p.qty != 0");
                                 while($fetcharray = mysqli_fetch_array($ambildata)){
                                     $namaproduk = $fetcharray['nama_produk'];
                                     $idproduk = $fetcharray['id_produk'];
@@ -70,7 +70,7 @@ if($_SESSION['level'] == "kasir"){
                     <label-form for="jumlah_barang">&nbsp;
                         Quantity
                     </label-form>
-                    <input id="quantity" class="form-control" type="number" name="quantity" autocomplete="on" required/>
+                    <input id="quantity" class="form-control" type="number" min="1" name="quantity" autocomplete="on" required/>
                     <label-form for="deskripsi">&nbsp;
                         Ket:
                     </label-form>

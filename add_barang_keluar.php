@@ -48,7 +48,7 @@ if($_SESSION['level'] == "admin"){
                     <select onChange="Harga()" id="id_produk" name="id_produk" class="form-control" onsubmit="cek()" required>
                         <option value="">-- Pilih --</option>
                             <?php
-                                $ambildata = mysqli_query($koneksi, "select * from produk");
+                                $ambildata = mysqli_query($koneksi, "select * from produk where qty != 0");
                                 while($fetcharray = mysqli_fetch_array($ambildata)){
                                     $namaproduk = $fetcharray['nama_produk'];
                                     $idproduk = $fetcharray['id_produk'];
@@ -68,7 +68,7 @@ if($_SESSION['level'] == "admin"){
                     <label-form for="jumlah_barang">&nbsp;
                         Quantity
                     </label-form>
-                    <input onChange="Total_Harga()" id="jumlah_barang" class="form-control" type="number" name="jumlah_barang" autocomplete="on" required/>
+                    <input onChange="Total_Harga()" id="jumlah_barang" class="form-control" type="number" min="1" name="jumlah_barang" autocomplete="on" required/>
                     <label-form for="total_harga">&nbsp;
                         Total Harga
                     </label-form>

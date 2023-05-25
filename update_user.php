@@ -61,7 +61,7 @@ if($_SESSION['level'] == "kasir" || $_SESSION['level'] == "admin"){
                     <label-form for="username">&nbsp;
                         User Name
                     </label-form>
-                    <input id="username" class="form-control" type="text" name="username" value="<?php echo $username;?>" required/>
+                    <input id="username" class="form-control" type="text" name="username" value="<?php echo $username;?>" required?/>
                     <label-form for="fullname">&nbsp;
                         Full Name
                     </label-form>
@@ -72,12 +72,28 @@ if($_SESSION['level'] == "kasir" || $_SESSION['level'] == "admin"){
                         <div>
                             <select name="level" id="level"  class="form-control"  required>
                                 <option value="<?php echo $level;?>"><?php echo $level;?></option>
-                                <option value="owner">Owner</option>
-                                <option value="admin">Admin</option>
-                                <option value="kasir">Kasir</option>
+                                <?php 
+                                if ($level=="owner"){
+                                ?>
+                                    <option value="admin">admin</option>
+                                    <option value="kasir">kasir</option>
+                                <?php
+                                }
+                                else if ( $level=="admin"){
+                                ?>
+                                    <option value="owner">owner</option>
+                                    <option value="kasir">kasir</option>
+                                <?php
+                                }
+                                else if ( $level=="kasir"){
+                                ?>
+                                    <option value="owner">owner</option>
+                                    <option value="admin">admin</option>
+                                <?php
+                                }
+                                ?>
                             </select>
                         </div>
-                       
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label"></label>
                             <div class="col-sm-10">

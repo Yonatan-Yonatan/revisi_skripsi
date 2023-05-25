@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 22, 2023 at 10:58 AM
+-- Generation Time: May 25, 2023 at 07:19 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -33,7 +33,7 @@ CREATE TABLE `barang_keluar` (
   `tanggal` date NOT NULL DEFAULT current_timestamp(),
   `jumlah_barang` int(11) NOT NULL,
   `total_harga` int(11) NOT NULL,
-  `deskripsi` varchar(500) CHARACTER SET latin1 NOT NULL,
+  `deskripsi` varchar(150) CHARACTER SET latin1 NOT NULL,
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -137,8 +137,8 @@ INSERT INTO `retur_barang` (`id_retur`, `id_produk`, `id_supplier`, `tanggal`, `
 
 CREATE TABLE `supplier` (
   `id_supplier` int(11) NOT NULL,
-  `nama_supplier` varchar(200) CHARACTER SET latin1 NOT NULL,
-  `alamat` varchar(500) CHARACTER SET latin1 NOT NULL,
+  `nama_supplier` varchar(120) CHARACTER SET latin1 NOT NULL,
+  `alamat` varchar(300) CHARACTER SET latin1 NOT NULL,
   `no_telp` varchar(20) CHARACTER SET latin1 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -158,20 +158,22 @@ INSERT INTO `supplier` (`id_supplier`, `nama_supplier`, `alamat`, `no_telp`) VAL
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
-  `username` varchar(200) CHARACTER SET latin1 NOT NULL,
+  `username` varchar(50) CHARACTER SET latin1 NOT NULL,
   `password` text CHARACTER SET latin1 NOT NULL,
-  `fullname` varchar(200) CHARACTER SET latin1 NOT NULL,
-  `level` enum('owner','admin','kasir') CHARACTER SET latin1 NOT NULL
+  `fullname` varchar(50) CHARACTER SET latin1 NOT NULL,
+  `level` enum('owner','admin','kasir','INACTIVE') CHARACTER SET latin1 NOT NULL,
+  `status_akun` enum('0','1') CHARACTER SET latin1 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`, `fullname`, `level`) VALUES
-(1, 'owner', '579233b2c479241523cba5e3af55d0f50f2d6414', 'Owner', 'owner'),
-(2, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'Admin', 'admin'),
-(3, 'kasir', '8691e4fc53b99da544ce86e22acba62d13352eff', 'Cashier', 'kasir');
+INSERT INTO `user` (`id`, `username`, `password`, `fullname`, `level`, `status_akun`) VALUES
+(1, 'owner', '579233b2c479241523cba5e3af55d0f50f2d6414', 'Owner', 'owner', '0'),
+(2, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'Admin', 'admin', '0'),
+(3, 'kasir', '8691e4fc53b99da544ce86e22acba62d13352eff', 'Cashier', 'kasir', '0'),
+(4, 'yonatan', 'b30f5421ee44c0904eef5d0626c92b32aa569a65', 'Yonatan', 'owner', '1');
 
 --
 -- Indexes for dumped tables
@@ -260,7 +262,7 @@ ALTER TABLE `supplier`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -270,30 +272,30 @@ ALTER TABLE `user`
 -- Constraints for table `barang_keluar`
 --
 ALTER TABLE `barang_keluar`
-  ADD CONSTRAINT `barang_keluar_ibfk_1` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `barang_keluar_ibfk_2` FOREIGN KEY (`id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `barang_keluar_ibfk_1` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `barang_keluar_ibfk_2` FOREIGN KEY (`id`) REFERENCES `user` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `barang_masuk`
 --
 ALTER TABLE `barang_masuk`
-  ADD CONSTRAINT `barang_masuk_ibfk_1` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `barang_masuk_ibfk_2` FOREIGN KEY (`id_supplier`) REFERENCES `supplier` (`id_supplier`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `barang_masuk_ibfk_3` FOREIGN KEY (`id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `barang_masuk_ibfk_1` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `barang_masuk_ibfk_2` FOREIGN KEY (`id_supplier`) REFERENCES `supplier` (`id_supplier`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `barang_masuk_ibfk_3` FOREIGN KEY (`id`) REFERENCES `user` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `produk`
 --
 ALTER TABLE `produk`
-  ADD CONSTRAINT `produk_ibfk_1` FOREIGN KEY (`id_supplier`) REFERENCES `supplier` (`id_supplier`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `produk_ibfk_1` FOREIGN KEY (`id_supplier`) REFERENCES `supplier` (`id_supplier`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `retur_barang`
 --
 ALTER TABLE `retur_barang`
-  ADD CONSTRAINT `retur_barang_ibfk_1` FOREIGN KEY (`id_supplier`) REFERENCES `supplier` (`id_supplier`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `retur_barang_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `retur_barang_ibfk_3` FOREIGN KEY (`id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `retur_barang_ibfk_1` FOREIGN KEY (`id_supplier`) REFERENCES `supplier` (`id_supplier`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `retur_barang_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `retur_barang_ibfk_3` FOREIGN KEY (`id`) REFERENCES `user` (`id`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

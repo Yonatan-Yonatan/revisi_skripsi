@@ -88,6 +88,13 @@ session_start();
                                                         $deskripsi = $row['deskripsi'];
                                                         $fullname = $row['fullname'];
                                                         $status = $row['status'];
+                                                        
+                                                        $tanggalretur = $tanggal;
+                                                        $tanggalsekarang = date('Y-m-d');
+                                                       // Konversi selisih waktu ke dalam jumlah hari
+                                                        $hari = round(abs(strtotime($tanggalsekarang) - strtotime($tanggalretur)) / (60 * 60 * 24));
+                                                      
+
                                             ?>		
                                                                 
                                                 <tr>
@@ -104,8 +111,15 @@ session_start();
                                                     <td><?php echo $fullname;?></td>
                                                     <?php if($_SESSION['level'] == "owner"){?>
                                                     <td><?php if ($status =="Diajukan" || $status =="Diambil"){ 
-                                                    echo "<a href='update_retur.php?id_retur=$id_retur' class='action'>UPDATE</a> |";} echo "
-                                                                    <a href='delete_retur.php?id_retur=$id_retur' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?> </td>
+                                                            echo "<a href='update_retur.php?id_retur=$id_retur' class='action'>UPDATE</a>  ";
+                                                            }
+                                                            if(($status =="Diajukan" || $status =="Diambil") && $hari < 1){
+                                                                echo " | ";
+                                                            }
+                                                            if ($hari < 1){
+                                                                echo " <a href='delete_retur.php?id_retur=$id_retur' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?>
+                                                            <?php } ?></td>
+                                                   
                                                     <?php }  ?>
                                                 </tr>
                                             <?php	   

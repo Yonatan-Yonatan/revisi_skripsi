@@ -75,7 +75,7 @@ if($_SESSION['level'] == "kasir" || $_SESSION['level'] == "admin"){
                     <label-form for="quantity">&nbsp;
                         Quantity
                     </label-form>
-                    <input id="quantity" class="form-control" type="number" name="quantity" value="<?php echo $quantity;?>" required/>
+                    <input id="quantity" class="form-control" type="number" min="1" name="quantity" value="<?php echo $quantity;?>" required/>
                     <label-form for="ket">&nbsp;
                         Ket:
                     </label-form>
