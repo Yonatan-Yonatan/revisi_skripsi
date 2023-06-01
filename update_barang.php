@@ -75,7 +75,7 @@ if($_SESSION['level'] == "kasir"){
                     <label-form for="harga">&nbsp;
                         Harga
                     </label-form>
-                    <input id="harga" class="form-control" type="number" name="harga" value="<?php echo $harga;?>" required/>
+                    <input id="harga" class="form-control" type="number" min="50" name="harga" value="<?php echo $harga;?>" required/>
                     <label-form for="nama_supplier">&nbsp;
                         Supplier
                     </label-form>

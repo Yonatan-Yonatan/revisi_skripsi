@@ -88,7 +88,7 @@ if($_SESSION['level'] == "kasir"){
 
                                                         $tanggalmasuk = $tanggal;
                                                         $tanggalsekarang = date('Y-m-d');
-                                                       // Konversi selisih waktu ke dalam jumlah hari
+                                                       // Hitung selisih hari
                                                         $hari = round(abs(strtotime($tanggalsekarang) - strtotime($tanggalmasuk)) / (60 * 60 * 24));
                                             ?>		
                                                                 

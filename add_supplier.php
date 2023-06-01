@@ -52,7 +52,7 @@ if($_SESSION['level'] == "kasir"){
                     <label-form for="no_telp">&nbsp;
                         Nomor Telepon
                     </label-form>
-                    <input id="no_telp" class="form-control" type="number" name="no_telp" autocomplete="on" required/>   
+                    <input id="no_telp" class="form-control" type="number" min="50" name="no_telp" autocomplete="on" required/>   
                     
                     <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label"></label>

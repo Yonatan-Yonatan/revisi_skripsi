@@ -53,7 +53,7 @@ if($_SESSION['level'] == "kasir"){
                     <label-form for="harga">&nbsp;
                         Harga
                     </label-form>
-                    <input id="harga" class="form-control" type="number" name="harga" autocomplete="on" required/>
+                    <input id="harga" class="form-control" type="number" name="harga" min="50" autocomplete="on" required/>
                     
                     <label-form for="nama_supplier">&nbsp;
                         Supplier
