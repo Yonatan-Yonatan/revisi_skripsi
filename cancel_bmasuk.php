@@ -26,22 +26,22 @@ session_start();
         $selisih = $qty - $stok;
         $update = mysqli_query($koneksi,"update produk set qty='$selisih' where id_produk='$id_produk'");
 
-     $sSQL= mysqli_query($koneksi, " delete from  barang_masuk where id_masuk='$id_masuk'");
+     $sSQL= mysqli_query($koneksi, " update barang_masuk set status_bmasuk = '1' where id_masuk='$id_masuk'");
         
     
      if ($update &&  $sSQL) {
         echo '
         <script>
-            alert("Data Barang Masuk BERHASIL Di Hapus");
-            window.location.href="restock_barang.php";
+            alert("Data Barang Masuk BERHASIL Di Cancel");
+            history.go(-1);
         </script>
         ';
         exit();
      }else{
         echo '
         <script>
-            alert("Data Barang Masuk GAGAL Di Hapus");
-            window.location.href="restock_barang.php";
+            alert("Data Barang Masuk GAGAL Di Cancel");
+            history.go(-1);
         </script>
         '; 
     }	
@@ -49,7 +49,7 @@ session_start();
             echo '
             <script>
                 alert("Stock Saat Ini Tidak Mencukupi");
-                window.location.href="restock_barang.php";
+                history.go(-1);
             </script>
             ';
         }

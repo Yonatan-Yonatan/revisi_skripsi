@@ -33,12 +33,12 @@
                     Barang Keluar
                 </a>
                 <?php } ?>
-                <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "admin"){?>
+                <!-- <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "admin"){?>
                 <a class="nav-link" href="retur.php">
                     <div class="sb-nav-link-icon"><i class="fa fa-reply"></i></div>
                     Retur Barang
                 </a>
-                <?php } ?>
+                <?php } ?> -->
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                     <div class="sb-nav-link-icon"><i class="fa fa-file"></i></div>
                     Laporan
@@ -55,9 +55,9 @@
                         <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "kasir"){?>
                             <a class="nav-link" href="laporan_data_keluar.php">Laporan Transaksi Keluar</a>
                         <?php } ?>
-                        <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "admin"){?>
+                        <!-- <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "admin"){?>
                             <a class="nav-link" href="laporan_retur.php">Laporan Retur Barang</a>
-                        <?php } ?>
+                        <?php } ?> -->
                     </nav>
                 </div>
                 <?php if($_SESSION['level'] == "owner" || $_SESSION['level'] == "admin"){?>

@@ -59,50 +59,47 @@ if($_SESSION['level'] == "kasir"){
                                     <table id="datatablesSimple">
                                         <thead>
                                             <tr>
+                                                <th>No Transaksi</th>
                                                 <th>Tanggal</th>
-                                                <th>Nama Produk</th>
                                                 <th>Supplier</th>   
-                                                <th>Quantity</th> 
+                                                <th>Total Barang</th> 
                                                 <th>PIC</th> 
-                                                <?php if($_SESSION['level'] == "owner"){?>
                                                 <th>Action</th>          
-                                                <?php } ?>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php 
-                                                $sSQL="";
-                                                $sSQL="select * from barang_masuk m, produk p, supplier s, user u where p.id_produk = m.id_produk and s.id_supplier = m.id_supplier and m.id = u.id order by m.id_masuk DESC";
-                                                $result=mysqli_query($koneksi, $sSQL);
-                                                if (mysqli_num_rows($result) > 0) 
-                                                {
-                                                    while ($row=mysqli_fetch_assoc($result))
-                                                    {
-                                                        $id_masuk = $row['id_masuk'];
-                                                        $id_produk = $row['id_produk'];
-                                                        $tanggal = $row['tanggal'];
-                                                        $nama_produk = $row['nama_produk'];
-                                                        $nama_supplier = $row['nama_supplier'];
-                                                        $stok= $row['stok'];
-                                                        $fullname = $row['fullname'];
+                                        <?php
+                                            $sSQL = "SELECT tm.id_tr_masuk, tm.no_faktur, tm.tanggal, s.nama_supplier, u.fullname,
+                                            SUM(IF(bm.stok IS NOT NULL, 1, 0)) AS not_null_subtotal,
+                                            SUM(IF(bm.stok IS NULL, 1, 0)) AS null_subtotal
+                                            FROM transaksi_masuk tm
+                                            LEFT JOIN supplier s ON s.id_supplier = tm.id_supplier
+                                            LEFT JOIN user u ON u.id = tm.id
+                                            LEFT JOIN barang_masuk bm ON bm.id_tr_masuk = tm.id_tr_masuk
+                                            GROUP BY tm.id_tr_masuk, tm.no_faktur, tm.tanggal, s.nama_supplier, u.fullname
+                                            ORDER BY tm.id_tr_masuk DESC";
 
-                                                        $tanggalmasuk = $tanggal;
-                                                        $tanggalsekarang = date('Y-m-d');
-                                                       // Hitung selisih hari
-                                                        $hari = round(abs(strtotime($tanggalsekarang) - strtotime($tanggalmasuk)) / (60 * 60 * 24));
-                                            ?>		
+                                            $result = mysqli_query($koneksi, $sSQL);
+
+                                            if (mysqli_num_rows($result) > 0) {
+                                                while ($row = mysqli_fetch_assoc($result)) {
+                                                    $no_faktur = $row['no_faktur'];
+                                                    $tanggal = $row['tanggal'];
+                                                    $nama_supplier = $row['nama_supplier'];
+                                                    $fullname = $row['fullname'];
+                                                    $id_tr_masuk = $row['id_tr_masuk'];
+                                                    $not_null_subtotal = $row['not_null_subtotal'];
+                                                    $null_subtotal = $row['null_subtotal'];        
+                                        ?>
                                                                 
                                                 <tr>
+                                                    <td><?php echo $no_faktur;?></td>
                                                     <td><?php echo date('d M Y', strtotime($tanggal));?></td>
-                                                    <td><?php echo $nama_produk;?></td>
                                                     <td><?php echo $nama_supplier;?></td>
-                                                    <td><?php echo $stok;?></td>
+                                                    <td><?php echo $not_null_subtotal;?></td>
                                                     <td><?php echo $fullname;?></td>
-                                                    <?php if($_SESSION['level'] == "owner"){?>
-                                                    <td><?php echo "<a href='update_restock_barang.php?id_masuk=$id_masuk' class='action'>UPDATE</a> ";
-                                                     if ($hari < 1){
-                                                    echo " | <a href='delete_restok.php?id_masuk=$id_masuk' class='action' onclick='return konfirmasi();'>DELETE</a>";} ?> </td>
-                                                    <?php } ?>
+                                                    <td><?php echo "<a href='detail_restock.php?id_tr_masuk=$id_tr_masuk' class='action'>DETAIL</a>
+                                                     | <a href='update_restock_barang.php?id_tr_masuk=$id_tr_masuk' class='action' >UPDATE</a>";?> </td>
                                                 </tr>
                                             <?php	   
                                                     }

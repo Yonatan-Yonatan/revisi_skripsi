@@ -42,40 +42,8 @@ if($_SESSION['level'] == "admin"){
                 <div class="container-fluid px-4">
                     <h1 class="mt-4" style="padding-bottom:15px";>Input Barang Keluar</h1>
                     <form action="submit_barang_keluar.php" class="form" name="form1" method="post"> 
-                    <label-form for="nama_produk">&nbsp;
-                        Nama Produk
-                    </label-form>
-                    <select onChange="Harga()" id="id_produk" name="id_produk" class="form-control" onsubmit="cek()" required>
-                        <option value="">-- Pilih --</option>
-                            <?php
-                                $ambildata = mysqli_query($koneksi, "select * from produk where qty != 0");
-                                while($fetcharray = mysqli_fetch_array($ambildata)){
-                                    $namaproduk = $fetcharray['nama_produk'];
-                                    $idproduk = $fetcharray['id_produk'];
-                                    $harga = $fetcharray['harga'];
-                            ?>
-                                <?php foreach($ambildata as $isi) : ?>
-					            <option value="<?= $isi ["id_produk"].':'.$isi["harga"]?>"><?=$isi["nama_produk"];?></option>
-				                <?php endforeach?>
-                            <?php
-                                }
-                            ?>
-                    </select>
-                    <label-form for="harga">&nbsp;
-                        Harga
-                    </label-form>
-                    <input id="harga_barang" class="form-control" type="text" name="harga_barang" readonly/>
-                    <label-form for="jumlah_barang">&nbsp;
-                        Quantity
-                    </label-form>
-                    <input onChange="Total_Harga()" id="jumlah_barang" class="form-control" type="number" min="1" name="jumlah_barang" autocomplete="on" required/>
-                    <label-form for="total_harga">&nbsp;
-                        Total Harga
-                    </label-form>
-                    
-                    <input id="total_harga" class="form-control" type="text" name="total_harga" readonly/>
                     <label-form for="deskripsi">&nbsp;
-                        Ket:
+                        Pelanggan
                     </label-form>
                     <input id="deskripsi" class="form-control" type="text" name="deskripsi" autocomplete="on" required/>
                         <div class="form-group">
@@ -103,34 +71,6 @@ if($_SESSION['level'] == "admin"){
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
-    
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('#id_produk').select2();
-                $('#id_supplier').select2();
-            });
-
-            function Harga(){
-                var harga1 = document.getElementById('id_produk');
-                var harga2 = harga1.options[harga1.selectedIndex].value;
-                const arrx = harga2.split(":");
-                document.getElementById('harga_barang').value=arrx[1];
-            }
-
-            function Total_Harga(){
-                var stok = document.getElementById("jumlah_barang");
-                var hargabarang = document.getElementById("harga_barang");
-                var hargatotal = document.getElementById("total_harga");
-                const hitungtotalharga = parseInt(stok.value) * parseInt(hargabarang.value);
-                hargatotal.value=""+hitungtotalharga;
-            }
-
-            function check(){
-                var varjs = document.getElementById("total_harga");
-                document.form1.total_harga.value = varjs;
-            }
-
-        </script>
     
     </body>
 </html>

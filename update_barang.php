@@ -37,7 +37,7 @@ if($_SESSION['level'] == "kasir"){
         
         $id_produk=$_GET['id_produk'];
     
-        $sSQL=" select * from produk p, supplier s where p.id_supplier = s.id_supplier and p.id_produk='$id_produk' limit 1";
+        $sSQL=" select * from produk where id_produk='$id_produk' limit 1";
         $result=mysqli_query($koneksi, $sSQL);
         if (mysqli_num_rows($result) > 0) 
         {
@@ -47,8 +47,7 @@ if($_SESSION['level'] == "kasir"){
                 $nama_produk = $row['nama_produk'];
                 $jenis_produk = $row['jenis_barang'];
                 $harga= $row['harga'];
-                $idsupplier=$row['id_supplier'];
-                $nama_supplier=$row['nama_supplier'];
+                $min_stok=$row['min_qty'];
             }
         }	 
     ?>  
@@ -76,23 +75,10 @@ if($_SESSION['level'] == "kasir"){
                         Harga
                     </label-form>
                     <input id="harga" class="form-control" type="number" min="50" name="harga" value="<?php echo $harga;?>" required/>
-                    <label-form for="nama_supplier">&nbsp;
-                        Supplier
+                    <label-form for="min_stok">&nbsp;
+                        Minimal Stok
                     </label-form>
-                    <select id="id_supplier" name="id_supplier" class="form-control" required>
-                    <option value="<?php echo $idsupplier;?>"><?php echo $nama_supplier;?></option>
-                            <?php
-                                $ambildata = mysqli_query($koneksi, "select * from supplier");
-                                while($fetcharray = mysqli_fetch_array($ambildata)){
-                                    $namasupplier = $fetcharray['nama_supplier'];
-                                    $idsupplier = $fetcharray['id_supplier'];
-                            ?>
-                            <option value="<?=$idsupplier;?>"><?=$namasupplier;?></option>
-                            <?php
-                                }
-
-                            ?>
-                    </select>
+                    <input id="min_stok" class="form-control" type="number" min="1" name="min_stok" value="<?php echo $min_stok;?>" required/>
                        
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label"></label>

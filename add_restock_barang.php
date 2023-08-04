@@ -43,36 +43,31 @@ if($_SESSION['level'] == "kasir"){
                     <h1 class="mt-4" style="padding-bottom:15px";>Input Barang Masuk</h1>
                     <form action="submit_restock_barang.php" class="form" method="post"> 
                     <label-form for="nama_produk">&nbsp;
-                        Nama Produk
+                        No. Transaksi
                     </label-form>
-                    <select onChange="supplier()" id="id_produk" name="id_produk" class="form-control" required>
+                    <input id="no_faktur" class="form-control" type="text" name="no_faktur" autocomplete="on" required/>
+                    <label-form for="Tanggal">&nbsp;
+                        Tanggal
+                    </label-form>
+                    <input id="tanggal" class="form-control" type="date" name="tanggal" autocomplete="on" required/>
+                    <label-form for="Supplier">&nbsp;
+                        Supplier
+                    </label-form>
+                    <select id="supplier" name="supplier" class="form-control" required>
                         <option value="">-- Pilih --</option>
                             <?php
-                                $ambildata = mysqli_query($koneksi, "select * from produk p, supplier s where p.id_supplier = s.id_supplier");
+                                $ambildata = mysqli_query($koneksi, "select * from supplier");
                                 while($fetcharray = mysqli_fetch_array($ambildata)){
-                                    $id_masuk = $fetcharray['id_masuk'];
-                                    $namaproduk = $fetcharray['nama_produk'];
-                                    $idproduk = $fetcharray['id_produk'];
                                     $idsupplier = $fetcharray['id_supplier'];
                                     $supplier=$fetcharray['nama_supplier'];
                             ?>
                                 <?php foreach($ambildata as $isi) : ?>
-					            <option value="<?= $isi ["id_produk"].':'.$isi ["id_supplier"].':'.$isi ["nama_supplier"]?>"><?=$isi["nama_produk"];?></option>
+					            <option value="<?= $isi ["id_supplier"]?>"><?=$isi ["nama_supplier"]?></option>
 				                <?php endforeach?>
                             <?php
                                 }
                             ?>
                     </select>
-                    <label-form for="nama_supplier">&nbsp;
-                        Supplier
-                    </label-form>
-                    <input id="id_supplier" class="form-control" type="hidden" name="id_supplier" value="" readonly/>
-                    <input id="nama_supplier" class="form-control" type="text" name="nama_supplier"  readonly/>
-                    <label-form for="quantity">&nbsp;
-                        Quantity
-                    </label-form>
-                    <input id="stok" class="form-control" type="number" min="1" name="stok" autocomplete="on" required/>
-
                        
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label"></label>

@@ -7,7 +7,8 @@ session_start();
  	}
     else{
     }
-if($_SESSION['level'] == "admin"){
+
+if($_SESSION['level'] == "kasir"){
     echo '
         <script>
             alert("Maaf anda tidak memiliki akses");
@@ -31,9 +32,14 @@ if($_SESSION['level'] == "admin"){
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <script>
+
+    <?php 
+        $id_tr_masuk=$_GET['id_tr_masuk'];
+        
+    ?>
 	function konfirmasi()
 	{
-	 	if (!confirm('Yakin hapus data ini ?'))
+	 	if (!confirm('Yakin Ingin Batalin Input Data Ini ?'))
 		{
 			return false;
         }
@@ -51,64 +57,66 @@ if($_SESSION['level'] == "admin"){
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4" style="padding-bottom:15px";>Data Barang Keluar</h1>
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table id="datatablesSimple">
+                    <a href="restock_barang.php" class="btn btn-primary mt-3"><i class="fa-solid fa-arrow-left">Kembali</i></a>
+                        <h1 class="mt-4" style="padding-bottom:15px";>Data Transaksi Masuk <?=$id_tr_masuk?></h1>
+                        <div class="container-fluid px-4">
+                        <br>   
+                            <div class="table-responsive">
+                                <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>No. Nota</th>    
-                                                <th>Tanggal</th>
-                                                <th>Pelanggan</th>
-                                                <th>Subtotal</th> 
-                                                <th>PIC</th>   
-                                                <th>Action</th>            
+                                                <th>Nama Barang</th>
+                                                <th>Quantity</th>
+                                                
+                                                <?php if($_SESSION['level'] == "owner"){?>
+                                                <th>Action</th>          
+                                                <?php } else if ($_SESSION['level'] == "admin"){?>
+                                                <th>Status</th>
+                                                <?php } ?> 
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php 
                                                 $sSQL="";
-                                                $sSQL="select * from transaksi_keluar tk, user u where tk.id = u.id order by tk.no_nota DESC";
+                                                $sSQL="select * from barang_masuk m, transaksi_masuk tm, produk p where m.id_tr_masuk = tm.id_tr_masuk and p.id_produk = m.id_produk and m.id_tr_masuk = '$id_tr_masuk'";
                                                 $result=mysqli_query($koneksi, $sSQL);
                                                 if (mysqli_num_rows($result) > 0) 
                                                 {
                                                     while ($row=mysqli_fetch_assoc($result))
                                                     {
-                                                        $no_nota = $row['no_nota'];
-                                                        $tanggal = $row['tanggal'];
-                                                        $subtotal = $row['subtotal'];
-                                                        $deskripsi = $row['ket'];
-                                                        $fullname = $row['fullname'];
-                                                        $status_print = $row['status_print'];
-
-                                                     
+                                                        $produk = $row['nama_produk'];
+                                                        $stok = $row['stok'];
+                                                        $status_bmasuk = $row['status_bmasuk'];
+                                                        $id_masuk = $row['id_masuk'];
+                                                       
                                             ?>		
                                                                 
                                                 <tr>
-                                                    <td><?php echo $no_nota;?></td>
-                                                    <td><?php echo date('d M Y', strtotime($tanggal));?></td>
-                                                    <td><?php echo $deskripsi;?></td>
-                                                    <td><?php echo FormatUang($subtotal);?></td>
-                                                    <td><?php echo $fullname;?></td>
-                                                    <td><?php echo "<a href='detail_barang_keluar.php?no_nota=$no_nota' class='action'>DETAIL</a>";
-                                                    if ($status_print == 0){
-                                                            echo " | <a href='update_barang_keluar.php?no_nota=$no_nota' class='action'>UPDATE</a>"; }
-                                                    }?> </td>
-                                                    
+                                                    <td><?php echo $produk;?></td>
+                                                    <td><?php echo $stok;?></td>
+                                                    <?php if($_SESSION['level'] == "owner"){
+                                                        if ($status_bmasuk == 0){ ?>
+                                                    <td><?php echo "<a href='cancel_bmasuk.php?id_masuk=$id_masuk' class='action' onclick='return konfirmasi();' >CANCEL</a>";?></td>
+                                                       <?php }else{ ?>
+                                                           <td> CANCELED </td>
+                                                       <?php }} else if($_SESSION['level'] == "admin"){
+                                                        if ($status_bmasuk == 0){ ?>
+                                                    <td>VALID</td>
+                                                       <?php }else{ ?>
+                                                           <td> CANCELED </td>
+                                                       <?php }} ?>
                                                 </tr>
-                                            <?php	   
+                                            <?php
                                                     }
+                                                }
                                             ?>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <a href="add_barang_keluar.php" class="act-btn">
+                    <?php echo "<a href='add_detail_restock.php?id_tr_masuk=$id_tr_masuk' class='act-btn'>
                         +
-                    </a>
+                    </a>"?>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">

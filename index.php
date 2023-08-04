@@ -47,42 +47,19 @@ session_start();
                         <h1 class="mt-4" style="padding-bottom:15px";>Stok Barang</h1>
                         <div class="card mb-4">
                             <div class="card-body">
-                                <?php 
-                                    $datastok = mysqli_query($koneksi, "select * from produk where qty < 1");
-                                    while ($fetch=mysqli_fetch_array($datastok)){
-                                        $nama_produk = $fetch['nama_produk'];
-                                    
-                                ?>
-                                    <div class="alert alert-danger alert-dismissible">
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                                        <strong>Perhatian!</strong> Stok <?=$nama_produk;?> Telah Habis
-                                    </div>
-                               
-                               <?php
-                                    }
-
-                                    $datastok1 = mysqli_query($koneksi, "select * from produk where qty < 10 and qty > 0");
-                                    while ($fetch=mysqli_fetch_array($datastok1)){
-                                        $nama_produk = $fetch['nama_produk'];
-                                        $qty = $fetch['qty'];
-                                    
-                                ?>
-                                    <div class="alert alert-warning alert-dismissible">
-                                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                                        <strong>Perhatian!</strong> Stok <?=$nama_produk;?> Hanya Tersisa <?=$qty;?>. Harap Direstock!
-                                    </div>
-                                <?php
-                                    }
-                                ?>
                                 <div class="table-responsive">
                                     <table id="datatablesSimple">
                                         <thead>
                                             <tr>
                                                 <th>Nama Produk</th>
-                                                <th>Jenis Produk</th>   
+                                                <th>Jenis Produk</th> 
+                                                <?php if($_SESSION['level'] != "kasir"){?>  
                                                 <th>Stok</th>  
-                                                <th>Harga</th>        
-                                                <th>Supplier</th>  
+                                                <?php } ?> 
+                                                <?php if($_SESSION['level'] != "admin"){?>
+                                                <th>Harga</th>  
+                                                <?php } ?>      
+                                                <th>Min Stok</th>  
                                                 <?php if($_SESSION['level'] == "owner"){?>
                                                 <th>Action</th>          
                                                 <?php } ?>
@@ -91,7 +68,7 @@ session_start();
                                         <tbody>
                                             <?php 
                                                 $sSQL="";
-                                                $sSQL="select * from produk p, supplier s where p.id_supplier = s.id_supplier  order  by id_produk";
+                                                $sSQL="select * from produk order  by id_produk";
                                                 $result=mysqli_query($koneksi, $sSQL);
                                                 if (mysqli_num_rows($result) > 0) 
                                                 {
@@ -102,16 +79,20 @@ session_start();
                                                         $jenis_produk = $row['jenis_barang'];
                                                         $qty= $row['qty'];
                                                         $harga= $row['harga'];
-                                                        $nama_supplier=$row['nama_supplier'];
+                                                        $min_stok=$row['min_qty'];
                                                      
                                             ?>		
                                                                 
                                                 <tr>
                                                     <td><?php echo $nama_produk;?></td>
                                                     <td><?php echo $jenis_produk;?></td>
+                                                    <?php if($_SESSION['level'] != "kasir"){?>
                                                     <td><?php echo $qty;?></td>
+                                                    <?php } ?>
+                                                    <?php if($_SESSION['level'] != "admin"){?>
                                                     <td><?php echo FormatUang($harga);?></td>
-                                                    <td><?php echo $nama_supplier;?></td>
+                                                    <?php } ?>
+                                                    <td><?php echo $min_stok;?></td>
                                                     <?php if($_SESSION['level'] == "owner"){?>
                                                     <td><?php echo "<a href='update_barang.php?id_produk=$id_produk' class='action'>UPDATE</a>"; ?> </td>
                                                     <?php } ?>

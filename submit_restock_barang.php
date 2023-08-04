@@ -8,23 +8,13 @@ session_start();
  	}
 
 if(isset($_POST['simpan'])){
-    $produk   = $_POST['id_produk'];
-    $id_produk = explode(':', $produk);
-    $id_supplier   = $_POST['id_supplier'];
-    $stok   = $_POST['stok'];
+    $no_faktur = $_POST['no_faktur'];
+    $supplier = $_POST['supplier'];
+    $tanggal = $_POST['tanggal'];
     $id = $_SESSION['id'];
 
-
-    $cekstok = mysqli_query($koneksi, "select * from produk where id_produk= '$id_produk[0]'");
-    $ambil_data_stok = mysqli_fetch_array($cekstok);
-
-    $data_stok = $ambil_data_stok['qty'];
-    $tambah_stok = $data_stok + $stok;
-
-
-    $query = mysqli_query($koneksi, "INSERT INTO barang_masuk (id_produk, id_supplier, stok,id) VALUES ('$id_produk[0]', '$id_supplier', '$stok','$id')");
-    $update_stok = mysqli_query($koneksi, "update produk set qty='$tambah_stok' where id_produk='$id_produk[0]'");
-    if ($query && $update_stok){
+    $query = mysqli_query($koneksi, "INSERT INTO transaksi_masuk (no_faktur, id_supplier, tanggal,id) VALUES ('$no_faktur', '$supplier', '$tanggal','$id')");
+    if ($query){
         echo '
             <script>
                 alert("Data Barang Masuk BERHASIL Dimasukkan");

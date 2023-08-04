@@ -12,7 +12,7 @@ if($_SESSION['level'] == "kasir"){
             javascript:window.history.go(-1);
         </script>
     ';
-} 
+}
 ?>
 
 
@@ -28,28 +28,10 @@ if($_SESSION['level'] == "kasir"){
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+        <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
     </head>
-
-    <?php
-        
-        $id_tr_masuk=$_GET['id_tr_masuk'];
-
-        
-        
-        $sSQL=" select * from transaksi_masuk tm, supplier s where s.id_supplier = tm.id_supplier and tm.id_tr_masuk = '$id_tr_masuk' limit 1";
-        $result=mysqli_query($koneksi, $sSQL);
-        if (mysqli_num_rows($result) > 0) 
-        {
-            while ($row=mysqli_fetch_assoc($result))
-            {
-                $no_faktur = $row['no_faktur'];
-                $tanggal = $row['tanggal'];
-                $id_supplier = $row['id_supplier'];
-                $nama_supplier = $row['nama_supplier'];
-                
-            }
-        }	 
-    ?>  
 
     <body class="sb-nav-fixed">
     <?php include "head.php"; ?>
@@ -58,42 +40,41 @@ if($_SESSION['level'] == "kasir"){
             </div>
             <div id="layoutSidenav_content">
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4" style="padding-bottom:15px";>Edit Barang Masuk</h1>
-                    <form action="submit_update_restock.php" class="form" method="post"> 
-                    <input id="id_tr_masuk" class="form-control" type="hidden" name="id_tr_masuk" value="<?php echo $id_tr_masuk;?>" readonly/>
+                    <h1 class="mt-4" style="padding-bottom:15px";>Input Barang Masuk</h1>
+
+                    <?php 
+                    $id_tr_masuk=$_GET['id_tr_masuk'];
+                    ?>
+
+                    <form action="submit_detail_restock.php" class="form" method="post"> 
+                    <input id="id_tr_masuk" name="id_tr_masuk" type="hidden" class="form-control" value="<?=$id_tr_masuk?>"required>
                     <label-form for="nama_produk">&nbsp;
-                        No. Faktur
+                        Produk
                     </label-form>
-                    <input id="no_faktur" class="form-control" type="text" name="no_faktur" value="<?php echo $no_faktur;?>"/>
-                    <label-form for="nama_supplier">&nbsp;
-                        Supplier
-                    </label-form>
-                    <select id="supplier" name="supplier" class="form-control" required>
-                        <option value="<?=$id_supplier?>"><?=$nama_supplier?></option>
+                    <select id="id_produk" name="id_produk" class="form-control" required>
+                        <option value="">-- Pilih --</option>
                             <?php
-                                $ambildata = mysqli_query($koneksi, "select * from supplier");
+                                $ambildata = mysqli_query($koneksi, "select * from produk");
                                 while($fetcharray = mysqli_fetch_array($ambildata)){
-                                    $idsupplier = $fetcharray['id_supplier'];
-                                    $supplier=$fetcharray['nama_supplier'];
+                                    $namaproduk = $fetcharray['nama_produk'];
+                                    $idproduk = $fetcharray['id_produk'];
                             ?>
                                 <?php foreach($ambildata as $isi) : ?>
-					            <option value="<?= $isi ["id_supplier"]?>"><?=$isi ["nama_supplier"]?></option>
+					            <option value="<?= $isi ["id_produk"]?>"><?=$isi["nama_produk"];?></option>
 				                <?php endforeach?>
                             <?php
                                 }
                             ?>
                     </select>
-                    
-                    <label-form for="stok">&nbsp;
-                        Tanggal
+                    <label-form for="quantity">&nbsp;
+                        Quantity
                     </label-form>
-                    <input id="tanggal" class="form-control" type="date"  name="tanggal" value="<?php echo $tanggal;?>" required/>
-                       
+                    <input id="stok" class="form-control" type="number" min="1" name="stok" autocomplete="on" required/>
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label"></label>
                             <div class="col-sm-10">
                                 <input type="submit" name="simpan" value="Simpan" class="btn btn-sm btn-primary" />&nbsp;
-	                            <a href="restock_barang.php" class="btn btn-sm btn-danger">Batal </a>
+                                <button onclick="redirectToPreviousPage()" class="btn btn-sm btn-danger">Batal</button>
                             </div>
                         </div>
                     </form>
@@ -114,20 +95,16 @@ if($_SESSION['level'] == "kasir"){
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
+    
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#id_produk').select2();
+            });
 
-        <script>
-            function showPassword()
-            {
-                var x = document.getElementById("password");
-                if (x.type === "password") 
-                {
-                    x.type = "text";
-                } 
-                else 
-                {
-                    x.type = "password";
-                }
+            function redirectToPreviousPage() {
+                history.go(-1); 
             }
         </script>
+    
     </body>
 </html>

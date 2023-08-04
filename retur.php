@@ -119,7 +119,6 @@ session_start();
                                                             if ($hari < 1){
                                                                 echo " <a href='delete_retur.php?id_retur=$id_retur' class='action' onclick='return konfirmasi();'>DELETE</a>"; ?>
                                                             <?php } ?></td>
-                                                   
                                                     <?php }  ?>
                                                 </tr>
                                             <?php	   

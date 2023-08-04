@@ -5,7 +5,7 @@ session_start();
     {
 	    header("location: logout.php");
  	}
-if($_SESSION['level'] == "kasir" || $_SESSION['level'] == "admin"){
+if($_SESSION['level'] == "admin"){
     echo '
         <script>
             alert("Maaf anda tidak memiliki akses");
@@ -32,20 +32,17 @@ if($_SESSION['level'] == "kasir" || $_SESSION['level'] == "admin"){
 
     <?php
         
-        $id_keluar=$_GET['id_keluar'];
+        $no_nota=$_GET['no_nota'];
 
-        $sSQL=" select * from barang_keluar k, produk p where k.id_keluar = '$id_keluar' and k.id_produk=p.id_produk limit 1";
+        $sSQL=" select * from transaksi_keluar where no_nota = '$no_nota' limit 1";
         $result=mysqli_query($koneksi, $sSQL);
         if (mysqli_num_rows($result) > 0) 
         {
             while ($row=mysqli_fetch_assoc($result))
             {
-                $nama_produk = $row['nama_produk'];
-                $id_produk = $row['id_produk'];
-                $harga = $row['harga'];
-                $total_harga = $row['total_harga'];
-                $jumlah_barang= $row['jumlah_barang'];
-                $deskripsi= $row['deskripsi'];
+                $no_nota = $row['no_nota'];
+                $tanggal = $row['tanggal'];
+                $ket = $row['ket'];
             }
         }	 
     ?>  
@@ -57,32 +54,18 @@ if($_SESSION['level'] == "kasir" || $_SESSION['level'] == "admin"){
             </div>
             <div id="layoutSidenav_content">
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4" style="padding-bottom:15px";>Edit Barang Keluar</h1>
+                    <h1 class="mt-4" style="padding-bottom:15px";>Edit Transaksi Keluar</h1>
                     <form action="submit_update_keluar.php" class="form" method="post"> 
-                    <input id="id_keluar" class="form-control" type="hidden" name="id_keluar" value="<?php echo $id_keluar;?>" readonly/>
-                    <input id="id_produk" class="form-control" type="hidden" name="id_produk" value="<?php echo $id_produk;?>" readonly/>
+                    <input id="no_nota" class="form-control" type="hidden" name="no_nota" value="<?php echo $no_nota;?>" readonly/>
                     <label-form for="nama_produk">&nbsp;
-                        Nama Produk
+                        Tanggal
                     </label-form>
-                    <input id="nama_produk" class="form-control" type="text" name="nama_produk" value="<?php echo $nama_produk;?>" readonly/>
+                    <input id="tanggal" class="form-control" type="date" name="tanggal" value="<?php echo $tanggal;?>" required/>
                     <label-form for="harga">&nbsp;
-                        Harga
+                        Ket
                     </label-form>
-                    <input id="harga" class="form-control" type="number" name="harga" value="<?php echo $harga;?>" readonly/>
-                    <input id="stoklama" class="form-control" type="hidden" name="stoklama" value="<?php echo $jumlah_barang;?>" readonly required/>
-                    <label-form for="quantity">&nbsp;
-                        Quantity
-                    </label-form>
-                    <input onChange="Total_Harga()" id="jumlah_barang" class="form-control" type="number" min="1" name="jumlah_barang" value="<?php echo $jumlah_barang;?>" required/>
-                    <label-form for="total harga">&nbsp;
-                        Total Harga
-                    </label-form>
-                    <input id="total_harga" class="form-control" type="number" name="total_harga" value="<?php echo $total_harga;?>" readonly/>
-                    <label-form for="ket">&nbsp;
-                        Ket:
-                    </label-form>
-                    <input id="deskripsi" class="form-control" type="text" name="deskripsi" value="<?php echo $deskripsi;?>"/>
-
+                    <input id="ket" class="form-control" type="text" name="ket" value="<?php echo $ket;?>" required/>
+                    
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label"></label>
                             <div class="col-sm-10">

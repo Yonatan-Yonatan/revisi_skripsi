@@ -5,21 +5,21 @@ session_start();
     {
 	    header("location: logout.php");
  	}
-
-if($_SESSION['level'] == "kasir"){
+if($_SESSION['level'] == "admin"){
     echo '
         <script>
-        alert("Maaf anda tidak memiliki akses");
+            alert("Maaf anda tidak memiliki akses");
             javascript:window.history.go(-1);
         </script>
-        ';
- } 
- ?>
+    ';
+}   
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
     <head>
-    <meta charset="utf-8" />
+        <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
@@ -40,31 +40,50 @@ if($_SESSION['level'] == "kasir"){
             </div>
             <div id="layoutSidenav_content">
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4" style="padding-bottom:15px";>Input Data Barang</h1>
-                    <form action="submit_barang.php" class="form" method="post"> 
+                    <h1 class="mt-4" style="padding-bottom:15px";>Input Barang Keluar</h1>
+                    <?php 
+                        $no_nota=$_GET['no_nota'];
+                    ?>
+                    <form action="submit_detail_keluar.php" class="form" name="form1" method="post"> 
+                    <input id="no_nota" name="no_nota" type="hidden" class="form-control" value="<?=$no_nota?>"required>
                     <label-form for="nama_produk">&nbsp;
                         Nama Produk
                     </label-form>
-                    <input id="nama_produk" class="form-control" type="text" name="nama_produk" autocomplete="on" required/>
-                    <label-form for="jenis_barang">&nbsp;
-                        Jenis Barang
-                    </label-form>
-                    <input id="jenis_barang" class="form-control" type="text" name="jenis_barang" autocomplete="on" required/>
+                    <select onChange="Harga()" id="id_produk" name="id_produk" class="form-control" onsubmit="cek()" required>
+                        <option value="">-- Pilih --</option>
+                            <?php
+                                $ambildata = mysqli_query($koneksi, "select * from produk where qty != 0");
+                                while($fetcharray = mysqli_fetch_array($ambildata)){
+                                    $namaproduk = $fetcharray['nama_produk'];
+                                    $idproduk = $fetcharray['id_produk'];
+                                    $harga = $fetcharray['harga'];
+                            ?>
+                                <?php foreach($ambildata as $isi) : ?>
+					            <option value="<?= $isi ["id_produk"].':'.$isi["harga"]?>"><?=$isi["nama_produk"];?></option>
+				                <?php endforeach?>
+                            <?php
+                                }
+                            ?>
+                    </select>
                     <label-form for="harga">&nbsp;
                         Harga
                     </label-form>
-                    <input id="harga" class="form-control" type="number" name="harga" min="50" autocomplete="on" required/>
-                    
-                    <label-form for="min_stok">&nbsp;
-                        Stok Minimal
+                    <input id="harga_barang" class="form-control" type="text" name="harga_barang" readonly/>
+                    <label-form for="jumlah_barang">&nbsp;
+                        Quantity
                     </label-form>
-                    <input id="min_stok" class="form-control" type="number" name="min_stok" min="1" autocomplete="on" required/>
-                       
+                    <input onChange="Total_Harga()" id="jumlah_barang" class="form-control" type="number" min="1" name="jumlah_barang" autocomplete="on" required/>
+                    <label-form for="total_harga">&nbsp;
+                        Total Harga
+                    </label-form>
+                    
+                    <input id="total_harga" class="form-control" type="text" name="total_harga" readonly/>
+
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label"></label>
                             <div class="col-sm-10">
                                 <input type="submit" name="simpan" value="Simpan" class="btn btn-sm btn-primary" />&nbsp;
-                                <a href="index.php" class="btn btn-sm btn-danger">Batal </a>
+                                <button onclick="redirectToPreviousPage()" class="btn btn-sm btn-danger">Batal</button>
                             </div>
                         </div>
                     </form>
@@ -85,12 +104,37 @@ if($_SESSION['level'] == "kasir"){
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
-
+    
         <script type="text/javascript">
             $(document).ready(function() {
+                $('#id_produk').select2();
                 $('#id_supplier').select2();
             });
-        </script>
 
+            function Harga(){
+                var harga1 = document.getElementById('id_produk');
+                var harga2 = harga1.options[harga1.selectedIndex].value;
+                const arrx = harga2.split(":");
+                document.getElementById('harga_barang').value=arrx[1];
+            }
+
+            function Total_Harga(){
+                var stok = document.getElementById("jumlah_barang");
+                var hargabarang = document.getElementById("harga_barang");
+                var hargatotal = document.getElementById("total_harga");
+                const hitungtotalharga = parseInt(stok.value) * parseInt(hargabarang.value);
+                hargatotal.value=""+hitungtotalharga;
+            }
+
+            function check(){
+                var varjs = document.getElementById("total_harga");
+                document.form1.total_harga.value = varjs;
+            }
+
+            function redirectToPreviousPage() {
+                history.go(-1); 
+            }
+        </script>
+    
     </body>
 </html>

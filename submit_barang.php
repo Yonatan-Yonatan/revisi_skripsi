@@ -12,9 +12,9 @@ if(isset($_POST['simpan'])){
     $nama_produk = $_POST['nama_produk'];
     $jenis_barang = $_POST['jenis_barang'];
     $harga= $_POST['harga'];
-    $id_supplier   = $_POST['id_supplier'];
+    $min_stok  = $_POST['min_stok'];
 
-    $query = mysqli_query($koneksi, "INSERT INTO produk (nama_produk, jenis_barang, harga, id_supplier) VALUES ('$nama_produk', '$jenis_barang', '$harga','$id_supplier')");
+    $query = mysqli_query($koneksi, "INSERT INTO produk (nama_produk, jenis_barang, harga, min_qty) VALUES ('$nama_produk', '$jenis_barang', '$harga','$min_stok')");
     if ($query){
         echo '
         <script>
