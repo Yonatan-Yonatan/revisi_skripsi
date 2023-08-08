@@ -43,7 +43,7 @@ function forgot($data)
             // Buat halaman lupa password
             $output.='<p>-------------------------------------------------------------</p>';
             $output.='<p>Harap klik link segera. Token akan expired dalam 24 jam. </p>';
-            $output.='<p>Jika Anda tidak meminta forget password, harap abaiakan pesan ini. Namun, akun anda kemungkinan sudah disalahgunakan, harap ganti passord anda segera.</p>';
+            $output.='<p>Jika Anda tidak meminta forget password, harap abaikan pesan ini. Namun, akun anda kemungkinan sudah disalahgunakan, harap ganti password anda segera.</p>';
             $output.='<p>Terima Kasih,</p>';
             $output.='<p>Wahana Service</p>';
             $body = $output; 

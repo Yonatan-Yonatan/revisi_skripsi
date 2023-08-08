@@ -2,6 +2,14 @@
 <!-- Fungsi Forgotpassoword -->
 <?php
     require 'email.php';
+    session_start();
+    if (empty($_SESSION['isLoggedin']))
+    {
+    }
+    else{
+         header("location: index.php");
+    }
+
     if(isset($_POST["submit"]))
     {
         // cek apakah data berhasil di kirim atau tidak
