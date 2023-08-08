@@ -47,6 +47,10 @@ if($_SESSION['level'] != "owner"){
                         Full Name
                     </label-form>
                     <input id="fullname" class="form-control" type="text" name="fullname" autocomplete="on" required/>
+                    <label-form for="email">&nbsp;
+                        Email
+                    </label-form>
+                    <input id="email" class="form-control" type="email" name="email" autocomplete="on" required/>
                     <label-form for="password">&nbsp;
                         Password
                     </label-form>

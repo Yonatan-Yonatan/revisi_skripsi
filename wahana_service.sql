@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 04, 2023 at 11:33 AM
+-- Generation Time: Aug 08, 2023 at 01:02 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -76,20 +76,6 @@ INSERT INTO `barang_masuk` (`id_masuk`, `id_tr_masuk`, `id_produk`, `stok`, `sta
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pelanggan`
---
-
-CREATE TABLE `pelanggan` (
-  `plat` varchar(12) NOT NULL,
-  `nama_pelanggan` varchar(50) NOT NULL,
-  `merk_kendaraan` varchar(100) NOT NULL,
-  `jenis_kendaraan` enum('Mobil','Motor') NOT NULL,
-  `transmisi` enum('Manual','Matic','Manual + Matic') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `produk`
 --
 
@@ -114,32 +100,8 @@ INSERT INTO `produk` (`id_produk`, `nama_produk`, `jenis_barang`, `qty`, `harga`
 (5, 'Absorber Assy FR RH', 'Shockbreaker & Kaki Mobil', 1, 950000, 10),
 (6, 'Wiper Blade DCS-G016', 'Wiper Blade', 30, 50000, 10),
 (7, 'STP.SYN Gear Oil 80W-90.946ML', 'Oli Mesin', 63, 75000, 10),
-(8, 'STP.SYN Gear Oil SAE140GL-5', 'Oli Mesin', 63, 75000, 10),
+(8, 'STP.SYN Gear Oil SAE 140GL-5', 'Oli Mesin', 63, 75000, 10),
 (9, 'Rotary Lith EP-3 WB COPBM Red', 'Oli Mesin', 23, 55000, 10);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `retur_barang`
---
-
-CREATE TABLE `retur_barang` (
-  `id_retur` int(11) NOT NULL,
-  `id_produk` int(11) NOT NULL,
-  `id_supplier` int(11) NOT NULL,
-  `tanggal` date NOT NULL DEFAULT current_timestamp(),
-  `quantity` int(11) NOT NULL,
-  `deskripsi` varchar(150) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `status` enum('Diajukan','Diambil','Selesai') CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `retur_barang`
---
-
-INSERT INTO `retur_barang` (`id_retur`, `id_produk`, `id_supplier`, `tanggal`, `quantity`, `deskripsi`, `status`, `id`) VALUES
-(1, 6, 1, '2023-02-23', 1, 'Patah', 'Selesai', 2);
 
 -- --------------------------------------------------------
 
@@ -161,6 +123,19 @@ CREATE TABLE `supplier` (
 INSERT INTO `supplier` (`id_supplier`, `nama_supplier`, `alamat`, `no_telp`) VALUES
 (1, 'CV Putera Jaya Sentosa', 'Jl. Tanjung Pura Darat Sekip No 77, Kota Pontianak, Kalimantan Barat, 78243', '0561734103'),
 (2, 'PT Tasti Anugerah Mandiri', 'Jl. Gaya Motor Selatan No. 5, Sungai Bambu, Tanjuk Priok, Jakarta Utara', '6285251842284');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `token`
+--
+
+CREATE TABLE `token` (
+  `id_token` int(11) NOT NULL,
+  `email` int(11) NOT NULL,
+  `token` text NOT NULL,
+  `expired` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -217,6 +192,7 @@ INSERT INTO `transaksi_masuk` (`id_tr_masuk`, `no_faktur`, `tanggal`, `id_suppli
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `username` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `email` varchar(50) NOT NULL,
   `password` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `fullname` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `level` enum('owner','admin','kasir','INACTIVE') CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
@@ -227,11 +203,12 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`, `fullname`, `level`, `status_akun`) VALUES
-(1, 'owner', '579233b2c479241523cba5e3af55d0f50f2d6414', 'Owner', 'owner', '0'),
-(2, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'Admin', 'admin', '0'),
-(3, 'kasir', '8691e4fc53b99da544ce86e22acba62d13352eff', 'Cashier', 'kasir', '0'),
-(4, 'yonatan', 'b30f5421ee44c0904eef5d0626c92b32aa569a65', 'Yonatan', 'owner', '1');
+INSERT INTO `user` (`id`, `username`, `email`, `password`, `fullname`, `level`, `status_akun`) VALUES
+(1, 'owner', 'yonatanhokianto35@gmail.com', '579233b2c479241523cba5e3af55d0f50f2d6414', 'Owner', 'owner', '0'),
+(2, 'admin', 'yonatana6699@gmail.com', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'Admin', 'admin', '0'),
+(3, 'kasir', 'admin@gmail.com', '8691e4fc53b99da544ce86e22acba62d13352eff', 'Cashier', 'kasir', '0'),
+(4, 'yonatan', 'yonatann2810@gmail.com', 'b30f5421ee44c0904eef5d0626c92b32aa569a65', 'Yonatan', 'owner', '0'),
+(5, 'Fifi', 'fifi@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 'Yonatan', 'kasir', '1');
 
 --
 -- Indexes for dumped tables
@@ -254,31 +231,23 @@ ALTER TABLE `barang_masuk`
   ADD KEY `id_tr_masuk` (`id_tr_masuk`);
 
 --
--- Indexes for table `pelanggan`
---
-ALTER TABLE `pelanggan`
-  ADD PRIMARY KEY (`plat`);
-
---
 -- Indexes for table `produk`
 --
 ALTER TABLE `produk`
   ADD PRIMARY KEY (`id_produk`);
 
 --
--- Indexes for table `retur_barang`
---
-ALTER TABLE `retur_barang`
-  ADD PRIMARY KEY (`id_retur`),
-  ADD KEY `id_supplier` (`id_supplier`),
-  ADD KEY `id` (`id`),
-  ADD KEY `retur_barang_ibfk_2` (`id_produk`);
-
---
 -- Indexes for table `supplier`
 --
 ALTER TABLE `supplier`
   ADD PRIMARY KEY (`id_supplier`);
+
+--
+-- Indexes for table `token`
+--
+ALTER TABLE `token`
+  ADD PRIMARY KEY (`id_token`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `transaksi_keluar`
@@ -315,7 +284,7 @@ ALTER TABLE `barang_keluar`
 -- AUTO_INCREMENT for table `barang_masuk`
 --
 ALTER TABLE `barang_masuk`
-  MODIFY `id_masuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_masuk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `produk`
@@ -324,16 +293,16 @@ ALTER TABLE `produk`
   MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `retur_barang`
---
-ALTER TABLE `retur_barang`
-  MODIFY `id_retur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
 -- AUTO_INCREMENT for table `supplier`
 --
 ALTER TABLE `supplier`
   MODIFY `id_supplier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `token`
+--
+ALTER TABLE `token`
+  MODIFY `id_token` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `transaksi_keluar`
@@ -351,7 +320,7 @@ ALTER TABLE `transaksi_masuk`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
@@ -371,12 +340,10 @@ ALTER TABLE `barang_masuk`
   ADD CONSTRAINT `barang_masuk_ibfk_1` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `retur_barang`
+-- Constraints for table `token`
 --
-ALTER TABLE `retur_barang`
-  ADD CONSTRAINT `retur_barang_ibfk_1` FOREIGN KEY (`id_supplier`) REFERENCES `supplier` (`id_supplier`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `retur_barang_ibfk_2` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `retur_barang_ibfk_3` FOREIGN KEY (`id`) REFERENCES `user` (`id`) ON UPDATE CASCADE;
+ALTER TABLE `token`
+  ADD CONSTRAINT `token_ibfk_1` FOREIGN KEY (`email`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `transaksi_keluar`

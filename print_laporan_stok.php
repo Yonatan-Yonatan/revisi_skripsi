@@ -55,85 +55,59 @@ if(isset($_POST['print'])){
                 <th>Nama Produk</th>
                 <th>Jenis Produk</th>   
                 <th>Stok</th>  
-                <th>Harga</th>        
-                <th>Supplier</th>                   
+                <th>Harga</th>                         
             </tr>
         </thead>
         <tbody>
             <?php
              if ($filter == "semua"){ 
-                $data = mysqli_query($koneksi, "select * from produk p, supplier s where p.id_supplier = s.id_supplier");
+                $data = mysqli_query($koneksi, "select * from produk");
                 while($row = mysqli_fetch_array($data)){
                     $id_produk = $row['id_produk'];
                     $nama_produk = $row['nama_produk'];
                     $jenis_produk = $row['jenis_barang'];
                     $qty= $row['qty'];
                     $harga= $row['harga'];
-                    $nama_supplier=$row['nama_supplier'];
             ?>		                                                
             <tr>
                 <td><?php echo $nama_produk;?></td>
                 <td><?php echo $jenis_produk;?></td>
                 <td><?php echo $qty;?></td>
                 <td><?php echo FormatUang($harga);?></td>
-                <td><?php echo $nama_supplier;?></td>
         </tr>
             <?php
                 }
              } else if ($filter == "habis"){ 
-                $data = mysqli_query($koneksi, "select * from produk p, supplier s where p.id_supplier = s.id_supplier and qty = 0");
+                $data = mysqli_query($koneksi, "select * from produk where qty = 0");
                 while($row = mysqli_fetch_array($data)){
                     $id_produk = $row['id_produk'];
                     $nama_produk = $row['nama_produk'];
                     $jenis_produk = $row['jenis_barang'];
                     $qty= $row['qty'];
                     $harga= $row['harga'];
-                    $nama_supplier=$row['nama_supplier'];
             ?>		                                                
             <tr>
                 <td><?php echo $nama_produk;?></td>
                 <td><?php echo $jenis_produk;?></td>
                 <td><?php echo $qty;?></td>
                 <td><?php echo FormatUang($harga);?></td>
-                <td><?php echo $nama_supplier;?></td>
         </tr>
             <?php
                 } 
             } else if ($filter == "hampirhabis"){ 
-                    $data = mysqli_query($koneksi, "select * from produk p, supplier s where p.id_supplier = s.id_supplier and (qty < 10 and qty > 0)");
+                    $data = mysqli_query($koneksi, "select * from produk p where (qty < min_qty and qty > 0)");
                     while($row = mysqli_fetch_array($data)){
                         $id_produk = $row['id_produk'];
                         $nama_produk = $row['nama_produk'];
                         $jenis_produk = $row['jenis_barang'];
                         $qty= $row['qty'];
                         $harga= $row['harga'];
-                        $nama_supplier=$row['nama_supplier'];
                 ?>		                                                
                 <tr>
                     <td><?php echo $nama_produk;?></td>
                     <td><?php echo $jenis_produk;?></td>
                     <td><?php echo $qty;?></td>
                     <td><?php echo FormatUang($harga);?></td>
-                    <td><?php echo $nama_supplier;?></td>
-            </tr>
-                <?php
-                    }
-                 } else if ($filter == "kurangdari10"){ 
-                    $data = mysqli_query($koneksi, "select * from produk p, supplier s where p.id_supplier = s.id_supplier and qty < 10 ");
-                    while($row = mysqli_fetch_array($data)){
-                        $id_produk = $row['id_produk'];
-                        $nama_produk = $row['nama_produk'];
-                        $jenis_produk = $row['jenis_barang'];
-                        $qty= $row['qty'];
-                        $harga= $row['harga'];
-                        $nama_supplier=$row['nama_supplier'];
-                ?>		                                                
-                <tr>
-                    <td><?php echo $nama_produk;?></td>
-                    <td><?php echo $jenis_produk;?></td>
-                    <td><?php echo $qty;?></td>
-                    <td><?php echo FormatUang($harga);?></td>
-                    <td><?php echo $nama_supplier;?></td>
             </tr>
                 <?php
                     }

@@ -72,10 +72,10 @@ if($_SESSION['level'] == "kasir"){
                                             $sSQL = "SELECT tm.id_tr_masuk, tm.no_faktur, tm.tanggal, s.nama_supplier, u.fullname,
                                             SUM(IF(bm.stok IS NOT NULL, 1, 0)) AS not_null_subtotal,
                                             SUM(IF(bm.stok IS NULL, 1, 0)) AS null_subtotal
-                                            FROM transaksi_masuk tm
+                                            FROM transaksi_masuk tm 
                                             LEFT JOIN supplier s ON s.id_supplier = tm.id_supplier
                                             LEFT JOIN user u ON u.id = tm.id
-                                            LEFT JOIN barang_masuk bm ON bm.id_tr_masuk = tm.id_tr_masuk
+                                            LEFT JOIN barang_masuk bm ON bm.id_tr_masuk = tm.id_tr_masuk AND bm.status_bmasuk = 1 
                                             GROUP BY tm.id_tr_masuk, tm.no_faktur, tm.tanggal, s.nama_supplier, u.fullname
                                             ORDER BY tm.id_tr_masuk DESC";
 

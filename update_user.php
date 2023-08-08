@@ -43,6 +43,7 @@ if($_SESSION['level'] == "kasir" || $_SESSION['level'] == "admin"){
                 $username = $row['username'];
                 $fullname = $row['fullname'];
                 $level = $row['level']; 
+                $email= $row['email'];
             }
         }	 
     ?>  
@@ -66,6 +67,10 @@ if($_SESSION['level'] == "kasir" || $_SESSION['level'] == "admin"){
                         Full Name
                     </label-form>
                     <input id="fullname" class="form-control" type="text" name="fullname" value="<?php echo $fullname;?>" required/>
+                    <label-form for="email">&nbsp;
+                        Email
+                    </label-form>
+                    <input id="email" class="form-control" type="email" name="email" value="<?php echo $email;?>" required/>
                     <label-form for="level">&nbsp;
                         Jenis Akun
                     </label-form>

@@ -43,7 +43,10 @@ else{
                 <input id="password" class="form-content" type="password" name="password" required/>
                 <div class="form-border"></div>
                 <label for="Show Password" style="padding-top: 15px">
-                    <input type="checkbox" onclick="showPassword()"/>Show Password
+                    <input type="checkbox" onclick="showPassword()"/>Show Password</input>
+                </label>
+                <label for="Show Password" style="padding-top: 15px">
+                    <a href="forget_password.php" class="form-content">forget password ?</a>
                 </label>
                 <input id="submit-btn" type="submit" name="submit" value="LOGIN">
 

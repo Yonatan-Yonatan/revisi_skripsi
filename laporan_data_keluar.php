@@ -62,11 +62,12 @@ session_start();
                                         <thead>
                                             <tr>   
                                                 <th>Tanggal</th>
+                                                <th>No. Nota</th>
+                                                <th>Pelanggan</th>
                                                 <th>Nama Produk</th>
                                                 <th>Harga Produk</th>   
                                                 <th>Quantity</th>    
-                                                <th>Total Harga</th>  
-                                                <th>Keterangan</th>  
+                                                <th>Total Harga</th>    
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -75,7 +76,7 @@ session_start();
                                                 
                                                 if(isset($_GET['dari']) && isset($_GET['sampai'])){
                                                     // tampilkan data yang sesuai dengan range tanggal yang dicari 
-                                                    $data = mysqli_query($koneksi, "select * from barang_keluar k, produk p where (tanggal BETWEEN '".$_GET['dari']."' and '".$_GET['sampai']."') and k.id_produk = p.id_produk");
+                                                    $data = mysqli_query($koneksi, "select * from barang_keluar k, produk p, transaksi_keluar tk where (tanggal BETWEEN '".$_GET['dari']."' and '".$_GET['sampai']."') and k.id_produk = p.id_produk and k.no_nota = tk.no_nota and k.status_bkeluar = '0'");
                                                     while($row = mysqli_fetch_array($data)){
                                                         $tanggal = $row['tanggal'];
                                                         $id_produk = $row['id_produk'];
@@ -83,16 +84,18 @@ session_start();
                                                         $harga = $row['harga'];
                                                         $jumlah= $row['jumlah_barang'];
                                                         $totalharga = $row['total_harga'];
-                                                        $deskripsi = $row['deskripsi'];
+                                                        $deskripsi = $row['ket'];
+                                                        $no_nota = $row['no_nota'];
                                             ?>	
                                                                             
                                                 <tr>   
                                                     <td><?php echo date('d M Y', strtotime($tanggal));?></td>
+                                                    <td><?php echo $no_nota;?></td>
+                                                    <td><?php echo $deskripsi;?></td>
                                                     <td><?php echo $nama_produk;?></td>
                                                     <td><?php echo FormatUang($harga);?></td>
                                                     <td><?php echo $jumlah;?></td>
                                                     <td><?php echo FormatUang($totalharga);?></td>
-                                                    <td><?php echo $deskripsi;?></td>
                                                 </tr>
                                             <?php	   
                                                     }     

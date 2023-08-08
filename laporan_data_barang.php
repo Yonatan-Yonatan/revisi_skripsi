@@ -48,7 +48,6 @@ session_start();
                                         <option value="semua">Semua Barang</option>
                                         <option value="habis">Habis</option>
                                         <option value="hampirhabis">Hampir Habis</option>
-                                        <option value="kurangdari10">Kurang Dari 10</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-4" style="padding-top :30px;"> 
@@ -66,8 +65,7 @@ session_start();
                                                 <th>Nama Produk</th>
                                                 <th>Jenis Produk</th>
                                                 <th>Stok</th>
-                                                <th>Harga</th> 
-                                                <th>Supplier</th>            
+                                                <th>Harga</th>           
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -78,14 +76,13 @@ session_start();
                                                     $filter = $_GET['filter'];
                                                     if ($filter == "semua"){ 
                                                         // tampilkan data yang sesuai dengan filter yang dipilih 
-                                                        $data = mysqli_query($koneksi, "select * from produk p, supplier s where p.id_supplier = s.id_supplier");
+                                                        $data = mysqli_query($koneksi, "select * from produk p");
                                                         while($row = mysqli_fetch_array($data)){
                                                             $id_produk = $row['id_produk'];
                                                             $nama_produk = $row['nama_produk'];
                                                             $jenis_produk = $row['jenis_barang'];
                                                             $qty= $row['qty'];
                                                             $harga= $row['harga'];
-                                                            $nama_supplier=$row['nama_supplier'];
                                             ?>	
                                                                             
                                             <tr>   
@@ -93,7 +90,6 @@ session_start();
                                                 <td><?php echo $jenis_produk;?></td>
                                                 <td><?php echo $qty;?></td>
                                                 <td><?php echo FormatUang($harga);?></td>
-                                                <td><?php echo $nama_supplier;?></td>
                                             </tr>
                                             <?php	   
                                                         }  
@@ -110,14 +106,13 @@ session_start();
                                             <?php   
                                                     } else if ($filter == "habis"){ 
                                                     //jika tidak ada tanggal dari dan tanggal ke maka tampilkan seluruh data		
-                                                    $data = mysqli_query($koneksi, "select * from produk p, supplier s where p.id_supplier = s.id_supplier and qty = 0");
+                                                    $data = mysqli_query($koneksi, "select * from produk p where qty = 0");
                                                         while($row = mysqli_fetch_array($data)){
                                                             $id_produk = $row['id_produk'];
                                                             $nama_produk = $row['nama_produk'];
                                                             $jenis_produk = $row['jenis_barang'];
                                                             $qty= $row['qty'];
                                                             $harga= $row['harga'];
-                                                            $nama_supplier=$row['nama_supplier'];
                                             ?>	
                                                                             
                                                 <tr>   
@@ -125,7 +120,6 @@ session_start();
                                                     <td><?php echo $jenis_produk;?></td>
                                                     <td><?php echo $qty;?></td>
                                                     <td><?php echo FormatUang($harga);?></td>
-                                                    <td><?php echo $nama_supplier;?></td>
                                                 </tr>
                                             <?php	   
                                                         }  
@@ -142,14 +136,13 @@ session_start();
                                         <?php
                                                 } else if ($filter == "hampirhabis"){ 
                                                     //jika tidak ada tanggal dari dan tanggal ke maka tampilkan seluruh data		
-                                                    $data = mysqli_query($koneksi, "select * from produk p, supplier s where p.id_supplier = s.id_supplier and (qty < 10 and qty > 0)");
+                                                    $data = mysqli_query($koneksi, "select * from produk p where (qty < min_qty and qty > 0)");
                                                         while($row = mysqli_fetch_array($data)){
                                                             $id_produk = $row['id_produk'];
                                                             $nama_produk = $row['nama_produk'];
                                                             $jenis_produk = $row['jenis_barang'];
                                                             $qty= $row['qty'];
                                                             $harga= $row['harga'];
-                                                            $nama_supplier=$row['nama_supplier'];
                                             ?>	
                                                                             
                                                 <tr>   
@@ -157,7 +150,6 @@ session_start();
                                                     <td><?php echo $jenis_produk;?></td>
                                                     <td><?php echo $qty;?></td>
                                                     <td><?php echo FormatUang($harga);?></td>
-                                                    <td><?php echo $nama_supplier;?></td>
                                                 </tr>
                                             <?php	   
                                                         }  
@@ -172,39 +164,7 @@ session_start();
                                             </form>
                                         </tfoot>
                                         <?php
-                                                } else if ($filter == "kurangdari10"){ 
-                                                    //jika tidak ada tanggal dari dan tanggal ke maka tampilkan seluruh data		
-                                                    $data = mysqli_query($koneksi, "select * from produk p, supplier s where p.id_supplier = s.id_supplier and qty < 10 ");
-                                                        while($row = mysqli_fetch_array($data)){
-                                                            $id_produk = $row['id_produk'];
-                                                            $nama_produk = $row['nama_produk'];
-                                                            $jenis_produk = $row['jenis_barang'];
-                                                            $qty= $row['qty'];
-                                                            $harga= $row['harga'];
-                                                            $nama_supplier=$row['nama_supplier'];
-                                            ?>	
-                                                                            
-                                                <tr>   
-                                                    <td><?php echo $nama_produk;?></td>
-                                                    <td><?php echo $jenis_produk;?></td>
-                                                    <td><?php echo $qty;?></td>
-                                                    <td><?php echo FormatUang($harga);?></td>
-                                                    <td><?php echo $nama_supplier;?></td>
-                                                </tr>
-                                            <?php	   
-                                                        }  
-                                            ?>
-                                        </tbody>
-                                        <tfoot>
-                                            <form method="POST" action="print_laporan_stok.php" target="_BLANK">
-                                                <div class="col-sm-4" style="padding-bottom:15px">
-                                                    <input type="hidden" name="filter" class="filter-form-control" value="<?php echo $_GET['filter'];?>">
-                                                </div>
-                                                <input type="submit" name="print" value="print" class="btn btn-sm btn-primary" />&nbsp
-                                            </form>
-                                        </tfoot>
-                                        <?php
-                                                }
+                                                } 
                                             }
                                             ?>
                                     </table>

@@ -43,6 +43,13 @@ if($_SESSION['level'] == "admin"){
 		}
 	}
     </script>
+
+<?php 
+    function FormatUang($harga){
+            $hasil = "Rp " . number_format($harga,2,',','.');
+            return $hasil;}
+    ?>
+
     <body class="sb-nav-fixed">
     <?php include "head.php"; ?>
         <div id="layoutSidenav">

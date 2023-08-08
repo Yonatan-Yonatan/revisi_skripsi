@@ -56,22 +56,26 @@ if(isset($_POST['print'])){
         <thead>
             <tr>   
                 <th>Tanggal</th>
+                <th>No. Transaksi</th>
                 <th>Nama Produk</th>
                 <th>Supplier</th>   
-                <th>Quantity</th>              
+                <th>Quantity</th>               
             </tr>
         </thead>
         <tbody>
             <?php
-            $data = mysqli_query($koneksi, "select * from barang_masuk m, produk p, supplier s where (tanggal BETWEEN '$dari' and '$sampai') and m.id_produk = p.id_produk and m.id_supplier = s.id_supplier");
+            $data = mysqli_query($koneksi, "select * from barang_masuk m, transaksi_masuk tm, produk p, supplier s where (tanggal BETWEEN '$dari' and '$sampai') and m.id_tr_masuk = tm.id_tr_masuk and m.id_produk = p.id_produk and tm.id_supplier = s.id_supplier and m.status_bmasuk = '0'");
             while($row = mysqli_fetch_array($data)){
                 $tanggal = $row['tanggal'];
                 $nama_produk = $row['nama_produk'];
                 $nama_supplier = $row['nama_supplier'];
                 $stok= $row['stok'];
-         ?>	                         
+                $no_faktur = $row['no_faktur']
+    ?>	
+                                    
         <tr>   
-            <td><?php echo date('d F Y', strtotime($tanggal));?></td>
+            <td><?php echo date('d M Y', strtotime($tanggal));?></td>
+            <td><?php echo $no_faktur;?></td>
             <td><?php echo $nama_produk;?></td>
             <td><?php echo $nama_supplier;?></td>
             <td><?php echo $stok;?></td>

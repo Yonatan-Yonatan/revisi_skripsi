@@ -43,7 +43,12 @@ if($_SESSION['level'] == "admin"){
             {
                 $status_print = $row['status_print'];
             }
-        }	 
+        }	
+        
+      
+    function FormatUang($harga){
+            $hasil = "Rp " . number_format($harga,2,',','.');
+            return $hasil;}
     ?>
 
 	function konfirmasiPrint()

@@ -62,6 +62,7 @@ if($_SESSION['level'] == "kasir" || $_SESSION['level'] == "admin"){
                                             <tr>
                                                 <th>User Name</th>
                                                 <th>Full Name</th>
+                                                <th>Email</th>
                                                 <th>Level</th>
                                                 <th>Status</th>
                                                 <th>Action</th>         
@@ -81,6 +82,7 @@ if($_SESSION['level'] == "kasir" || $_SESSION['level'] == "admin"){
                                                         $FullName = $row['fullname'];
                                                         $level= $row['level'];
                                                         $status= $row['status_akun'];
+                                                        $email= $row['email'];
                                                         if ($status == "0") {
                                                             $status_akun = "ACTIVE";        
                                                         } else {
@@ -91,6 +93,7 @@ if($_SESSION['level'] == "kasir" || $_SESSION['level'] == "admin"){
                                             <tr>
                                                 <td><?php echo $UserName;?></td>
                                                 <td><?php echo $FullName;?></td>
+                                                <td><?php echo $email;?></td>
                                                 <td><?php echo $level;?></td>
                                                 <td><?php if ($UserName != "owner" && $FullName != "Owner"){
                                                              if ($status == "0"){ 

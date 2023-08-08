@@ -35,6 +35,11 @@ session_start();
 		}
 	}
     </script>
+    <?php 
+    function FormatUang($harga){
+            $hasil = "Rp " . number_format($harga,2,',','.');
+            return $hasil;}
+    ?>
 
     <body class="sb-nav-fixed">
     <?php include "head.php"; ?>
@@ -58,9 +63,9 @@ session_start();
                                                 <?php } ?> 
                                                 <?php if($_SESSION['level'] != "admin"){?>
                                                 <th>Harga</th>  
-                                                <?php } ?>      
+                                                <?php } ?>
+                                                <?php if($_SESSION['level'] == "owner"){?>      
                                                 <th>Min Stok</th>  
-                                                <?php if($_SESSION['level'] == "owner"){?>
                                                 <th>Action</th>          
                                                 <?php } ?>
                                             </tr>
@@ -92,8 +97,8 @@ session_start();
                                                     <?php if($_SESSION['level'] != "admin"){?>
                                                     <td><?php echo FormatUang($harga);?></td>
                                                     <?php } ?>
-                                                    <td><?php echo $min_stok;?></td>
                                                     <?php if($_SESSION['level'] == "owner"){?>
+                                                    <td><?php echo $min_stok;?></td>
                                                     <td><?php echo "<a href='update_barang.php?id_produk=$id_produk' class='action'>UPDATE</a>"; ?> </td>
                                                     <?php } ?>
                                                 </tr>

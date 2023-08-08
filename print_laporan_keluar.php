@@ -54,44 +54,47 @@ if(isset($_POST['print'])){
         <thead>
             <tr>   
                 <th>Tanggal</th>
+                <th>No. Nota</th>
+                <th>Pelanggan</th>
                 <th>Nama Produk</th>
                 <th>Harga Produk</th>   
                 <th>Quantity</th>
-                <th>Total Harga</th>   
-                <th>Keterangan</th>             
+                <th>Total Harga</th>               
             </tr>
         </thead>
         <tbody>
             <?php
-                $data = mysqli_query($koneksi, "select * from barang_keluar k, produk p where (tanggal BETWEEN '$dari' and '$sampai') and k.id_produk = p.id_produk");
-                while($row = mysqli_fetch_array($data)){
-                    $tanggal = $row['tanggal'];
-                    $nama_produk = $row['nama_produk'];
-                    $harga = $row['harga'];
-                    $jumlah= $row['jumlah_barang'];
-                    $totalharga = $row['total_harga'];
-                    $deskripsi = $row['deskripsi'];
-            ?>	                         
-            <tr>   
-                <td><?php echo date('d M Y', strtotime($tanggal));?></td>
-                <td><?php echo $nama_produk;?></td>
-                <td><?php echo FormatUang($harga);?></td>
-                <td><?php echo $jumlah;?></td>
-                <td><?php echo FormatUang($totalharga);?></td>
-                <td><?php echo $deskripsi;?></td>
-            </tr>
+                  $data = mysqli_query($koneksi, "select * from barang_keluar k, produk p, transaksi_keluar tk where (tanggal BETWEEN '$dari' and '$sampai') and k.id_produk = p.id_produk and k.no_nota = tk.no_nota and k.status_bkeluar = '0'");
+                  while($row = mysqli_fetch_array($data)){
+                      $tanggal = $row['tanggal'];
+                      $id_produk = $row['id_produk'];
+                      $nama_produk = $row['nama_produk'];
+                      $harga = $row['harga'];
+                      $jumlah= $row['jumlah_barang'];
+                      $totalharga = $row['total_harga'];
+                      $deskripsi = $row['ket'];
+                      $no_nota = $row['no_nota'];
+          ?>	
+                                          
+              <tr>   
+                  <td><?php echo date('d M Y', strtotime($tanggal));?></td>
+                  <td><?php echo $no_nota;?></td>
+                  <td><?php echo $deskripsi;?></td>
+                  <td><?php echo $nama_produk;?></td>
+                  <td><?php echo FormatUang($harga);?></td>
+                  <td><?php echo $jumlah;?></td>
+                  <td><?php echo FormatUang($totalharga);?></td>
+              </tr>
             <?php	   
                 }
-                $subtotal = mysqli_query($koneksi, "select SUM(total_harga) AS subtotal, SUM(jumlah_barang) as jumlah_terjual from barang_keluar where (tanggal BETWEEN '$dari' and '$sampai');");
+                $subtotal = mysqli_query($koneksi, "select SUM(subtotal) AS total from transaksi_keluar where (tanggal BETWEEN '$dari' and '$sampai');");
                 $row1 = mysqli_fetch_array($subtotal);
-                $jumlah_terjual=$row1['jumlah_terjual'];
-                $sub_total_harga=$row1['subtotal'];
+                $sub_total_harga=$row1['total'];
                 
             ?>	                         
             <tr>   
-                <td colspan="3" class="subtotal">Subtotal</td>
-                <td><?php echo $jumlah_terjual;?></td>
-                <td colspan="2" style="text-align:right"><?php echo FormatUang($sub_total_harga);?></td>
+                <td colspan="6" class="subtotal">Subtotal</td>
+                <td colspan="2" style="text-align:left"><?php echo FormatUang($sub_total_harga);?></td>
             
             </tr>
             <?php

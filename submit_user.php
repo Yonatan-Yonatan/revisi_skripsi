@@ -12,8 +12,9 @@ if(isset($_POST['simpan'])){
     $password   = sha1($_POST['password']);
     $fullname   = $_POST['fullname'];
     $level      = $_POST['level'];
+    $email      = $_POST['email'];
 
-    $query = mysqli_query($koneksi, "INSERT INTO user (username, password, fullname, level) VALUES ('$username', '$password', '$fullname', '$level')");
+    $query = mysqli_query($koneksi, "INSERT INTO user (username, password, fullname, email, level) VALUES ('$username', '$password', '$fullname', '$email', '$level')");
     if ($query){
         echo '
             <script>
