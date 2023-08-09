@@ -35,6 +35,19 @@ if($_SESSION['level'] == "kasir"){
 
     <?php 
         $id_tr_masuk=$_GET['id_tr_masuk'];
+        $sSQL=" select * from transaksi_masuk tm, supplier s where s.id_supplier = tm.id_supplier and tm.id_tr_masuk = '$id_tr_masuk' limit 1";
+        $result=mysqli_query($koneksi, $sSQL);
+        if (mysqli_num_rows($result) > 0) 
+        {
+            while ($row=mysqli_fetch_assoc($result))
+            {
+                $no_faktur = $row['no_faktur'];
+                $tanggal = $row['tanggal'];
+                $id_supplier = $row['id_supplier'];
+                $nama_supplier = $row['nama_supplier'];
+                
+            }
+        }	 
         
     ?>
 	function konfirmasi()
@@ -58,7 +71,8 @@ if($_SESSION['level'] == "kasir"){
                 <main>
                     <div class="container-fluid px-4">
                     <a href="restock_barang.php" class="btn btn-primary mt-3"><i class="fa-solid fa-arrow-left">Kembali</i></a>
-                        <h1 class="mt-4" style="padding-bottom:15px";>Data Transaksi Masuk <?=$id_tr_masuk?></h1>
+                        <h2 class="mt-4" style="padding-bottom:15px";>Data Transaksi Masuk <?=$no_faktur?></h2>
+                       
                         <div class="container-fluid px-4">
                         <br>   
                             <div class="table-responsive">

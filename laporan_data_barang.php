@@ -30,6 +30,12 @@ session_start();
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
+    <?php
+    function FormatUang($harga){
+        $hasil = "Rp " . number_format($harga,2,',','.');
+        return $hasil;
+    }
+    ?>
     <body class="sb-nav-fixed">
     <?php include "head.php"; ?>
         <div id="layoutSidenav">

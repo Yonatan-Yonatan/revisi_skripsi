@@ -19,6 +19,11 @@ if($_SESSION['level'] == "kasir"){
 if(isset($_POST['print'])){
     $filter = $_POST['filter'];
 }
+
+function FormatUang($harga){
+    $hasil = "Rp " . number_format($harga,2,',','.');
+    return $hasil;
+}
 ?>
 
 <!DOCTYPE html>

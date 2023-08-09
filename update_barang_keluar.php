@@ -62,7 +62,7 @@ if($_SESSION['level'] == "admin"){
                     </label-form>
                     <input id="tanggal" class="form-control" type="date" name="tanggal" value="<?php echo $tanggal;?>" required/>
                     <label-form for="harga">&nbsp;
-                        Ket
+                        Pelanggan
                     </label-form>
                     <input id="ket" class="form-control" type="text" name="ket" value="<?php echo $ket;?>" required/>
                     

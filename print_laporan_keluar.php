@@ -17,9 +17,15 @@ session_start();
         ';
     } 
 
+function FormatUang($harga){
+    $hasil = "Rp " . number_format($harga,2,',','.');
+    return $hasil;
+}    
+
 if(isset($_POST['print'])){
     $dari = $_POST['dari'];
     $sampai = $_POST['sampai'];
+
 ?>
 
 <!DOCTYPE html>

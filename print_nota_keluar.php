@@ -47,8 +47,12 @@ if (mysqli_num_rows($result) > 0)
         $tanggal = $row['tanggal'];
         $no_nota = $row['no_nota'];
     }
-}	  
+}	
 
+function FormatUang($harga){
+    $hasil = "Rp " . number_format($harga,2,',','.');
+    return $hasil;
+}
 ?>
 <br><br><br>
 <header>
