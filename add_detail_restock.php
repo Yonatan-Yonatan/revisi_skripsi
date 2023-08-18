@@ -74,7 +74,7 @@ if($_SESSION['level'] == "kasir"){
                             <label class="col-sm-2 col-sm-2 control-label"></label>
                             <div class="col-sm-10">
                                 <input type="submit" name="simpan" value="Simpan" class="btn btn-sm btn-primary" />&nbsp;
-                                <button onclick="redirectToPreviousPage()" class="btn btn-sm btn-danger">Batal</button>
+                                <?php echo" <a href='detail_restock.php?id_tr_masuk=$id_tr_masuk' class='btn btn-sm btn-danger'>Batal </a>"; ?>
                             </div>
                         </div>
                     </form>
@@ -101,9 +101,7 @@ if($_SESSION['level'] == "kasir"){
                 $('#id_produk').select2();
             });
 
-            function redirectToPreviousPage() {
-                history.go(-1); 
-            }
+
         </script>
     
     </body>

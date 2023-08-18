@@ -49,7 +49,7 @@ if($_SESSION['level'] == "admin"){
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label"></label>
                             <div class="col-sm-10">
-                                <input type="submit" name="simpan" value="Simpan" class="btn btn-sm btn-primary" />&nbsp;
+                                <input type="submit" name="simpan" value="Simpan" class="btn btn-sm btn-primary">&nbsp;
                                 <a href="barang_keluar.php" class="btn btn-sm btn-danger">Batal </a>
                             </div>
                         </div>

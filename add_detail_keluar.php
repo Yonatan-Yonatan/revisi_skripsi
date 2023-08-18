@@ -83,7 +83,7 @@ if($_SESSION['level'] == "admin"){
                             <label class="col-sm-2 col-sm-2 control-label"></label>
                             <div class="col-sm-10">
                                 <input type="submit" name="simpan" value="Simpan" class="btn btn-sm btn-primary" />&nbsp;
-                                <button onclick="redirectToPreviousPage()" class="btn btn-sm btn-danger">Batal</button>
+                            <?php echo" <a href='detail_barang_keluar.php?no_nota=$no_nota' class='btn btn-sm btn-danger'>Batal </a>"; ?>
                             </div>
                         </div>
                     </form>
@@ -131,9 +131,6 @@ if($_SESSION['level'] == "admin"){
                 document.form1.total_harga.value = varjs;
             }
 
-            function redirectToPreviousPage() {
-                history.go(-1); 
-            }
         </script>
     
     </body>
